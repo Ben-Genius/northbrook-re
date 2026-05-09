@@ -33,16 +33,24 @@ export default function Navbar() {
       const nav = navRef.current;
       if (!nav) return;
 
+      const scrollTriggerConfig = {
+        start: "80px top",
+        toggleActions: "play none none reverse",
+      };
+
       gsap.to(nav, {
-        backgroundColor: "rgba(255, 255, 255, 1)", // Solid white on scroll for clarity
+        backgroundColor: "rgba(255,255,255,0.97)",
         backdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
+        borderBottom: "1px solid rgba(0,0,0,0.08)",
         paddingTop: "0.5rem",
         paddingBottom: "0.5rem",
-        scrollTrigger: {
-          start: "80px top",
-          toggleActions: "play none none reverse",
-        },
+        scrollTrigger: scrollTriggerConfig,
+      });
+
+      // Flip text dark once nav has a white background
+      gsap.to(".nav-text-item", {
+        color: "hsl(0 0% 10%)",
+        scrollTrigger: scrollTriggerConfig,
       });
     },
     { scope: navRef }
@@ -74,7 +82,7 @@ export default function Navbar() {
             <div className="absolute inset-0 rounded-full bg-accent animate-ping opacity-40" />
             <div className="relative h-full w-full rounded-full bg-accent" />
           </div>
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-foreground font-black">
+          <span className="nav-text-item font-mono text-[9px] uppercase tracking-[0.3em] text-white font-black">
             Ops Status: Nominal / GH-TEMA
           </span>
         </div>
@@ -91,7 +99,7 @@ export default function Navbar() {
                     <NavigationMenuLink
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        "bg-transparent hover:bg-transparent hover:text-accent focus:bg-transparent text-foreground uppercase text-[11px] tracking-[0.2em] font-black transition-all drop-shadow-sm"
+                        "nav-text-item bg-transparent hover:bg-transparent hover:text-accent focus:bg-transparent text-white uppercase text-[11px] tracking-[0.2em] font-black transition-colors"
                       )}
                     >
                       {link.name}
@@ -106,7 +114,7 @@ export default function Navbar() {
         <div className="h-6 w-px bg-foreground/10 mx-4" />
 
         <MagneticButton strength={0.2} radius={50}>
-          <Button variant="default" className="rounded-none px-10 h-14 font-black uppercase tracking-widest text-[11px] shadow-xl bg-accent hover:bg-foreground">
+          <Button variant="default" className="px-10 h-14 font-black uppercase tracking-widest text-[11px] shadow-xl bg-accent hover:bg-foreground">
             Request a Quote
           </Button>
         </MagneticButton>
@@ -130,7 +138,7 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Button variant="default" className="mt-8 rounded-none py-10 text-xl font-black uppercase tracking-widest bg-accent">
+            <Button variant="default" className="mt-8 py-10 text-xl font-black uppercase tracking-widest bg-accent">
               Request a Quote
             </Button>
           </SheetContent>

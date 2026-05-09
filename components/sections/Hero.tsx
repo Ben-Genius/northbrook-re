@@ -70,21 +70,16 @@ export default function Hero() {
         progress={scrollProgress}
       />
 
-      {/* Atmospheric Contrast Overlays */}
+      {/* Cinematic Overlays — minimal, image-first */}
       <div className="absolute inset-0 z-20 pointer-events-none">
-        {/* Top Vignette (for Navbar visibility) */}
-        <div className="absolute top-0 left-0 w-full h-[30vh] bg-linear-to-b from-background/80 to-transparent" />
+        {/* Top fade — just enough for navbar legibility */}
+        <div className="absolute top-0 left-0 w-full h-[20vh] bg-linear-to-b from-black/40 to-transparent" />
 
-        {/* Bottom Vignette (for watermark hiding and button visibility) */}
-        <div className="absolute bottom-0 left-0 w-full h-[45vh] bg-linear-to-t from-background/90 via-background/40 to-transparent" />
+        {/* Bottom fade — enough to ground the buttons, no more */}
+        <div className="absolute bottom-0 left-0 w-full h-[35vh] bg-linear-to-t from-black/60 via-black/20 to-transparent" />
 
-        {/* Center Contrast shelf */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-full h-[40vh] bg-[radial-gradient(circle,rgba(0,0,0,0.4)_0%,transparent_70%)] opacity-80" />
-        </div>
-
-        {/* Industrial Grid Overlay */}
-        <div className="absolute inset-0 opacity-[0.03] bg-size-[5vw_5vw] bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)]" />
+        {/* Edge vignette — darkens corners, leaves center crisp */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.35)_100%)]" />
       </div>
 
       {/* Editorial Content */}
@@ -92,31 +87,32 @@ export default function Hero() {
         ref={contentRef}
         className="relative z-30 h-full container mx-auto px-6 lg:px-24 flex flex-col items-center justify-center text-center"
       >
-        <div className="section-eyebrow text-accent font-black mb-8 uppercase tracking-[0.5em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-          Strategic Industrial Logistics
+        <div className="inline-flex items-center gap-3 mb-8 border border-white/25 bg-black/30 backdrop-blur-md px-5 py-2">
+          <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-white font-bold">
+            Strategic Industrial Logistics
+          </span>
         </div>
 
-        <h1 className="hero-title font-display text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.8] uppercase text-foreground drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+        <h1 className="hero-title font-display text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.8] uppercase text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]">
           Precision <br />
           <span className="text-accent italic">In Motion.</span>
         </h1>
 
-        <div className="mt-12 max-w-3xl mx-auto space-y-10 relative">
-          <div className="absolute inset-x-0 -inset-y-4 bg-background/5 backdrop-blur-[2px] rounded-full scale-110 -z-10 opacity-60" />
-
-          <p className="text-xl md:text-3xl text-white font-bold leading-tight text-pretty drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+        <div className="mt-12 max-w-3xl mx-auto space-y-10">
+          <p className="text-xl md:text-2xl text-white/90 font-semibold leading-snug text-pretty drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
             Over a decade of moving entire operations forward where others hesitate.
             Delivering trust at every turn in the West African sub-region.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
             <MagneticButton strength={0.2} radius={50}>
-              <Button size="lg" className="rounded-none px-12 py-8 text-xs font-black uppercase tracking-widest bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all">
+              <Button size="lg" className="px-12 py-8 text-xs font-black uppercase tracking-widest bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all">
                 Request a Quote
               </Button>
             </MagneticButton>
             <MagneticButton strength={0.1} radius={40}>
-              <Button variant="outline" size="lg" className="rounded-none px-12 py-8 text-xs font-black uppercase tracking-widest border-white/20 bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-accent shadow-2xl transition-all">
+              <Button variant="outline" size="lg" className="px-12 py-8 text-xs font-black uppercase tracking-widest border-white/20 bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-accent shadow-2xl transition-all">
                 See Our Work
               </Button>
             </MagneticButton>
@@ -127,30 +123,40 @@ export default function Hero() {
       {/* Telemetry Overlays */}
       <div className="absolute bottom-12 left-12 z-40 hidden md:flex flex-col gap-2">
         <div className="flex items-center gap-4">
-          <div className="font-mono text-[9px] uppercase tracking-widest text-foreground/80 font-bold">
+          <div className="font-mono text-[9px] uppercase tracking-widest text-white/70 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
             Telemetry: GH-FR-{String(currentFrame).padStart(3, "0")}
           </div>
-          <div className="h-[2px] w-32 bg-foreground/10 relative overflow-hidden">
+          <div className="h-[2px] w-32 bg-white/15 relative overflow-hidden">
             <div
               className="absolute top-0 left-0 h-full bg-accent transition-all duration-100"
               style={{ width: `${scrollProgress * 100}%` }}
             />
           </div>
         </div>
-        <div className="font-mono text-[9px] text-foreground/60 uppercase tracking-[0.2em] font-medium">
+        <div className="font-mono text-[9px] text-white/50 uppercase tracking-[0.2em] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
           Coordinates: 5.5500° N, 0.2000° E
         </div>
       </div>
 
-      {/* Bottom Right: Industrial Status (Covers "Veo" watermark) */}
-      <div className="absolute bottom-2 right-0 z-40 bg-background/90 backdrop-blur-xl px-8 py-6 border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        <div className="flex flex-col items-end gap-2">
-          <div className="flex items-center gap-4">
-            <div className="h-3 w-3 rounded-full bg-accent animate-pulse shadow-[0_0_10px_var(--color-accent)]" />
-            <span className="font-mono text-[11px] font-black text-white uppercase tracking-widest">System Nominal</span>
+      {/* Bottom-right corner triangle badge */}
+      <div className="absolute bottom-0 right-0 z-40 w-52 h-52 pointer-events-none">
+        {/* Triangle fill */}
+        <div
+          className="absolute inset-0 bg-accent/90 backdrop-blur-sm"
+          style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
+        />
+        {/* Text anchored to the bottom-right corner */}
+        <div className="absolute bottom-5 right-4 flex flex-col items-end gap-1.5">
+          <div className="flex items-center gap-2">
+            <div className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+            <span className="font-mono text-[9px] text-white/60 uppercase tracking-[0.25em]">Live</span>
           </div>
-          <span className="font-mono text-[9px] text-accent font-bold uppercase tracking-[0.3em]">Operational Readiness 2025</span>
-          <div className="h-px w-16 bg-accent mt-3" />
+          <span className="font-mono text-[11px] text-white font-black uppercase tracking-widest leading-tight text-right">
+            Port of Tema
+          </span>
+          <span className="font-mono text-[9px] text-white/70 uppercase tracking-[0.2em] text-right">
+            Ghana · Est. 2011
+          </span>
         </div>
       </div>
     </section>

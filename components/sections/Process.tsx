@@ -53,37 +53,43 @@ export default function Process() {
 
       mm.add("(min-width: 768px)", () => {
         const steps = gsap.utils.toArray(".process-step-item");
-        
-        // Pinned sequence
+
+        // Each step occupies SLOT units in the timeline:
+        //   0 – 0.6  → slide in
+        //   0.6 – 1.2 → content staggers
+        //   1.2 – 3   → hold (user reads before next step)
+        const SLOT = 3;
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: () => "+=" + (steps.length * 100) + "%",
+            end: () => "+=" + (steps.length * SLOT * 100) + "%",
             pin: true,
-            scrub: 1,
-            // onUpdate for "beats"
-            onUpdate: (self) => {
-              // We could trigger subtle visual flashes here
-            }
-          }
+            scrub: 1.5,
+          },
         });
 
         steps.forEach((step: any, i: number) => {
+          const offset = i * SLOT;
+
           if (i > 0) {
             tl.from(step, {
               x: "100%",
               ease: "power2.inOut",
-            }, i);
+              duration: 0.6,
+            }, offset);
           }
 
-          // Content staggers per step
           tl.from(step.querySelectorAll(".process-animate"), {
             opacity: 0,
-            x: 50,
-            stagger: 0.1,
+            x: 40,
+            stagger: 0.12,
             duration: 0.5,
-          }, i + 0.5);
+          }, offset + 0.6);
+
+          // No-op hold — keeps the step visible while the user scrolls
+          tl.to({}, { duration: SLOT - 1.2 }, offset + 1.2);
         });
       });
 

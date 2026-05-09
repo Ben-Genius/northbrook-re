@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { gsap, ScrollTrigger, MotionPathPlugin, useGSAP } from "@/lib/gsap";
+import { gsap, MotionPathPlugin, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { Anchor } from "lucide-react";
 
@@ -13,7 +13,7 @@ const WAYPOINTS = [
     details: "Specialized husbandry services for deep-sea survey vessels and FPSO support.",
     coords: { x: 148, y: 342 },
     viewBox: "50 250 200 200",
-    offset: { x: 40, y: -80 } // Position box relative to pin
+    offset: { x: 40, y: -80 },
   },
   {
     id: "02",
@@ -22,7 +22,7 @@ const WAYPOINTS = [
     details: "18+ Strategic Vessel Calls per month. Primary logistics center for offshore operations.",
     coords: { x: 200, y: 300 },
     viewBox: "100 200 200 200",
-    offset: { x: 60, y: -40 }
+    offset: { x: 60, y: -40 },
   },
   {
     id: "03",
@@ -31,7 +31,7 @@ const WAYPOINTS = [
     details: "Integrated project cargo handling and customs clearance for regional drilling rigs.",
     coords: { x: 278, y: 382 },
     viewBox: "180 280 200 200",
-    offset: { x: -300, y: -60 } // Shift to left if point is on right
+    offset: { x: -300, y: -60 },
   },
   {
     id: "04",
@@ -40,7 +40,7 @@ const WAYPOINTS = [
     details: "Complex crew management and heavy-lift freight solutions for major oil field developers.",
     coords: { x: 368, y: 452 },
     viewBox: "270 350 200 200",
-    offset: { x: -300, y: 20 }
+    offset: { x: -300, y: 20 },
   },
   {
     id: "05",
@@ -49,9 +49,24 @@ const WAYPOINTS = [
     details: "Strategic warehousing and offshore supply chain maintenance for the sub-region.",
     coords: { x: 420, y: 482 },
     viewBox: "320 380 200 200",
-    offset: { x: -320, y: -100 }
+    offset: { x: -320, y: -100 },
   },
 ];
+
+// Cubic bezier path that passes THROUGH every waypoint coordinate exactly.
+// Control points are chosen so each segment flows naturally into the next
+// without kinking at any port.
+const ROUTE_PATH =
+  "M 148 342 " +
+  "C 165 330, 185 302, 200 300 " +   // → Tema
+  "C 218 298, 258 365, 278 382 " +   // → Lomé
+  "C 305 405, 345 440, 368 452 " +   // → Lagos
+  "C 385 456, 408 472, 420 482";     // → Port Harcourt
+
+// Per-waypoint slot in the timeline (units).
+// Structure per slot:  0–1 zoom+pin  |  1–1.8 card in  |  1.8–4 hold (user reads)
+const SLOT = 4;
+const INITIAL = 0.5; // initial map zoom-out
 
 export default function WorkMapSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -62,79 +77,104 @@ export default function WorkMapSection() {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        // Set initial vessel position at start of path
-        gsap.set("#wm-vessel-full", {
-          opacity: 1,
-          scale: 1,
-          xPercent: -50,
-          yPercent: -50
-        });
+        gsap.set("#wm-vessel", { opacity: 1 });
+
+        const totalUnits = INITIAL + WAYPOINTS.length * SLOT;
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top top",
-            end: "+=600%", // Longer scroll for more discovery time
+            end: `+=${WAYPOINTS.length * SLOT * 100}%`,
             pin: true,
-            scrub: 1,
+            scrub: 2,
             invalidateOnRefresh: true,
+            snap: {
+              snapTo: "labelsDirectional",
+              duration: { min: 0.25, max: 0.6 },
+              delay: 0.05,
+              ease: "power3.inOut",
+            },
           },
         });
 
-        // 1. Zoom into the map
+        // Initial pull-back to show the full route
         tl.to(mapRef.current, {
-          attr: { viewBox: "0 0 600 600" },
-          duration: 0.5
+          attr: { viewBox: "0 150 600 500" },
+          duration: INITIAL,
+          ease: "power2.inOut",
         });
 
-        // 2. Sequential Discovery
         WAYPOINTS.forEach((point, i) => {
-          // Zoom to point
+          const offset = INITIAL + i * SLOT;
+
+          // Fade previous card out before zoom starts
+          if (i > 0) {
+            tl.to(`.waypoint-info-${i - 1}`, {
+              opacity: 0,
+              y: -12,
+              filter: "blur(6px)",
+              duration: 0.35,
+              ease: "power2.in",
+            }, offset);
+          }
+
+          // Smooth zoom to this port
           tl.to(mapRef.current, {
             attr: { viewBox: point.viewBox },
-            duration: 1.5,
-            ease: "power2.inOut"
-          });
+            duration: 1.0,
+            ease: "power3.inOut",
+          }, offset + 0.1);
 
-          // Reveal Point Marker (Pulse)
-          tl.fromTo(`.waypoint-pin-${i}`,
+          // Pin pops in
+          tl.fromTo(
+            `.waypoint-pin-${i}`,
             { scale: 0, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.3)" },
-            "-=1"
+            { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1.1, 0.5)" },
+            offset + 0.7
           );
 
-          // Reveal Label (Near point)
-          tl.fromTo(`.waypoint-info-${i}`,
-            { opacity: 0, y: 20, filter: "blur(10px)" },
-            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.8, ease: "power3.out" },
-            "-=0.4"
+          // Info card slides in
+          tl.fromTo(
+            `.waypoint-info-${i}`,
+            { opacity: 0, y: 18, filter: "blur(8px)" },
+            { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.5, ease: "power3.out" },
+            offset + 1.1
           );
 
-          // Hold
-          tl.to({}, { duration: 1.2 });
+          // Label here — ScrollTrigger snaps to this moment
+          tl.addLabel(`waypoint-${i}`, offset + 1.8);
 
-          // Fade out if not last
-          if (i < WAYPOINTS.length - 1) {
-            tl.to(`.waypoint-info-${i}`, { opacity: 0, y: -20, filter: "blur(10px)", duration: 0.4 });
-          }
+          // Silent hold so the user can read
+          tl.to({}, { duration: SLOT - 1.8 }, offset + 1.8);
         });
 
-        // 3. Vessel Travel (Locked to scroll progress)
-        // We link this to the container's scroll progress separately to ensure it spans the whole section
-        gsap.to("#wm-vessel-full", {
-          motionPath: {
-            path: "#wm-route-full",
-            align: "#wm-route-full",
-            alignOrigin: [0.5, 0.5],
-            autoRotate: true,
+        // Vessel follows the route for the full timeline duration
+        tl.to(
+          "#wm-vessel",
+          {
+            motionPath: {
+              path: "#wm-route-full",
+              align: "#wm-route-full",
+              alignOrigin: [0.5, 0.5],
+              autoRotate: true,
+            },
+            ease: "none",
+            duration: totalUnits,
           },
-          ease: "none",
+          0
+        );
+      });
+
+      mm.add("(max-width: 767px)", () => {
+        // Mobile: simple stagger reveal
+        gsap.from(".waypoint-info-mobile", {
+          y: 30,
+          opacity: 0,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top top",
-            end: "bottom bottom",
-            scrub: 0.2, // Tighter scrub for better sync
-            immediateRender: true,
+            start: "top 80%",
           },
         });
       });
@@ -143,13 +183,11 @@ export default function WorkMapSection() {
   );
 
   return (
-    <section ref={containerRef} className="relative h-screen bg-background overflow-hidden border-t border-foreground/5">
-      {/* Background Depth */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.03]">
-        <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-size-[4vw_4vw]" />
-      </div>
-
-      {/* Floating UI Elements */}
+    <section
+      ref={containerRef}
+      className="relative h-screen bg-background overflow-hidden border-t border-foreground/5"
+    >
+      {/* Header */}
       <div className="absolute top-12 left-12 z-20 flex flex-col gap-2">
         <div className="flex items-center gap-3">
           <div className="h-2 w-2 rounded-full bg-accent animate-ping" />
@@ -162,7 +200,7 @@ export default function WorkMapSection() {
         </div>
       </div>
 
-      {/* Immersive Map Container */}
+      {/* Map */}
       <div className="relative h-full w-full flex items-center justify-center">
         <div className="relative w-full h-full max-w-[85vw] flex items-center justify-center p-12">
           <svg
@@ -173,7 +211,6 @@ export default function WorkMapSection() {
           >
             {/* Coastline */}
             <path
-              id="wm-coast-full"
               d="M 80 95 C 110 140,145 180,165 235 C 185 285,175 330,195 375 C 215 415,255 445,300 475 C 340 500,390 520,440 542 C 480 555,520 565,555 578"
               fill="none"
               stroke="currentColor"
@@ -181,45 +218,64 @@ export default function WorkMapSection() {
               className="text-foreground/10"
             />
 
-            {/* Master Route Path (Aligned to waypoints) */}
+            {/* Route — cubic bezier through all 5 ports exactly */}
             <path
               id="wm-route-full"
-              d="M 148 342 Q 200 300, 278 382 Q 320 420, 368 452 Q 400 480, 420 482"
+              d={ROUTE_PATH}
               fill="none"
               stroke="var(--color-accent)"
               strokeWidth="1.5"
               strokeDasharray="4 6"
-              className="opacity-10"
+              className="opacity-20"
             />
 
-            {/* Points */}
+            {/* Waypoint pins */}
             {WAYPOINTS.map((point, i) => (
-              <g key={point.id} className={cn("waypoint-pin-" + i, "origin-center")}>
-                <circle cx={point.coords.x} cy={point.coords.y} r="10" fill="var(--color-accent)" className="opacity-10" />
-                <circle cx={point.coords.x} cy={point.coords.y} r="3" fill="var(--color-accent)" />
+              <g
+                key={point.id}
+                className={cn("waypoint-pin-" + i)}
+                style={{ transformOrigin: `${point.coords.x}px ${point.coords.y}px` }}
+              >
+                <circle
+                  cx={point.coords.x}
+                  cy={point.coords.y}
+                  r="10"
+                  fill="var(--color-accent)"
+                  className="opacity-15"
+                />
+                <circle
+                  cx={point.coords.x}
+                  cy={point.coords.y}
+                  r="3"
+                  fill="var(--color-accent)"
+                />
               </g>
             ))}
 
-            {/* Vessel */}
-            <g id="wm-vessel-full" className="opacity-0">
+            {/* Vessel — starts at Takoradi, GSAP moves it along the route */}
+            <g
+              id="wm-vessel"
+              className="opacity-0"
+              style={{ transformOrigin: "0px 0px" }}
+            >
               <path
-                d="M-5,-4 L8,0 L-5,4 Z"
+                d="M-6,-3 L9,0 L-6,3 Z"
                 fill="var(--color-accent)"
-                className="drop-shadow-[0_0_8px_rgba(227,30,36,0.6)]"
+                filter="drop-shadow(0 0 6px hsl(339 100% 29% / 0.7))"
               />
             </g>
           </svg>
 
-          {/* Absolute Overlays (Positioned near the points but relative to the map center) */}
+          {/* Info cards */}
           {WAYPOINTS.map((point, i) => (
             <div
               key={point.id}
               className={cn(
                 "waypoint-info-" + i,
-                "absolute pointer-events-none z-30 bg-background/90 backdrop-blur-md border border-foreground/5 p-6 lg:p-8 max-w-[280px]"
+                "absolute pointer-events-none z-30 opacity-0",
+                "bg-background/92 backdrop-blur-md border border-foreground/8 p-6 lg:p-8 max-w-[280px]"
               )}
               style={{
-                // Rough positioning based on SVG coords - will be refined by GSAP
                 left: `calc(50% + ${point.offset.x}px)`,
                 top: `calc(50% + ${point.offset.y}px)`,
               }}
@@ -228,18 +284,17 @@ export default function WorkMapSection() {
                 <div className="font-mono text-[9px] text-accent font-bold uppercase tracking-[0.3em]">
                   {point.region}
                 </div>
-
                 <h3 className="font-display text-2xl font-bold tracking-tighter uppercase">
                   {point.label}
                 </h3>
-
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {point.details}
                 </p>
-
                 <div className="pt-2 flex items-center gap-2 border-t border-foreground/5">
                   <Anchor size={10} className="text-accent" />
-                  <span className="text-[8px] font-bold uppercase tracking-widest text-accent">Active Service Node</span>
+                  <span className="text-[8px] font-bold uppercase tracking-widest text-accent">
+                    Active Service Node
+                  </span>
                 </div>
               </div>
             </div>
@@ -247,7 +302,7 @@ export default function WorkMapSection() {
         </div>
       </div>
 
-      {/* Industrial Progress Indicators */}
+      {/* Progress dots */}
       <div className="absolute bottom-12 right-12 z-20 flex flex-col items-end gap-6">
         <div className="flex gap-2">
           {WAYPOINTS.map((_, i) => (

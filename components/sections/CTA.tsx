@@ -121,7 +121,7 @@ function CTAContent() {
         <MagneticButton strength={0.5} radius={150}>
           <Button
             size="lg"
-            className="cta-button h-20 rounded-none px-16 text-sm font-bold uppercase tracking-[0.2em]"
+            className="cta-button h-20 px-16 text-sm font-bold uppercase tracking-[0.2em]"
             asChild
           >
             <a href="mailto:info@northbrook.com.gh">Get in Touch</a>

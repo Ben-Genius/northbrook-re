@@ -1,9 +1,9 @@
 export const DESIGN_TOKENS = {
   colors: {
-    primary: "#E31E24",
+    primary: "#940038",
     background: "#FFFFFF",
     foreground: "#1A1A1A",
-    accent: "#E31E24",
+    accent: "#940038",
     muted: "#71717A",
     success: "#28A745",
   },
