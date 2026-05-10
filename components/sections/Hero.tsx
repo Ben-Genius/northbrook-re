@@ -1,164 +1,111 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { gsap, useGSAP, SplitText, ScrollTrigger } from "@/lib/gsap";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import MagneticButton from "@/components/ui/MagneticButton";
+import { ArrowUpRight, Menu, Search, ShoppingBasket } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import ImageSequencePlayer from "@/components/ui/ImageSequencePlayer";
+import { Separator } from "@/components/ui/separator";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+
+const categories = [
+  {
+    title: "Home",
+    image: "https://static.vecteezy.com/system/resources/previews/035/500/119/non_2x/ai-generated-3d-succulent-plant-isolated-on-transparent-background-free-png.png",
+    href: "#",
+  },
+  {
+    title: "Footwear",
+    image: "https://static.vecteezy.com/system/resources/previews/047/920/967/large_2x/formal-shoes-isolated-on-a-transparent-background-free-png.png",
+    href: "#",
+  },
+  {
+    title: "Technology",
+    image: "https://static.vecteezy.com/system/resources/previews/035/500/119/non_2x/ai-generated-3d-succulent-plant-isolated-on-transparent-background-free-png.png",
+    href: "#",
+  },
+  {
+    title: "Accessories",
+    image: "https://static.vecteezy.com/system/resources/previews/047/920/967/large_2x/formal-shoes-isolated-on-a-transparent-background-free-png.png",
+    href: "#",
+  },
+];
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 768px)", () => {
-        // Entrance: Kinetic Typography
-        const split = new SplitText(".hero-title", { type: "lines,chars" });
-        gsap.from(split.chars, {
-          y: 100,
-          opacity: 0,
-          rotateX: -90,
-          stagger: 0.02,
-          duration: 1.2,
-          ease: "power4.out",
-        });
-
-        // Scroll Sequence: Main Driver
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=300%",
-            pin: true,
-            scrub: 1,
-            onUpdate: (self) => setScrollProgress(self.progress),
-          },
-        });
-
-        // Text Morph / Fade as ship moves
-        tl.to(contentRef.current, {
-          opacity: 0,
-          y: -100,
-          scale: 0.9,
-          filter: "blur(20px)",
-          duration: 1,
-        });
-      });
-    },
-    { scope: containerRef }
-  );
-
   return (
-    <section
-      ref={containerRef}
-      className="relative h-screen w-full bg-background overflow-hidden"
-    >
-      {/* Cinematic Image Sequence */}
-      <ImageSequencePlayer
-        frameCount={240}
-        baseUrl="/hero/frame_"
-        extension=".webp"
-        className="absolute inset-0 z-10"
-        onFrameUpdate={setCurrentFrame}
-        progress={scrollProgress}
-      />
+    <div className="w-full relative container mx-auto min-h-screen">
 
-      {/* Cinematic Overlays — minimal, image-first */}
-      <div className="absolute inset-0 z-20 pointer-events-none">
-        {/* Top fade — just enough for navbar legibility */}
-        <div className="absolute top-0 left-0 w-full h-[20vh] bg-linear-to-b from-black/40 to-transparent" />
+      <div className="mt-6 bg-accent/50 rounded-2xl relative">
 
-        {/* Bottom fade — enough to ground the buttons, no more */}
-        <div className="absolute bottom-0 left-0 w-full h-[35vh] bg-linear-to-t from-black/60 via-black/20 to-transparent" />
-
-        {/* Edge vignette — darkens corners, leaves center crisp */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.35)_100%)]" />
+        <motion.section
+          className="w-full px-4 py-24"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="mx-auto text-center">
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+            >
+              <span className="bg-linear-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
+                Curate your products
+              </span>
+              <br />
+              <span className="text-foreground">
+                into simple collections.
+              </span>
+            </motion.h1>
+            <motion.p
+              className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            >
+              Use this page to group your products into themed collections,
+              making it easy for customers to explore.
+            </motion.p>
+          </div>
+        </motion.section>
       </div>
 
-      {/* Editorial Content */}
-      <div
-        ref={contentRef}
-        className="relative z-30 h-full container mx-auto px-6 lg:px-24 flex flex-col items-center justify-center text-center"
-      >
-        <div className="inline-flex items-center gap-3 mb-8 border border-white/25 bg-black/30 backdrop-blur-md px-5 py-2">
-          <div className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="font-mono text-[10px] uppercase tracking-[0.45em] text-white font-bold">
-            Strategic Industrial Logistics
-          </span>
-        </div>
-
-        <h1 className="hero-title font-display text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.8] uppercase text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.6)]">
-          Precision <br />
-          <span className="text-accent italic">In Motion.</span>
-        </h1>
-
-        <div className="mt-12 max-w-3xl mx-auto space-y-10">
-          <p className="text-xl md:text-2xl text-white/90 font-semibold leading-snug text-pretty drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)]">
-            Over a decade of moving entire operations forward where others hesitate.
-            Delivering trust at every turn in the West African sub-region.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
-            <MagneticButton strength={0.2} radius={50}>
-              <Button size="lg" className="px-12 py-8 text-xs font-black uppercase tracking-widest bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all">
-                Request a Quote
-              </Button>
-            </MagneticButton>
-            <MagneticButton strength={0.1} radius={40}>
-              <Button variant="outline" size="lg" className="px-12 py-8 text-xs font-black uppercase tracking-widest border-white/20 bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-accent shadow-2xl transition-all">
-                See Our Work
-              </Button>
-            </MagneticButton>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto mt-12">
+        {categories.map((category, index) => (
+          <motion.div
+            key={category.title}
+            className="group relative bg-muted/50 backdrop-blur-sm rounded-3xl p-4 sm:p-6 min-h-[250px] sm:min-h-[300px] w-full overflow-hidden transition-all duration-500"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+          >
+            <a href={category.href} className="absolute inset-0 z-20">
+              <h2 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(1.5rem,4vw,2.5rem)] font-bold relative z-10 text-primary my-2 sm:my-4 group-hover:text-primary/90 transition-colors duration-300">
+                {category.title}
+              </h2>
+              <div className="absolute inset-0 flex items-center justify-center p-4">
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full max-w-[min(40vw,200px)] sm:max-w-[min(30vw,180px)] md:max-w-[min(25vw,160px)] lg:max-w-[min(20vw,140px)] h-auto object-contain opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500"
+                />
+              </div>
+              <div className="absolute bottom-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-background/95 backdrop-blur-sm rounded-tl-xl flex items-center justify-center z-10 border-l border-t border-border/50">
+                <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-300 shadow-lg">
+                  <ArrowUpRight className="w-5 h-5" />
+                </div>
+              </div>
+            </a>
+          </motion.div>
+        ))}
       </div>
-
-      {/* Telemetry Overlays */}
-      <div className="absolute bottom-12 left-12 z-40 hidden md:flex flex-col gap-2">
-        <div className="flex items-center gap-4">
-          <div className="font-mono text-[9px] uppercase tracking-widest text-white/70 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-            Telemetry: GH-FR-{String(currentFrame).padStart(3, "0")}
-          </div>
-          <div className="h-[2px] w-32 bg-white/15 relative overflow-hidden">
-            <div
-              className="absolute top-0 left-0 h-full bg-accent transition-all duration-100"
-              style={{ width: `${scrollProgress * 100}%` }}
-            />
-          </div>
-        </div>
-        <div className="font-mono text-[9px] text-white/50 uppercase tracking-[0.2em] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-          Coordinates: 5.5500° N, 0.2000° E
-        </div>
-      </div>
-
-      {/* Bottom-right corner triangle badge */}
-      <div className="absolute bottom-0 right-0 z-40 w-52 h-52 pointer-events-none">
-        {/* Triangle fill */}
-        <div
-          className="absolute inset-0 bg-accent/90 backdrop-blur-sm"
-          style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
-        />
-        {/* Text anchored to the bottom-right corner */}
-        <div className="absolute bottom-5 right-4 flex flex-col items-end gap-1.5">
-          <div className="flex items-center gap-2">
-            <div className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
-            <span className="font-mono text-[9px] text-white/60 uppercase tracking-[0.25em]">Live</span>
-          </div>
-          <span className="font-mono text-[11px] text-white font-black uppercase tracking-widest leading-tight text-right">
-            Port of Tema
-          </span>
-          <span className="font-mono text-[9px] text-white/70 uppercase tracking-[0.2em] text-right">
-            Ghana · Est. 2011
-          </span>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }
