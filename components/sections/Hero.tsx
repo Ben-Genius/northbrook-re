@@ -1,55 +1,60 @@
 "use client";
 
-import { ArrowUpRight, Menu, Search, ShoppingBasket } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 
-
-const categories = [
+const stats = [
   {
-    title: "Home",
-    image: "https://static.vecteezy.com/system/resources/previews/035/500/119/non_2x/ai-generated-3d-succulent-plant-isolated-on-transparent-background-free-png.png",
-    href: "#",
+    value: "13+",
+    label: "Years of Total Logistics Solutions for Large-Scale Engineering in West Africa",
+    sub: null,
   },
   {
-    title: "Footwear",
-    image: "https://static.vecteezy.com/system/resources/previews/047/920/967/large_2x/formal-shoes-isolated-on-a-transparent-background-free-png.png",
-    href: "#",
+    value: "12",
+    label: "Integrated Service Lines",
+    sub: null,
   },
   {
-    title: "Technology",
-    image: "https://static.vecteezy.com/system/resources/previews/035/500/119/non_2x/ai-generated-3d-succulent-plant-isolated-on-transparent-background-free-png.png",
-    href: "#",
-  },
-  {
-    title: "Accessories",
-    image: "https://static.vecteezy.com/system/resources/previews/047/920/967/large_2x/formal-shoes-isolated-on-a-transparent-background-free-png.png",
-    href: "#",
+    value: "Certified",
+    label: "Classification Partners",
+    sub: "ABS · ClassNK · DNV-GL · Lloyd's · RINA · KR",
   },
 ];
 
 export default function Hero() {
   return (
-    <div className="w-full relative container mx-auto min-h-screen">
+    <div className="w-full relative min-h-screen px-4 sm:px-6 lg:px-24 pt-2">
+      {/* Background image — data-speed="0" keeps it fixed via ScrollSmoother */}
+      <div
+        data-speed="0"
+        className="absolute inset-0 -z-10 pointer-events-none"
+      >
+        <Image
+          src="/images/hero.png"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-background/20" />
+      </div>
 
-      <div className="mt-6 bg-accent/50 rounded-2xl relative">
-
+      <div className="bg-white/20 backdrop-blur-md border border-white/25 rounded-2xl relative shadow-xl">
         <motion.section
-          className="w-full px-4 py-24"
+          className="w-full px-6 sm:px-10 py-16 sm:py-24 lg:py-28"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="mx-auto text-center">
+            <motion.p
+              className="text-xs uppercase tracking-[0.4em] text-primary font-bold mb-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Established 2011 · Ghana · West Africa
+            </motion.p>
             <motion.h1
               className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight"
               initial={{ opacity: 0, y: 20 }}
@@ -57,52 +62,51 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
             >
               <span className="bg-linear-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
-                Curate your products
+                Precision Logistics
               </span>
               <br />
               <span className="text-foreground">
-                into simple collections.
+                for Oil &amp; Gas Operations.
               </span>
             </motion.h1>
             <motion.p
-              className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+              className="text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
             >
-              Use this page to group your products into themed collections,
-              making it easy for customers to explore.
+              Integrated onshore and offshore logistics across West Africa, Air &amp; Sea Freight,
+              Bunkering, Ship Husbandry, and Crew Management. Where others hesitate, we deliver.
             </motion.p>
           </div>
         </motion.section>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-7xl mx-auto mt-12">
-        {categories.map((category, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mt-2 pb-8 sm:pb-16">
+        {stats.map((stat, index) => (
           <motion.div
-            key={category.title}
-            className="group relative bg-muted/50 backdrop-blur-sm rounded-3xl p-4 sm:p-6 min-h-[250px] sm:min-h-[300px] w-full overflow-hidden transition-all duration-500"
+            key={stat.value}
+            className="bg-white/20 backdrop-blur-md border border-white/25 rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-row sm:flex-col items-center sm:items-start justify-between sm:justify-between gap-4 sm:gap-0 min-h-[100px] sm:min-h-[200px] shadow-lg hover:bg-white/25 hover:shadow-xl transition-all duration-500"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            transition={{ duration: 0.6, delay: 0.5 + index * 0.12, ease: "easeOut" }}
           >
-            <a href={category.href} className="absolute inset-0 z-20">
-              <h2 className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-[clamp(1.5rem,4vw,2.5rem)] font-bold relative z-10 text-primary my-2 sm:my-4 group-hover:text-primary/90 transition-colors duration-300">
-                {category.title}
-              </h2>
-              <div className="absolute inset-0 flex items-center justify-center p-4">
-                <img
-                  src={category.image}
-                  alt={category.title}
-                  className="w-full max-w-[min(40vw,200px)] sm:max-w-[min(30vw,180px)] md:max-w-[min(25vw,160px)] lg:max-w-[min(20vw,140px)] h-auto object-contain opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-500"
-                />
-              </div>
-              <div className="absolute bottom-0 right-0 w-16 h-16 md:w-20 md:h-20 bg-background/95 backdrop-blur-sm rounded-tl-xl flex items-center justify-center z-10 border-l border-t border-border/50">
-                <div className="absolute bottom-2 right-2 md:bottom-3 md:right-3 w-10 h-10 md:w-12 md:h-12 bg-secondary rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-300 shadow-lg">
-                  <ArrowUpRight className="w-5 h-5" />
-                </div>
-              </div>
-            </a>
+            {/* Value */}
+            <p className="text-5xl sm:text-6xl font-black text-white tracking-tight leading-none tabular-nums">
+              {stat.value}
+            </p>
+
+            {/* Divider + label block */}
+            <div className="sm:mt-6 pt-0 sm:pt-4 border-t-0 sm:border-t border-white/20 space-y-1 text-right sm:text-left max-w-[55%] sm:max-w-none">
+              <p className="text-[11px] uppercase tracking-[0.25em] text-white/60 font-semibold leading-snug">
+                {stat.label}
+              </p>
+              {stat.sub && (
+                <p className="text-[10px] tracking-widest text-white/40 font-medium">
+                  {stat.sub}
+                </p>
+              )}
+            </div>
           </motion.div>
         ))}
       </div>
