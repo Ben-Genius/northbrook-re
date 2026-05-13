@@ -68,26 +68,24 @@ export function PartnerLogoWall({ caption }: PartnerLogoWallProps) {
 
   return (
     <div ref={ref}>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-steel/15">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border border-wire divide-x divide-y divide-wire">
         {partners.map((p) => (
           <div
             key={p.name}
-            className="partner-item group bg-white flex flex-col items-center justify-center py-12 px-6 cursor-default select-none"
+            className="partner-item group bg-background hover:bg-smoke flex flex-col items-center justify-center py-12 px-6 cursor-default select-none transition-colors duration-300"
           >
             <span
               aria-hidden
-              className="font-display block text-[1.75rem] font-light text-primary/20 group-hover:text-accent/30 transition-colors duration-500 mb-3 leading-none"
+              className="font-display block text-[1.75rem] font-bold text-foreground/10 group-hover:text-accent/25 transition-colors duration-500 mb-3 leading-none tracking-tight"
             >
               {p.abbr}
             </span>
-            <span
-              className="font-display text-base lg:text-lg font-light tracking-wider text-primary/40 group-hover:text-primary transition-colors duration-400"
-            >
+            <span className="font-display text-base lg:text-lg font-medium tracking-wide text-foreground/40 group-hover:text-foreground transition-colors duration-300">
               {p.name}
             </span>
             <span
               aria-hidden
-              className="block mt-3 h-px w-0 group-hover:w-8 bg-accent transition-all duration-500 ease-out"
+              className="block mt-4 h-px w-0 group-hover:w-8 bg-accent transition-all duration-500 ease-out"
             />
           </div>
         ))}

@@ -51,8 +51,6 @@ export default async function ProjectPage({ params }: Props) {
 
       {/* Hero with full-bleed image */}
       <section className="relative pt-40 pb-28 px-6 lg:px-12 section-dark overflow-hidden min-h-[70vh] flex items-end">
-        {/* Brand marker: crimson left bar */}
-        <div aria-hidden className="absolute left-0 top-0 bottom-0 w-1.5 bg-accent z-10" />
         <div className="absolute inset-0">
           <SmartImage
             src={`/images/projects/${project.slug}.jpg`}
@@ -66,10 +64,7 @@ export default async function ProjectPage({ params }: Props) {
             placeholderHint={project.partner ?? "Project"}
           />
         </div>
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-linear-to-t from-ink/85 via-ink/45 to-ink/15"
-        />
+        <div aria-hidden className="absolute inset-0 bg-linear-to-t from-ink/80 via-ink/40 to-ink/10" />
         <div className="max-w-7xl mx-auto relative w-full">
           <FadeIn>
             <Link
@@ -85,9 +80,7 @@ export default async function ProjectPage({ params }: Props) {
             </FadeIn>
           )}
           <FadeIn delay={0.1}>
-            <h1
-              className="text-4xl lg:text-6xl font-light text-white max-w-4xl leading-[1.05] mb-6"
-            >
+            <h1 className="font-display font-bold text-4xl lg:text-6xl text-white max-w-4xl leading-none tracking-tight mb-6">
               {project.title}
             </h1>
           </FadeIn>
@@ -103,10 +96,8 @@ export default async function ProjectPage({ params }: Props) {
             </FadeIn>
           </div>
           <FadeIn delay={0.15}>
-            <div className="bg-gray-light p-8">
-              <p className="text-xs text-primary uppercase tracking-[0.14em] font-medium mb-5">
-                Services Provided
-              </p>
+            <div className="bg-smoke border border-wire rounded-md p-8">
+              <p className="eyebrow mb-5">Services Provided</p>
               <ul className="space-y-3">
                 {project.services.map((s) => (
                   <li key={s} className="flex items-start gap-3 text-sm text-caption">
@@ -116,11 +107,9 @@ export default async function ProjectPage({ params }: Props) {
                 ))}
               </ul>
               {project.partner && (
-                <div className="mt-6 pt-6 border-t border-steel/20">
-                  <p className="text-xs text-primary uppercase tracking-[0.14em] font-medium mb-2">
-                    Partner
-                  </p>
-                  <p className="text-sm text-caption">{project.partner}</p>
+                <div className="mt-6 pt-6 border-t border-wire">
+                  <p className="eyebrow mb-2">Partner</p>
+                  <p className="text-sm font-medium text-foreground">{project.partner}</p>
                 </div>
               )}
             </div>
@@ -129,12 +118,12 @@ export default async function ProjectPage({ params }: Props) {
       </Section>
 
       {/* Prev / Next with thumbnails */}
-      <section className="bg-gray-light py-12 px-6 lg:px-12">
+      <section className="bg-smoke py-12 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
           {prev ? (
             <Link
               href={`/projects/${prev.slug}`}
-              className="group flex items-center gap-5 bg-white p-5 lift-card"
+              className="group flex items-center gap-5 bg-white border border-wire hover:border-accent/40 rounded-md p-5 lift-card"
             >
               <div className="relative w-24 h-24 shrink-0 overflow-hidden zoom-frame">
                 <SmartImage
@@ -164,7 +153,7 @@ export default async function ProjectPage({ params }: Props) {
           {next && (
             <Link
               href={`/projects/${next.slug}`}
-              className="group flex items-center gap-5 bg-white p-5 lift-card md:flex-row-reverse md:text-right"
+              className="group flex items-center gap-5 bg-white border border-wire hover:border-accent/40 rounded-md p-5 lift-card md:flex-row-reverse md:text-right"
             >
               <div className="relative w-24 h-24 shrink-0 overflow-hidden zoom-frame">
                 <SmartImage

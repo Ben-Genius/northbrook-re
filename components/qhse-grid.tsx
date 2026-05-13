@@ -40,7 +40,7 @@ export function QHSEGrid({ pillars }: QHSEGridProps) {
   )
 
   return (
-    <div ref={containerRef} className="grid md:grid-cols-2 gap-px bg-steel/10 border border-steel/10">
+    <div ref={containerRef} className="grid md:grid-cols-2 border border-wire divide-x divide-y divide-wire rounded-md overflow-hidden">
       {pillars.map((p, i) => {
         const Icon = icons[i % icons.length]
         return (

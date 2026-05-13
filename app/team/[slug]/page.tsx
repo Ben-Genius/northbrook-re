@@ -60,7 +60,7 @@ export default async function TeamMemberPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}
-      <section className="relative min-h-[72vh] flex items-end overflow-hidden" style={{ background: "var(--nb-ink)" }}>
+      <section className="bg-ink relative min-h-[72vh] flex items-end overflow-hidden">
         {/* Full-bleed photo — right half, desktop */}
         <div className="absolute inset-0 lg:left-[45%]">
           <SmartImage
@@ -74,28 +74,15 @@ export default async function TeamMemberPage({ params }: Props) {
             placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
             placeholderHint={member.role}
           />
-          {/* Gradient over photo — fades left into ink */}
           <div
             aria-hidden
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(to right, var(--nb-ink) 0%, rgba(16,5,7,0.75) 40%, rgba(16,5,7,0.10) 100%)",
-            }}
+            className="absolute inset-0 bg-linear-to-r from-ink/95 via-ink/70 to-ink/10"
           />
-          {/* Gradient bottom */}
           <div
             aria-hidden
-            className="absolute inset-x-0 bottom-0 h-64"
-            style={{ background: "linear-gradient(to top, var(--nb-ink) 0%, transparent 100%)" }}
+            className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-ink to-transparent"
           />
         </div>
-
-        {/* Accent vertical stripe */}
-        <div
-          aria-hidden
-          className="hidden lg:block absolute left-[44.5%] top-0 bottom-0 w-0.5 opacity-30"
-          style={{ background: "linear-gradient(to bottom, transparent, var(--nb-accent), transparent)" }}
-        />
 
         {/* Content */}
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 pt-40 pb-16 w-full">
@@ -113,10 +100,7 @@ export default async function TeamMemberPage({ params }: Props) {
               <p className="eyebrow mb-4">{member.role}</p>
             </FadeIn>
             <FadeIn delay={0.12}>
-              <h1
-                className="font-light text-white leading-none mb-6"
-                style={{ fontSize: "clamp(2.6rem, 6vw, 5.5rem)", letterSpacing: "-0.02em" }}
-              >
+              <h1 className="font-display font-bold text-white leading-none tracking-tight text-[clamp(2.6rem,6vw,5.5rem)] mb-6">
                 {member.name}
               </h1>
             </FadeIn>
@@ -152,7 +136,7 @@ export default async function TeamMemberPage({ params }: Props) {
         <FadeIn>
           <p className="eyebrow mb-4">Other Leaders</p>
           <h2
-            className="text-3xl lg:text-4xl font-light text-primary leading-[1.1] mb-12"
+            className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight leading-tight mb-12"
           >
             Meet the rest of the team
           </h2>
@@ -165,7 +149,7 @@ export default async function TeamMemberPage({ params }: Props) {
               <FadeIn key={m.slug} delay={i * 0.08}>
                 <Link
                   href={`/team/${m.slug}`}
-                  className="group block bg-white overflow-hidden lift-card"
+                  className="group block bg-white border border-wire hover:border-accent/40 rounded-md overflow-hidden lift-card"
                 >
                   <div className="relative aspect-4/5 zoom-frame">
                     <SmartImage

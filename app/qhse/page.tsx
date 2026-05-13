@@ -62,7 +62,7 @@ export default function QHSEPage() {
                 by="word"
                 delay={0.1}
                 stagger={0.05}
-                className="text-4xl lg:text-6xl font-display font-light text-primary mb-8 leading-[1.05]"
+                className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-8 leading-[1.05]"
               />
               <div className="space-y-6 text-body leading-relaxed">
                 <p>
@@ -76,9 +76,9 @@ export default function QHSEPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="lg:col-span-6 lg:offset-1">
+          <div className="lg:col-span-6 lg:col-start-7 overflow-visible">
             <Reveal variant="scale" delay={0.2}>
-              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-sm shadow-2xl">
+              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-md border border-wire">
                 <SmartImage
                   src="/images/projects/borr-drilling.jpg"
                   alt="North-Brook safety operations"
@@ -89,7 +89,7 @@ export default function QHSEPage() {
                 <div className="absolute inset-0 bg-ink/10" />
                 {/* Floating stat card */}
                 <div className="absolute -bottom-6 -right-6 glass-card shadow-sm p-8 z-10 max-w-[240px]">
-                  <p className="text-accent text-3xl font-display font-light mb-1">100%</p>
+                  <p className="text-accent text-3xl font-display font-bold tracking-tight mb-1">100%</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary">Safety Record</p>
                   <p className="text-caption text-xs mt-3 leading-relaxed">Zero LTIs (Lost Time Injuries) recorded across all offshore campaigns since 2014.</p>
                 </div>
@@ -127,7 +127,7 @@ export default function QHSEPage() {
             by="word"
             delay={0.1}
             stagger={0.05}
-            className="text-4xl lg:text-6xl font-display font-light text-primary mb-16 leading-[1.05]"
+            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-16 leading-[1.05]"
           />
         </FadeIn>
         <QHSEGrid pillars={pillars} />
@@ -137,7 +137,7 @@ export default function QHSEPage() {
         <div className="grid lg:grid-cols-2 gap-16 items-end">
           <div>
             <p className="eyebrow mb-6">Compliance</p>
-            <h2 className="text-3xl lg:text-4xl font-light text-primary mb-8 leading-[1.1]">
+            <h2 className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight mb-8 leading-tight">
               Held to the world&apos;s most demanding standards.
             </h2>
             <p className="text-body text-sm leading-relaxed max-w-md mb-8">

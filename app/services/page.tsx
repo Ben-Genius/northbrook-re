@@ -190,7 +190,7 @@ export default function ServicesPage() {
                     by="word"
                     delay={0.1}
                     stagger={0.05}
-                    className="text-4xl lg:text-5xl font-display font-light text-primary mb-6 leading-[1.05]"
+                    className="text-4xl lg:text-5xl font-display font-bold text-foreground tracking-tight mb-6 leading-[1.05]"
                   />
                   <p className="text-body leading-relaxed mb-8">{service.body}</p>
 
