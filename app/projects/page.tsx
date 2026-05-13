@@ -40,8 +40,51 @@ export default function ProjectsPage() {
       <VelocityMarquee variant="ports" />
 
       <Section gray>
+        {/* Featured first project */}
+        {projects[0] && (
+          <FadeIn className="mb-6">
+            <Link
+              href={`/projects/${projects[0].slug}`}
+              className="group block bg-white border border-wire hover:border-accent/40 transition-all duration-500 overflow-hidden rounded-md"
+            >
+              <div className="grid lg:grid-cols-2">
+                <div className="relative aspect-16/9 lg:aspect-auto lg:min-h-[380px] zoom-frame tile-vignette">
+                  <SmartImage
+                    src={`/images/projects/${projects[0].slug}.jpg`}
+                    alt={projects[0].title}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-cover"
+                    placeholderTone="primary"
+                    placeholderLabel="NB"
+                    placeholderHint={projects[0].partner ?? "Project"}
+                  />
+                  {projects[0].partner && (
+                    <span className="absolute bottom-5 left-6 text-accent text-xs uppercase tracking-widest z-10">
+                      {projects[0].partner}
+                    </span>
+                  )}
+                </div>
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <p className="eyebrow mb-4">Featured Project</p>
+                  <h3 className="text-2xl lg:text-3xl font-display font-bold text-foreground mb-4 leading-snug group-hover:text-accent transition-colors">
+                    {projects[0].title}
+                  </h3>
+                  <p className="text-sm text-body leading-relaxed mb-6">
+                    {projects[0].description}
+                  </p>
+                  <span className="text-xs text-accent uppercase tracking-[0.14em] flex items-center gap-1.5 group-hover:gap-3 transition-all">
+                    View case study <ArrowRight size={12} />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </FadeIn>
+        )}
+
+        {/* Remaining projects grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p, i) => (
+          {projects.slice(1).map((p, i) => (
             <FadeIn key={p.slug} delay={(i % 3) * 0.1}>
               <Link
                 href={`/projects/${p.slug}`}
@@ -65,9 +108,7 @@ export default function ProjectsPage() {
                   )}
                 </div>
                 <div className="p-6">
-                  <h3
-                    className="text-xl font-light text-primary mb-3 group-hover:text-accent transition-colors leading-snug"
-                  >
+                  <h3 className="text-lg font-medium text-primary mb-3 group-hover:text-accent transition-colors leading-snug">
                     {p.title}
                   </h3>
                   <p className="text-sm text-body leading-relaxed line-clamp-2 mb-4">

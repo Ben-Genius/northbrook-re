@@ -164,18 +164,18 @@ export default function ServicesPage() {
             className={`py-24 lg:py-32 px-6 lg:px-12 ${isEven ? "bg-background" : "bg-smoke"}`}
           >
             <div className="max-w-7xl mx-auto">
-              <div className={`grid lg:grid-cols-2 gap-16 items-center ${!isEven ? "lg:flex-row-reverse" : ""}`}>
-                <FadeIn direction="left">
-                  <div className="flex items-center gap-4 mb-6">
-                    <span className="text-accent/20 text-7xl lg:text-8xl font-light leading-none">
-                      0{i + 1}
+              <div className="grid lg:grid-cols-2 gap-16 items-center">
+                <FadeIn direction="left" className={!isEven ? "lg:order-2" : ""}>
+                  <div className="flex items-start gap-5 mb-8">
+                    <span className="text-accent font-display font-bold text-[5rem] lg:text-[6.5rem] leading-none opacity-[0.08] select-none -mt-2">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                     {service.tags && (
-                      <div className="flex flex-wrap gap-2 mt-4">
+                      <div className="flex flex-wrap gap-2 pt-3">
                         {service.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-gray-light text-[10px] uppercase tracking-wider text-caption font-semibold rounded-full"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-wire text-[10px] uppercase tracking-wider text-caption font-semibold rounded-full"
                           >
                             <Tag size={10} className="text-accent" />
                             {tag}
@@ -194,20 +194,20 @@ export default function ServicesPage() {
                   />
                   <p className="text-body leading-relaxed mb-8">{service.body}</p>
 
-                  <p className="text-xs text-primary uppercase tracking-[0.14em] font-medium mb-4">
-                    What&apos;s included
-                  </p>
-                  <ul className="space-y-3">
-                    {service.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-sm text-caption">
-                        <CheckCircle2 size={16} className="text-accent mt-0.5 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="border-t border-wire pt-6">
+                    <p className="eyebrow mb-4">What&apos;s included</p>
+                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
+                      {service.includes.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-sm text-caption">
+                          <CheckCircle2 size={15} className="text-accent mt-0.5 shrink-0" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </FadeIn>
 
-                <FadeIn delay={0.2}>
+                <FadeIn delay={0.2} className={!isEven ? "lg:order-1" : ""}>
                   <div className="relative aspect-square overflow-hidden zoom-frame rounded-md">
                     <SmartImage
                       src={`/images/services/${service.id}.jpg`}
@@ -216,12 +216,12 @@ export default function ServicesPage() {
                       sizes="(min-width: 1024px) 50vw, 100vw"
                       className="object-cover"
                       placeholderTone="primary"
-                      placeholderLabel={`0${i + 1}`}
+                      placeholderLabel={String(i + 1).padStart(2, "0")}
                       placeholderHint={service.title}
                     />
                     <div
                       aria-hidden
-                      className="absolute inset-0 bg-linear-to-tr from-ink/30 via-transparent to-transparent pointer-events-none"
+                      className="absolute inset-0 bg-linear-to-tr from-ink/20 via-transparent to-transparent pointer-events-none"
                     />
                   </div>
                 </FadeIn>

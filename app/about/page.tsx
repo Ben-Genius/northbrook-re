@@ -93,21 +93,24 @@ export default function AboutPage() {
       <VelocityMarquee variant="stats" />
 
       {/* Stat band */}
-      <section className="bg-smoke py-20 px-6 lg:px-12 border-y border-wire">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-6">
-          {[
-            { label: "Years Operating", value: "10+" },
-            { label: "Port Calls", value: "347" },
-            { label: "Class Certifications", value: "6" },
-            { label: "Lost Time Injuries", value: "0" },
-          ].map((stat, i) => (
-            <FadeIn key={stat.label} delay={i * 0.1}>
-              <div className="flex flex-col">
-                <span className="text-muted-foreground text-[10px] uppercase tracking-[0.3em] mb-3 font-mono">{stat.label}</span>
-                <span className="text-accent font-display font-bold text-4xl lg:text-5xl tracking-tight leading-none">{stat.value}</span>
-              </div>
-            </FadeIn>
-          ))}
+      <section className="bg-smoke py-16 px-6 lg:px-12 border-y border-wire">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-wire">
+            {[
+              { label: "Years Operating", value: "10+", note: "Est. November 2014" },
+              { label: "Port Calls", value: "347", note: "Vessels handled" },
+              { label: "Class Certifications", value: "6", note: "International societies" },
+              { label: "Lost Time Injuries", value: "0", note: "Since operations began" },
+            ].map((stat, i) => (
+              <FadeIn key={stat.label} delay={i * 0.1}>
+                <div className="flex flex-col py-8 lg:py-4 lg:px-10 first:lg:pl-0 last:lg:pr-0">
+                  <span className="text-muted-foreground text-[9px] uppercase tracking-[0.3em] mb-2 font-mono">{stat.label}</span>
+                  <span className="text-accent font-display font-bold text-5xl lg:text-6xl tracking-tight leading-none mb-2">{stat.value}</span>
+                  <span className="text-caption text-[10px] font-mono">{stat.note}</span>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -174,9 +177,7 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h3
-                    className="text-lg font-light text-primary mb-1 group-hover:text-accent transition-colors"
-                  >
+                  <h3 className="text-base font-medium text-primary mb-1 group-hover:text-accent transition-colors leading-snug">
                     {m.name}
                   </h3>
                   <p className="text-xs text-caption uppercase tracking-wider">{m.role}</p>

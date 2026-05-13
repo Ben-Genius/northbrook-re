@@ -6,12 +6,13 @@ import { CtaBand } from "@/components/ui/cta-band"
 import { QHSEGrid } from "@/components/qhse-grid"
 import { SmartImage } from "@/components/ui/smart-image"
 import { Reveal } from "@/components/ui/reveal"
-import { FileText, ArrowRight } from "lucide-react"
+import { FileText } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
 import LogoMarquee from "@/components/sections/LogoMarquee"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "QHSE Policy | North-Brook Limited",
@@ -131,6 +132,43 @@ export default function QHSEPage() {
           />
         </FadeIn>
         <QHSEGrid pillars={pillars} />
+      </Section>
+
+      {/* Certification logos */}
+      <Section gray>
+        <FadeIn>
+          <p className="eyebrow mb-6">Classification Societies</p>
+          <h2 className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight mb-4 leading-tight">
+            Six societies. One standard: the highest.
+          </h2>
+          <p className="text-body text-sm leading-relaxed max-w-lg mb-12">
+            Multi-certified by the world&apos;s leading classification societies, North-Brook meets the compliance requirements of the most demanding global operators.
+          </p>
+        </FadeIn>
+        <div className="grid grid-cols-3 lg:grid-cols-6 border border-wire divide-x divide-y divide-wire rounded-md overflow-hidden">
+          {[
+            { file: "abs.png", name: "ABS" },
+            { file: "classnk.png", name: "ClassNK" },
+            { file: "dnv-gl.png", name: "DNV GL" },
+            { file: "korean-register.png", name: "Korean Register" },
+            { file: "lloyds-register.png", name: "Lloyd's Register" },
+            { file: "rina.png", name: "RINA" },
+          ].map((cert, i) => (
+            <FadeIn key={cert.name} delay={i * 0.07}>
+              <div className="group flex flex-col items-center justify-center gap-3 bg-background hover:bg-smoke transition-colors duration-300 py-8 px-4">
+                <div className="relative h-10 w-20 opacity-40 group-hover:opacity-70 transition-opacity duration-300 grayscale group-hover:grayscale-0">
+                  <Image
+                    src={`/images/certs/${cert.file}`}
+                    alt={cert.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-caption font-semibold">{cert.name}</span>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
       </Section>
 
       <Section>

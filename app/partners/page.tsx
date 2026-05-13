@@ -75,11 +75,11 @@ export default function PartnersPage() {
         <div className="grid lg:grid-cols-3 gap-6">
           {values.map((v, i) => (
             <FadeIn key={v.title} delay={i * 0.12}>
-              <div className="bg-smoke border border-wire rounded-md p-8">
-                <div className="w-8 h-px bg-accent mb-6" />
-                <h3
-                  className="text-xl font-light text-primary mb-3"
-                >
+              <div className="bg-smoke border border-wire rounded-md p-8 flex flex-col gap-5">
+                <span className="text-accent font-display font-bold text-5xl leading-none opacity-15 select-none -mb-1">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-lg font-semibold text-foreground tracking-tight leading-snug">
                   {v.title}
                 </h3>
                 <p className="text-sm text-body leading-relaxed">{v.body}</p>

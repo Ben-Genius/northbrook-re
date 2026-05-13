@@ -41,54 +41,72 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left: Contact details */}
           <FadeIn direction="left">
-            <h2 className="text-3xl lg:text-4xl font-display font-bold text-foreground tracking-tight mb-8">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-foreground tracking-tight mb-2">
               Find us in Accra
             </h2>
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <MapPin size={18} className="text-accent mt-1 shrink-0" />
+            <p className="text-body text-sm leading-relaxed mb-8">
+              One business day response, guaranteed. For urgent operational matters, call directly.
+            </p>
+
+            {/* Response promise */}
+            <div className="flex items-center gap-4 bg-smoke border border-wire rounded-md px-5 py-4 mb-8">
+              <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
+              <p className="text-sm text-foreground font-medium">We respond within <span className="text-accent">1 business day</span> to all enquiries.</p>
+            </div>
+
+            <div className="space-y-5 mb-10">
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                  <MapPin size={15} className="text-accent" />
+                </div>
                 <div>
-                  <p className="text-xs text-primary uppercase tracking-widest mb-1">Address</p>
-                  <p className="text-caption text-sm leading-relaxed">
+                  <p className="text-[10px] text-caption uppercase tracking-widest mb-1 font-mono">Address</p>
+                  <p className="text-foreground text-sm leading-relaxed">
                     No 12 Joseph Richard Asiedu St,<br />Accra, Ghana
                   </p>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <Mail size={18} className="text-accent mt-1 shrink-0" />
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                  <Mail size={15} className="text-accent" />
+                </div>
                 <div>
-                  <p className="text-xs text-primary uppercase tracking-widest mb-1">Email</p>
+                  <p className="text-[10px] text-caption uppercase tracking-widest mb-1 font-mono">Email</p>
                   <a
                     href="mailto:info@northbrook.com.gh"
-                    className="text-caption text-sm hover:text-accent transition-colors"
+                    className="text-foreground text-sm hover:text-accent transition-colors"
                   >
                     info@northbrook.com.gh
                   </a>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <Phone size={18} className="text-accent mt-1 shrink-0" />
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                  <Phone size={15} className="text-accent" />
+                </div>
                 <div>
-                  <p className="text-xs text-primary uppercase tracking-widest mb-1">Phone</p>
+                  <p className="text-[10px] text-caption uppercase tracking-widest mb-1 font-mono">Phone</p>
                   <a
                     href="tel:+233244270797"
-                    className="text-caption text-sm hover:text-accent transition-colors"
+                    className="text-foreground text-sm hover:text-accent transition-colors"
                   >
                     +233 (0) 244 270 797
                   </a>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <Clock size={18} className="text-accent mt-1 shrink-0" />
+              <div className="flex gap-4 items-start">
+                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                  <Clock size={15} className="text-accent" />
+                </div>
                 <div>
-                  <p className="text-xs text-primary uppercase tracking-widest mb-1">Hours</p>
-                  <p className="text-caption text-sm">Mon–Fri, 8:00 AM – 5:30 PM GMT</p>
+                  <p className="text-[10px] text-caption uppercase tracking-widest mb-1 font-mono">Hours</p>
+                  <p className="text-foreground text-sm">Mon–Fri, 8:00 AM – 5:30 PM GMT</p>
                 </div>
               </div>
             </div>
 
             {/* Map embed */}
-            <div className="mt-10 aspect-4/3 bg-smoke border border-wire rounded-md relative overflow-hidden">
+            <div className="aspect-4/3 bg-smoke border border-wire rounded-md relative overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8763!2d-0.187!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAccra%2C+Ghana!5e0!3m2!1sen!2sgh!4v1"
                 width="100%"
