@@ -65,7 +65,7 @@ const ROUTE_PATH =
 
 // Per-waypoint slot in the timeline (units).
 // Structure per slot:  0–1 zoom+pin  |  1–1.8 card in  |  1.8–4 hold (user reads)
-const SLOT = 4;
+const SLOT = 2.5;
 const INITIAL = 0.5; // initial map zoom-out
 
 export default function WorkMapSection() {
@@ -87,14 +87,8 @@ export default function WorkMapSection() {
             start: "top top",
             end: `+=${WAYPOINTS.length * SLOT * 100}%`,
             pin: true,
-            scrub: 2,
+            scrub: 1.5,
             invalidateOnRefresh: true,
-            snap: {
-              snapTo: "labelsDirectional",
-              duration: { min: 0.25, max: 0.6 },
-              delay: 0.05,
-              ease: "power3.inOut",
-            },
           },
         });
 
@@ -201,12 +195,12 @@ export default function WorkMapSection() {
       </div>
 
       {/* Map */}
-      <div className="relative h-full w-full flex items-center justify-center">
-        <div className="relative w-full h-full max-w-[85vw] flex items-center justify-center p-12">
+      <div className="relative h-full w-full">
+        <div className="relative w-full h-full">
           <svg
             ref={mapRef}
             viewBox="0 0 600 600"
-            className="h-full w-full object-contain"
+            className="absolute inset-0 h-full w-full"
             preserveAspectRatio="xMidYMid meet"
           >
             {/* Coastline */}
@@ -280,6 +274,7 @@ export default function WorkMapSection() {
                 top: `calc(50% + ${point.offset.y}px)`,
               }}
             >
+
               <div className="flex flex-col gap-3">
                 <div className="font-mono text-[9px] text-accent font-bold uppercase tracking-[0.3em]">
                   {point.region}

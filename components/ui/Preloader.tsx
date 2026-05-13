@@ -20,6 +20,8 @@ export default function Preloader() {
             ease: "power4.inOut",
             onComplete: () => {
               if (containerRef.current) containerRef.current.style.display = "none";
+              (window as any).__preloaderDone = true;
+              window.dispatchEvent(new CustomEvent("preloader:complete"));
             }
           });
         }

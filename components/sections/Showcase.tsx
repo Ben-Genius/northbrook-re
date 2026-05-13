@@ -138,9 +138,9 @@ export default function Showcase() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-700"
+                    className="object-cover opacity-70 transition-all duration-700 hover:opacity-90"
                   />
-                  <div className="absolute inset-0 bg-foreground/40" />
+                  <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-black/20" />
                 </div>
               </div>
 
@@ -149,10 +149,10 @@ export default function Showcase() {
                   <div className="font-mono text-xs uppercase tracking-[0.4em] text-accent">
                     {project.subtitle}
                   </div>
-                  <h3 className="font-display text-7xl font-bold tracking-tighter leading-none">
+                  <h3 className="font-display text-7xl font-bold tracking-tighter leading-none text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                     {project.title}
                   </h3>
-                  <p className="text-xl text-background/60 max-w-sm text-pretty leading-relaxed">
+                  <p className="text-xl text-white/70 max-w-sm text-pretty leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {project.description}
                   </p>
                   <div className="mt-8">
@@ -182,18 +182,19 @@ export default function Showcase() {
         </div>
         <div className="space-y-16">
           {PROJECTS.map((project) => (
-            <div key={project.title} className="project-panel-mobile space-y-6">
+            <div key={project.title} className="project-panel-mobile space-y-4">
               <div className="relative aspect-16/10 w-full overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover grayscale"
+                  className="object-cover"
                 />
+                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="space-y-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-accent">{project.subtitle}</div>
-                <h3 className="text-3xl font-bold tracking-tighter">{project.title}</h3>
+                <h3 className="text-3xl font-bold tracking-tighter text-background">{project.title}</h3>
                 <p className="text-background/60 text-sm text-pretty">{project.description}</p>
               </div>
             </div>

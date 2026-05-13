@@ -1,115 +1,197 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-
-const stats = [
-  {
-    value: "13+",
-    label: "Years of Total Logistics Solutions for Large-Scale Engineering in West Africa",
-    sub: null,
-  },
-  {
-    value: "12",
-    label: "Integrated Service Lines",
-    sub: null,
-  },
-  {
-    value: "Certified",
-    label: "Classification Partners",
-    sub: "ABS · ClassNK · DNV-GL · Lloyd's · RINA · KR",
-  },
-];
+import { useRef, useState, useEffect } from "react";
+import { gsap, useGSAP, SplitText, ScrollTrigger } from "@/lib/gsap";
+import { Badge } from "../ui/badge";
+import MagneticButton from "@/components/ui/MagneticButton";
+import { Button } from "@/components/ui/button";
+import ImageSequencePlayer from "@/components/ui/ImageSequencePlayer";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subRef = useRef<HTMLParagraphElement>(null);
+  const btnsRef = useRef<HTMLDivElement>(null);
+  const [currentFrame, setCurrentFrame] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Entrance: runs after preloader via event, uses direct refs (not scoped selectors)
+  useEffect(() => {
+    const badge = badgeRef.current;
+    const title = titleRef.current;
+    const sub = subRef.current;
+    const btns = btnsRef.current;
+    if (!badge || !title || !sub || !btns) return;
+
+    const split = new SplitText(title, { type: "lines,chars" });
+
+    // Hide everything immediately
+    gsap.set(badge, { opacity: 0, y: 16 });
+    gsap.set(split.chars, { opacity: 0, y: 80, rotateX: -90 });
+    gsap.set([sub, btns], { opacity: 0, y: 20 });
+
+    const runEntrance = () => {
+      const tl = gsap.timeline();
+      tl.to(badge, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" });
+      tl.to(split.chars, { opacity: 1, y: 0, rotateX: 0, stagger: 0.018, duration: 1, ease: "power4.out" }, "-=0.2");
+      tl.to([sub, btns], { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.12 }, "-=0.4");
+    };
+
+    if ((window as any).__preloaderDone) {
+      runEntrance();
+    } else {
+      window.addEventListener("preloader:complete", runEntrance, { once: true });
+    }
+
+    return () => window.removeEventListener("preloader:complete", runEntrance);
+  }, []);
+
+  // Scroll sequences
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+
+      // Desktop: pinned scroll sequence
+      mm.add("(min-width: 768px)", () => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=300%",
+            pin: true,
+            scrub: 1,
+            onUpdate: (self) => setScrollProgress(self.progress),
+          },
+        }).to(contentRef.current, {
+          opacity: 0, y: -100, scale: 0.9, filter: "blur(20px)", duration: 1,
+        });
+      });
+
+      // Mobile: no pin, lighter fade
+      mm.add("(max-width: 767px)", () => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: "+=80%",
+            scrub: 1,
+            onUpdate: (self) => setScrollProgress(self.progress),
+          },
+        }).to(contentRef.current, {
+          opacity: 0, y: -60, scale: 0.95, filter: "blur(10px)", duration: 1,
+        });
+      });
+    },
+    { scope: containerRef }
+  );
+
   return (
-    <div className="w-full relative min-h-screen px-4 sm:px-6 lg:px-24 pt-2">
-      {/* Background image — data-speed="0" keeps it fixed via ScrollSmoother */}
+    <section
+      ref={containerRef}
+      className="relative h-dvh w-full bg-background overflow-hidden"
+    >
+      {/* Cinematic Image Sequence */}
+      <ImageSequencePlayer
+        frameCount={220}
+        baseUrl="/hero/frame_"
+        extension=".webp"
+        className="absolute inset-0 z-10 h-screen"
+        onFrameUpdate={setCurrentFrame}
+        progress={scrollProgress}
+      />
+
+      {/* Cinematic Overlays — left-weighted, image-first */}
+      <div className="absolute inset-0 z-20 pointer-events-none">
+        {/* Top fade — navbar legibility */}
+        <div className="absolute top-0 left-0 w-full h-[22vh] bg-linear-to-b from-black/50 to-transparent" />
+
+        {/* Left column scrim — full width on mobile, half on desktop */}
+        <div className="absolute inset-y-0 left-0 w-full sm:w-[65%] bg-linear-to-r from-black/70 via-black/40 sm:via-black/25 to-transparent" />
+
+        {/* Bottom-left anchor fade */}
+        <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-linear-to-t from-black/50 via-black/15 to-transparent" />
+      </div>
+
+      {/* Editorial Content — pinned bottom-left, ship stays clear */}
       <div
-        data-speed="0"
-        className="absolute inset-0 -z-10 pointer-events-none"
+        ref={contentRef}
+        className="relative z-30 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-16 py-28 sm:py-32"
       >
-        <Image
-          src="/images/hero.png"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-background/20" />
-      </div>
+        {/* Badge — top-left */}
+        <div ref={badgeRef} className="self-start">
+          <Badge className="gap-2 border-white/25 bg-black/25 backdrop-blur-sm text-white/90 p-3 rounded-md font-mono text-[9px] uppercase tracking-[0.4em] font-bold">
+            Strategic Industrial Logistics
+          </Badge>
+        </div>
 
-      <div className="bg-white/20 backdrop-blur-md border border-white/25 rounded-2xl relative shadow-xl">
-        <motion.section
-          className="w-full px-6 sm:px-10 py-16 sm:py-24 lg:py-28"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <div className="mx-auto text-center">
-            <motion.p
-              className="text-xs uppercase tracking-[0.4em] text-primary font-bold mb-4"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              Established 2011 · Ghana · West Africa
-            </motion.p>
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-            >
-              <span className="bg-linear-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
-                Precision Logistics
-              </span>
-              <br />
-              <span className="text-foreground">
-                for Oil &amp; Gas Operations.
-              </span>
-            </motion.h1>
-            <motion.p
-              className="text-base md:text-lg text-white/80 max-w-2xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-            >
-              Integrated onshore and offshore logistics across West Africa, Air &amp; Sea Freight,
-              Bunkering, Ship Husbandry, and Crew Management. Where others hesitate, we deliver.
-            </motion.p>
+        {/* Headline + body — bottom-left */}
+        <div className="w-full max-w-[90vw] sm:max-w-[60vw] lg:max-w-[520px] flex flex-col gap-4 sm:gap-6">
+          <h1 ref={titleRef} className="font-display text-[clamp(3.5rem,8vw,7rem)] font-black tracking-tighter leading-[0.82] uppercase text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+            Precision
+            <br />
+            <span className="text-accent italic">In Motion.</span>
+          </h1>
+
+          <p ref={subRef} className="text-sm sm:text-base text-white/80 font-medium leading-relaxed max-w-xs drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+            Over a decade moving entire operations forward where others hesitate across the West African sub-region.
+          </p>
+
+          <div ref={btnsRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-2">
+            <MagneticButton strength={0.2} radius={50}>
+              <Button size="lg" className="px-8 py-6 text-[11px] font-black uppercase tracking-widest bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all">
+                Request a Quote
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  <path d="M2 14L14 2M14 2H5M14 2V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Button>
+            </MagneticButton>
+            <MagneticButton strength={0.1} radius={40}>
+              <Button variant="outline" size="lg" className="px-8 py-6 text-[11px] font-black uppercase tracking-widest border-white/25 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-accent shadow-xl transition-all">
+                See Our Work
+              </Button>
+            </MagneticButton>
           </div>
-        </motion.section>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mt-2 pb-8 sm:pb-16">
-        {stats.map((stat, index) => (
-          <motion.div
-            key={stat.value}
-            className="bg-white/20 backdrop-blur-md border border-white/25 rounded-2xl sm:rounded-3xl p-5 sm:p-8 flex flex-row sm:flex-col items-center sm:items-start justify-between sm:justify-between gap-4 sm:gap-0 min-h-[100px] sm:min-h-[200px] shadow-lg hover:bg-white/25 hover:shadow-xl transition-all duration-500"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 + index * 0.12, ease: "easeOut" }}
-          >
-            {/* Value */}
-            <p className="text-5xl sm:text-6xl font-black text-white tracking-tight leading-none tabular-nums">
-              {stat.value}
-            </p>
+      {/* Telemetry Overlays */}
+      {/* <div className="absolute bottom-12 left-12 z-40 hidden md:flex flex-col gap-2">
+        <div className="flex items-center gap-4">
+          <div className="font-mono text-[9px] uppercase tracking-widest text-white/70 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+            Telemetry: GH-FR-{String(currentFrame).padStart(3, "0")}
+          </div>
+          <div className="h-[2px] w-32 bg-white/15 relative overflow-hidden">
+            <div
+              className="absolute top-0 left-0 h-full bg-accent transition-all duration-100"
+              style={{ width: `${scrollProgress * 100}%` }}
+            />
+          </div>
+        </div>
+        <div className="font-mono text-[9px] text-white/50 uppercase tracking-[0.2em] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+          Coordinates: 5.5500° N, 0.2000° E
+        </div>
+      </div> */}
 
-            {/* Divider + label block */}
-            <div className="sm:mt-6 pt-0 sm:pt-4 border-t-0 sm:border-t border-white/20 space-y-1 text-right sm:text-left max-w-[55%] sm:max-w-none">
-              <p className="text-[11px] uppercase tracking-[0.25em] text-white/60 font-semibold leading-snug">
-                {stat.label}
-              </p>
-              {stat.sub && (
-                <p className="text-[10px] tracking-widest text-white/40 font-medium">
-                  {stat.sub}
-                </p>
-              )}
-            </div>
-          </motion.div>
-        ))}
+      {/* Bottom-right corner triangle badge */}
+      <div className="absolute bottom-0 right-0 z-40 w-32 h-32 sm:w-40 sm:h-40 pointer-events-none">
+        <div
+          className="absolute inset-0 bg-accent/90 backdrop-blur-sm"
+          style={{ clipPath: "polygon(100% 0, 100% 100%, 0 100%)" }}
+        />
+        <div className="absolute bottom-3 right-3 flex flex-col items-end gap-1">
+          <div className="flex items-center gap-1.5">
+            <div className="h-1 w-1 rounded-full bg-white animate-pulse" />
+            <span className="font-mono text-[7px] text-white/60 uppercase tracking-[0.25em]">Live</span>
+          </div>
+          <span className="font-mono text-[9px] text-white font-black uppercase tracking-widest leading-tight text-right">
+            Port of Tema
+          </span>
+          <span className="font-mono text-[7px] text-white/70 uppercase tracking-[0.2em] text-right">
+            Ghana · Est. 2011
+          </span>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
