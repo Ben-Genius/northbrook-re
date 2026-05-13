@@ -41,7 +41,7 @@ export default function ContactPage() {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left: Contact details */}
           <FadeIn direction="left">
-            <h2 className="text-3xl lg:text-4xl font-display font-light text-primary mb-8">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-foreground tracking-tight mb-8">
               Find us in Accra
             </h2>
             <div className="space-y-6">
@@ -88,7 +88,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map embed */}
-            <div className="mt-10 aspect-4/3 bg-primary relative overflow-hidden">
+            <div className="mt-10 aspect-4/3 bg-smoke border border-wire rounded-md relative overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8763!2d-0.187!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAccra%2C+Ghana!5e0!3m2!1sen!2sgh!4v1"
                 width="100%"
@@ -105,7 +105,7 @@ export default function ContactPage() {
 
           {/* Right: Form */}
           <FadeIn delay={0.15}>
-            <h2 className="text-3xl lg:text-4xl font-display font-light text-primary mb-8">
+            <h2 className="text-3xl lg:text-4xl font-display font-bold text-foreground tracking-tight mb-8">
               Send a Brief
             </h2>
             <ContactForm />

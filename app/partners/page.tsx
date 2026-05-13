@@ -69,7 +69,7 @@ export default function PartnersPage() {
             by="word"
             delay={0.1}
             stagger={0.05}
-            className="text-4xl lg:text-6xl font-display font-light text-primary mb-14 max-w-xl leading-[1.05]"
+            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-14 max-w-xl leading-[1.05]"
           />
         </FadeIn>
         <div className="grid lg:grid-cols-3 gap-6">

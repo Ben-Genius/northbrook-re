@@ -33,7 +33,7 @@ export function SectionNav({ items }: { items: NavItem[] }) {
   }, [items])
 
   return (
-    <div className="sticky top-[68px] z-30 bg-gray-bg/85 backdrop-blur-md border-y border-steel/15 print:hidden">
+    <div className="sticky top-[68px] z-30 bg-background/90 backdrop-blur-md border-y border-wire print:hidden">
       <nav
         aria-label="Section navigation"
         className="max-w-7xl mx-auto px-6 lg:px-12 flex gap-1 overflow-x-auto no-scrollbar"

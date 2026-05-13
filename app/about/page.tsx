@@ -123,7 +123,7 @@ export default function AboutPage() {
                 by="word"
                 delay={0.1}
                 stagger={0.06}
-                className="text-4xl lg:text-5xl font-display font-light text-primary leading-[1.1]"
+                className="text-4xl lg:text-5xl font-display font-bold text-foreground tracking-tight leading-[1.1]"
               />
             </FadeIn>
           </div>
@@ -147,7 +147,7 @@ export default function AboutPage() {
             by="word"
             delay={0.1}
             stagger={0.05}
-            className="text-4xl lg:text-6xl font-display font-light text-primary mb-4 leading-[1.05]"
+            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-4 leading-[1.05]"
           />
           <p className="text-caption max-w-xl mb-14">
             The board shaping strategy for West Africa&apos;s most trusted offshore logistics operator.
@@ -207,7 +207,7 @@ export default function AboutPage() {
           by="word"
           delay={0.1}
           stagger={0.08}
-          className="text-5xl lg:text-6xl font-display font-light text-primary mb-14 leading-[1.05]"
+          className="text-5xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-14 leading-[1.05]"
         />
 
         <PillarGrid pillars={pillars} />
@@ -223,7 +223,7 @@ export default function AboutPage() {
             by="word"
             delay={0.1}
             stagger={0.05}
-            className="text-4xl lg:text-6xl font-display font-light text-primary mb-6 leading-[1.05]"
+            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-6 leading-[1.05]"
           />
           <p className="text-caption max-w-2xl leading-relaxed mb-14">
             Commercial performance is one measure. Community impact is another. We run both with the same discipline: books and PPE for coastal schools, tree planting, waste reduction in our warehouses, and vocational pipelines for the next generation of technicians.
