@@ -2,7 +2,6 @@
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 import { Flip } from "gsap/Flip";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
@@ -13,7 +12,6 @@ import { useGSAP } from "@gsap/react";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(
     ScrollTrigger,
-    ScrollSmoother,
     SplitText,
     Flip,
     ScrambleTextPlugin,
@@ -26,7 +24,6 @@ if (typeof window !== "undefined") {
 export {
   gsap,
   ScrollTrigger,
-  ScrollSmoother,
   SplitText,
   Flip,
   ScrambleTextPlugin,

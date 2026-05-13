@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP, SplitText } from "@/lib/gsap";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -19,6 +19,20 @@ export default function Stats() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
+
+      // H2 animate in — all screens
+      const split = new SplitText(".stats-heading", { type: "lines" });
+      gsap.from(split.lines, {
+        y: 60,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".stats-heading",
+          start: "top 85%",
+        },
+      });
 
       mm.add("(min-width: 768px)", () => {
         const panels = gsap.utils.toArray(".stat-panel");
@@ -66,7 +80,7 @@ export default function Stats() {
       <div className="px-6 lg:px-24">
         <div className="mb-24 space-y-4">
           <div className="section-eyebrow text-accent">Proven Track Record</div>
-          <h2 className="font-display text-5xl font-bold tracking-tighter text-balance lg:text-7xl">
+          <h2 className="stats-heading font-display text-5xl font-bold tracking-tighter text-balance lg:text-7xl">
             DELIVERING TRUST <br />
             AT EVERY TURN.
           </h2>
@@ -80,20 +94,22 @@ export default function Stats() {
                   src={stat.image}
                   alt={stat.label}
                   fill
-                  className="object-cover opacity-20 grayscale transition-all duration-700 group-hover:scale-110 group-hover:opacity-40 group-hover:grayscale-0"
+                  className="object-cover opacity-100 md:opacity-50 transition-all duration-700 group-hover:scale-105 md:group-hover:opacity-80"
                 />
+                {/* Stronger gradient on mobile so text is always legible */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/60 to-black/20 md:from-black/80 md:via-black/30 md:to-black/10" />
               </div>
 
               <div className="stat-content relative z-10 flex h-full flex-col justify-end p-8">
-                <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4">
+                {/* <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4">
                   0{i + 1} / Performance
-                </div>
+                </div> */}
                 <AnimatedCounter
                   end={stat.value}
                   suffix={stat.suffix}
-                  className="font-display text-6xl font-bold tracking-tighter lg:text-8xl"
+                  className="font-display text-6xl font-bold tracking-tighter lg:text-8xl text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 />
-                <p className="mt-2 text-sm font-bold uppercase tracking-widest text-muted-foreground">
+                <p className="mt-2 text-sm font-bold uppercase tracking-widest text-white/80 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                   {stat.label}
                 </p>
               </div>

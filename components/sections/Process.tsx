@@ -1,103 +1,116 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { UserCheck, Zap, Activity, Globe, ShieldCheck } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useRef, useState, useCallback } from "react";
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 
 const STEPS = [
   {
     id: "01",
     title: "In-depth Consultation",
     label: "Phase / Consultation",
-    description: "Understanding your unique onshore and offshore requirements through technical assessment.",
-    icon: UserCheck,
+    description: "Understanding your unique onshore and offshore requirements through rigorous technical assessment and direct stakeholder engagement.",
   },
   {
     id: "02",
     title: "Strategic Planning",
     label: "Phase / Strategy",
-    description: "Developing comprehensive logistical frameworks tailored to West African sub-region complexities.",
-    icon: Zap,
+    description: "Developing comprehensive logistical frameworks tailored to West African sub-region complexities and your operational timelines.",
   },
   {
     id: "03",
     title: "Operational Deployment",
     label: "Phase / Execution",
-    description: "Executing total logistics solutions with precision where others hesitate.",
-    icon: Activity,
+    description: "Executing total logistics solutions with precision — mobilising assets, coordinating vendors, and delivering where others hesitate.",
   },
   {
     id: "04",
     title: "Global Integration",
     label: "Phase / Logistics",
-    description: "Leveraging strategic alliances to deliver seamless air, sea, and freight solutions.",
-    icon: Globe,
+    description: "Leveraging strategic alliances with Eni, Saipem, Fugro and others to deliver seamless air, sea, and freight solutions across borders.",
   },
   {
     id: "05",
     title: "Compliance & Safety",
     label: "Phase / Standards",
-    description: "Ensuring zero compromise on QHSE timelines and international industry standards.",
-    icon: ShieldCheck,
+    description: "Ensuring zero compromise on QHSE timelines and international industry standards — ABS, DNV-GL, Lloyd's Register certified.",
   },
 ];
 
 export default function Process() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const numberRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const labelRef = useRef<HTMLDivElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const stepCountRef = useRef<HTMLDivElement>(null);
+
+  const [activeStep, setActiveStep] = useState(0);
+  const prevStep = useRef(0);
+
+  const animateTransition = useCallback((next: number) => {
+    const els = [numberRef.current, titleRef.current, labelRef.current, descRef.current];
+
+    // Out
+    gsap.to(els, {
+      opacity: 0,
+      y: -30,
+      duration: 0.25,
+      ease: "power2.in",
+      onComplete: () => {
+        setActiveStep(next);
+        // In — runs after React re-renders new content
+        gsap.fromTo(
+          els,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power3.out", stagger: 0.06 }
+        );
+      },
+    });
+
+    // Step counter crossfade
+    if (stepCountRef.current) {
+      gsap.to(stepCountRef.current, { opacity: 0, duration: 0.15, onComplete: () => {
+        if (stepCountRef.current) stepCountRef.current.textContent = `Step ${STEPS[next].id} / 0${STEPS.length}`;
+        gsap.to(stepCountRef.current, { opacity: 1, duration: 0.2 });
+      }});
+    }
+  }, []);
 
   useGSAP(
     () => {
       const mm = gsap.matchMedia();
 
       mm.add("(min-width: 768px)", () => {
-        const steps = gsap.utils.toArray(".process-step-item");
+        ScrollTrigger.create({
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=400%",
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => {
+            // Progress bar
+            if (progressBarRef.current) {
+              gsap.set(progressBarRef.current, { scaleX: self.progress });
+            }
 
-        // Each step occupies SLOT units in the timeline:
-        //   0 – 0.6  → slide in
-        //   0.6 – 1.2 → content staggers
-        //   1.2 – 3   → hold (user reads before next step)
-        const SLOT = 3;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: () => "+=" + (steps.length * SLOT * 100) + "%",
-            pin: true,
-            scrub: 1.5,
+            // Step index
+            const idx = Math.min(Math.floor(self.progress * STEPS.length), STEPS.length - 1);
+            if (idx !== prevStep.current) {
+              animateTransition(idx);
+              prevStep.current = idx;
+            }
           },
-        });
-
-        steps.forEach((step: any, i: number) => {
-          const offset = i * SLOT;
-
-          if (i > 0) {
-            tl.from(step, {
-              x: "100%",
-              ease: "power2.inOut",
-              duration: 0.6,
-            }, offset);
-          }
-
-          tl.from(step.querySelectorAll(".process-animate"), {
-            opacity: 0,
-            x: 40,
-            stagger: 0.12,
-            duration: 0.5,
-          }, offset + 0.6);
-
-          // No-op hold — keeps the step visible while the user scrolls
-          tl.to({}, { duration: SLOT - 1.2 }, offset + 1.2);
         });
       });
 
       mm.add("(max-width: 767px)", () => {
-        gsap.from(".process-step-mobile", {
-          y: 40,
+        gsap.from(".process-mobile-card", {
+          clipPath: "inset(100% 0 0 0)",
           opacity: 0,
-          stagger: 0.2,
+          duration: 0.8,
+          ease: "power4.inOut",
+          stagger: 0.12,
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top 80%",
@@ -105,87 +118,124 @@ export default function Process() {
         });
       });
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [animateTransition] }
   );
 
+  const step = STEPS[activeStep];
+
   return (
-    <section ref={containerRef} className="relative h-screen overflow-hidden bg-background">
-      {/* Desktop View: Modular Stack (Exergy3 style) */}
-      <div className="hidden md:block h-full w-full">
-        <div ref={trackRef} className="h-full w-full relative">
-          {STEPS.map((step, i) => (
+    <section ref={containerRef} className="relative bg-foreground text-background overflow-hidden">
+
+      {/* ── Desktop ── */}
+      <div className="hidden md:flex flex-col h-screen">
+
+        {/* Top bar */}
+        <div className="flex items-center justify-between px-14 pt-12 pb-8 border-b border-background/10">
+          <div className="flex items-center gap-4">
+            <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/50">
+              Our Methodology
+            </span>
+          </div>
+          <div ref={stepCountRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/40">
+            Step {step.id} / 0{STEPS.length}
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="flex flex-1 overflow-hidden">
+
+          {/* Left — giant number */}
+          <div className="w-[280px] shrink-0 flex items-center justify-center border-r border-background/10 relative">
             <div
-              key={step.id}
-              className="process-step-item absolute inset-0 flex items-center justify-center bg-background"
-              style={{ zIndex: i + 1 }}
+              ref={numberRef}
+              className="font-display font-black text-[clamp(8rem,14vw,14rem)] leading-none text-accent select-none"
             >
-              <div className="grid grid-cols-12 w-full h-full border-l border-foreground/5">
-                {/* Visual Side */}
-                <div className="col-span-5 relative overflow-hidden bg-secondary">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <step.icon className="process-animate h-64 w-64 text-accent/10" strokeWidth={0.5} />
-                  </div>
-                  <div className="absolute bottom-12 left-12 font-mono text-[8vw] font-bold text-foreground/5 leading-none">
-                    {step.id}
-                  </div>
-                </div>
+              {step.id}
+            </div>
+          </div>
 
-                {/* Content Side */}
-                <div className="col-span-7 flex flex-col justify-center px-24 space-y-12">
-                  <div className="process-animate space-y-4">
-                    <div className="font-mono text-xs uppercase tracking-[0.4em] text-accent">
-                      {step.label}
-                    </div>
-                    <h3 className="font-display text-7xl font-bold tracking-tighter leading-none">
-                      {step.title}
-                    </h3>
-                  </div>
-                  
-                  <div className="process-animate max-w-lg">
-                    <p className="text-xl text-muted-foreground leading-relaxed text-pretty">
-                      {step.description}
-                    </p>
-                  </div>
+          {/* Right — content */}
+          <div className="flex-1 flex flex-col justify-center px-16 xl:px-24 gap-8 max-w-3xl">
+            <div ref={labelRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
+              {step.label}
+            </div>
 
-                  <div className="process-animate flex items-center gap-6 pt-8">
-                    <div className="h-px w-24 bg-accent" />
-                    <span className="font-mono text-xs uppercase tracking-widest text-accent">
-                      Step 0{i + 1} / 0{STEPS.length}
-                    </span>
-                  </div>
-                </div>
+            <h3
+              ref={titleRef}
+              className="font-display text-[clamp(2.8rem,5.5vw,6rem)] font-black tracking-tighter leading-[0.88] uppercase text-background"
+            >
+              {step.title}.
+            </h3>
+
+            <p ref={descRef} className="text-base xl:text-lg text-background/60 leading-relaxed max-w-lg">
+              {step.description}
+            </p>
+
+            {/* Step dots */}
+            <div className="flex items-center gap-3 pt-4">
+              {STEPS.map((_, i) => (
+                <div
+                  key={i}
+                  className="h-1 rounded-full transition-all duration-500"
+                  style={{
+                    width: i === activeStep ? "2rem" : "0.5rem",
+                    backgroundColor: i === activeStep ? "#E31E24" : "rgba(255,255,255,0.2)",
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Progress bar */}
+        <div className="h-[2px] w-full bg-background/10 relative overflow-hidden">
+          <div
+            ref={progressBarRef}
+            className="absolute inset-y-0 left-0 w-full bg-accent origin-left"
+            style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+          />
+        </div>
+      </div>
+
+      {/* ── Mobile ── */}
+      <div className="md:hidden px-6 py-20">
+        <div className="mb-14 space-y-3">
+          <div className="flex items-center gap-3">
+            <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/50">Our Methodology</span>
+          </div>
+          <h2 className="font-display text-5xl font-black tracking-tighter uppercase text-background leading-none">
+            The Process.
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {STEPS.map((s, i) => (
+            <div
+              key={s.id}
+              className="process-mobile-card border border-background/10 p-8 space-y-6"
+              style={{ clipPath: "inset(0 0 0 0)" }}
+            >
+              <div className="flex items-start justify-between">
+                <span className="font-display text-6xl font-black text-accent/30 leading-none">{s.id}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-background/40 pt-2">{s.label}</span>
               </div>
-
-              {/* Industrial Grid Lines */}
-              <div className="absolute inset-0 pointer-events-none opacity-[0.03]" aria-hidden="true">
-                <div className="container h-full mx-auto grid grid-cols-12">
-                  {Array.from({ length: 13 }).map((_, j) => (
-                    <div key={j} className="h-full border-r border-foreground" />
-                  ))}
-                </div>
+              <div className="space-y-3">
+                <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-background leading-tight">
+                  {s.title}.
+                </h3>
+                <p className="text-sm text-background/60 leading-relaxed">{s.description}</p>
+              </div>
+              <div className="h-px w-full bg-background/10" />
+              <div className="font-mono text-[9px] text-background/30 uppercase tracking-widest">
+                {i + 1} of {STEPS.length}
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Mobile View */}
-      <div className="md:hidden space-y-24 py-24 px-6 overflow-y-auto h-full">
-        <div className="space-y-4">
-          <div className="section-eyebrow text-accent">Our Methodology</div>
-          <h2 className="text-5xl font-bold tracking-tighter leading-none uppercase">The Process.</h2>
-        </div>
-        {STEPS.map((step) => (
-          <div key={step.id} className="process-step-mobile space-y-8">
-            <div className="text-6xl font-bold text-accent/20 font-mono">{step.id}</div>
-            <div className="space-y-4">
-              <div className="text-xs font-bold uppercase tracking-widest text-accent">{step.label}</div>
-              <h3 className="text-3xl font-bold tracking-tighter">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }

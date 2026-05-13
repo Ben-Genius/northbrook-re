@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP, SplitText } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
@@ -44,30 +44,45 @@ export default function Features() {
     () => {
       const mm = gsap.matchMedia();
 
-      mm.add("(min-width: 768px)", () => {
-        gsap.from(".feature-card", {
-          y: 60,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 70%",
-          },
-        });
+      // Header: h2 lines animate in — all screens
+      const split = new SplitText(".features-heading", { type: "lines" });
+      gsap.from(split.lines, {
+        y: 70,
+        opacity: 0,
+        stagger: 0.12,
+        duration: 1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".features-heading",
+          start: "top 85%",
+        },
       });
 
-      mm.add("(max-width: 767px)", () => {
-        gsap.from(".feature-card-mobile", {
-          y: 40,
-          opacity: 0,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-          },
-        });
+      // Subtitle paragraph — all screens
+      gsap.from(".features-subtitle", {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".features-subtitle",
+          start: "top 88%",
+        },
+      });
+
+      // Cards: building-block clip-path reveal — all screens
+      gsap.from(".feature-card", {
+        clipPath: "inset(100% 0 0 0)",
+        duration: 1,
+        ease: "power4.inOut",
+        stagger: {
+          each: 0.15,
+          from: "start",
+        },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%",
+        },
       });
     },
     { scope: containerRef }
@@ -79,13 +94,13 @@ export default function Features() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-12 mb-24">
           <div className="space-y-4">
             <div className="section-eyebrow text-accent">Service Pillars</div>
-            <h2 className="font-display text-6xl font-bold tracking-tighter text-balance lg:text-8xl">
+            <h2 className="features-heading font-display text-6xl font-bold tracking-tighter text-balance lg:text-8xl">
               INTEGRATED <br />
               SOLUTIONS.
             </h2>
           </div>
           <div className="max-w-xs pb-4">
-            <p className="text-muted-foreground leading-relaxed text-pretty">
+            <p className="features-subtitle text-muted-foreground leading-relaxed text-pretty">
               High-performance logistics built on over a decade of West African sub-region expertise.
             </p>
           </div>
@@ -95,38 +110,38 @@ export default function Features() {
           {FEATURES.map((feature, i) => (
             <div
               key={feature.title}
-              className="feature-card group relative aspect-[16/10] overflow-hidden bg-secondary border border-foreground/5"
+              className="feature-card group relative aspect-16/10 overflow-hidden bg-secondary border border-foreground/5"
             >
               <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
                 <Image
                   src={feature.image}
                   alt={feature.title}
                   fill
-                  className="object-cover opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-60 transition-all"
+                  className="object-cover opacity-100 md:opacity-50 transition-all duration-700 md:group-hover:opacity-80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-black/20 md:from-black/80 md:via-black/30 md:to-black/10" />
               </div>
 
-              <div className="relative z-10 flex h-full flex-col justify-between p-12">
+              <div className="relative z-10 flex h-full flex-col justify-between p-8 lg:p-12">
                 <div className="flex justify-between items-start">
                   <div className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
                     {feature.category}
                   </div>
-                  <div className="h-10 w-10 flex items-center justify-center border border-accent/20 text-accent group-hover:bg-accent group-hover:text-white transition-all">
+                  <div className="h-10 w-10 flex items-center justify-center border border-white/20 text-white group-hover:bg-accent group-hover:border-accent transition-all">
                     <ArrowUpRight size={18} />
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="font-display text-4xl font-bold tracking-tighter leading-none group-hover:text-accent transition-colors">
+                  <h3 className="font-display text-3xl lg:text-4xl font-bold tracking-tighter leading-none text-white group-hover:text-accent transition-colors drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground max-w-sm text-pretty opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <p className="text-sm text-white/70 max-w-sm text-pretty opacity-0 group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                     {feature.description}
                   </p>
                   <div className="pt-4 flex items-center gap-2">
                     <div className="h-1 w-1 rounded-full bg-accent" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-accent drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
                       {feature.stat}
                     </span>
                   </div>

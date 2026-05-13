@@ -32,12 +32,25 @@ export default function MorphTransition() {
           duration: 1,
         }, 0);
       });
+
+      mm.add("(max-width: 767px)", () => {
+        gsap.to(".morph-panel-b", {
+          clipPath: "inset(0% 0% 0% 0%)",
+          ease: "power2.out",
+          duration: 1,
+          scrollTrigger: {
+            trigger: ".morph-panel-b",
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
     },
     { scope: containerRef }
   );
 
   return (
-    <section ref={containerRef} className="relative h-screen overflow-hidden bg-background">
+    <section ref={containerRef} className="relative md:h-screen overflow-hidden bg-background">
       <MorphPanelA />
       <MorphPanelB />
       
@@ -51,7 +64,7 @@ export default function MorphTransition() {
 
 function MorphPanelA() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-secondary p-12 lg:p-24">
+    <div className="relative md:absolute md:inset-0 flex items-center justify-center bg-secondary p-12 py-20 lg:p-24">
       <div className="morph-panel-a-content text-center max-w-5xl space-y-12">
         <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">Established 2011</div>
         <h2 className="font-display text-4xl font-bold leading-[1] tracking-tighter text-balance lg:text-8xl">
@@ -79,7 +92,7 @@ function MorphPanelB() {
 
   return (
     <div
-      className="morph-panel-b absolute inset-0 flex items-center justify-center bg-foreground text-background p-12 lg:p-24"
+      className="morph-panel-b relative md:absolute md:inset-0 flex items-center justify-center bg-foreground text-background p-12 py-20 lg:p-24"
       style={{ clipPath: "inset(100% 0% 0% 0%)" }}
     >
       <svg

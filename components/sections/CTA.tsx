@@ -3,32 +3,76 @@
 import React, { useRef } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { cn } from "@/lib/utils";
 
-// --- Components ---
-
-function CTARoot({ children, className }: { children: React.ReactNode; className?: string }) {
+export default function CTASection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      if (!headlineRef.current) return;
 
-      mm.add("(min-width: 768px)", () => {
-        // Background Pulse
-        gsap.to(".cta-pulse", {
-          scale: 1.2,
-          opacity: 0.1,
-          duration: 4,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-        });
+      const split = new SplitText(headlineRef.current, { type: "lines,words" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+          toggleActions: "play none none none",
+        },
       });
 
-      return () => mm.revert();
+      // Eyebrow line
+      tl.from(".cta-eyebrow", {
+        opacity: 0,
+        y: 16,
+        duration: 0.6,
+        ease: "power3.out",
+      });
+
+      // Headline words cascade
+      tl.from(
+        split.words,
+        {
+          opacity: 0,
+          y: 50,
+          rotateX: -40,
+          stagger: 0.04,
+          duration: 0.9,
+          ease: "power4.out",
+        },
+        "-=0.3"
+      );
+
+      // Divider line grows
+      tl.from(
+        ".cta-divider",
+        { scaleX: 0, duration: 0.8, ease: "power3.inOut", transformOrigin: "center" },
+        "-=0.4"
+      );
+
+      // Button + contact pop in
+      tl.from(
+        [".cta-btn-wrap", ".cta-contact"],
+        {
+          opacity: 0,
+          y: 24,
+          stagger: 0.12,
+          duration: 0.7,
+          ease: "power3.out",
+        },
+        "-=0.3"
+      );
+
+      // Ambient pulse — runs forever after reveal
+      gsap.to(".cta-pulse", {
+        scale: 1.3,
+        opacity: 0,
+        duration: 5,
+        repeat: -1,
+        ease: "sine.inOut",
+      });
     },
     { scope: containerRef }
   );
@@ -36,115 +80,68 @@ function CTARoot({ children, className }: { children: React.ReactNode; className
   return (
     <section
       ref={containerRef}
-      className={cn(
-        "relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-secondary/50 px-6 text-center border-y border-border/50",
-        className
-      )}
+      className="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-foreground text-background px-6 text-center"
     >
-      {/* Background Pulse */}
-      <div className="cta-pulse absolute left-1/2 top-1/2 h-[40vw] w-[40vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/5 blur-[120px]" aria-hidden="true" />
-      
-      {children}
-    </section>
-  );
-}
+      {/* Ambient glow */}
+      <div
+        className="cta-pulse absolute left-1/2 top-1/2 h-[60vw] w-[60vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[140px] opacity-60"
+        aria-hidden="true"
+      />
 
-function CTAContent() {
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+      {/* Grid texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px)",
+          backgroundSize: "4vw 4vw",
+        }}
+      />
 
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
+      <div className="relative z-10 flex flex-col items-center gap-8 max-w-5xl w-full">
+        {/* Eyebrow */}
+        <div className="cta-eyebrow flex items-center gap-3">
+          <div className="h-px w-8 bg-accent" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
+            Start a Project
+          </span>
+          <div className="h-px w-8 bg-accent" />
+        </div>
 
-      mm.add("(min-width: 768px)", () => {
-        if (!headlineRef.current) return;
+        {/* Headline */}
+        <h2
+          ref={headlineRef}
+          className="font-display text-[clamp(3rem,8vw,7.5rem)] font-black tracking-tighter leading-[0.88] uppercase text-background"
+          style={{ perspective: "800px" }}
+        >
+          Let's move your{" "}
+          <span className="text-accent italic">Operations</span>
+          <br />
+          Forward.
+        </h2>
 
-        const split = new SplitText(headlineRef.current, {
-          type: "words",
-        });
+        {/* Divider */}
+        <div className="cta-divider w-full max-w-sm h-px bg-background/10" />
 
-        gsap.from(split.words, {
-          y: 40,
-          opacity: 0,
-          stagger: 0.05,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: "top 70%",
-          },
-        });
+        {/* CTA Button */}
+        <div className="cta-btn-wrap mt-4">
+          <MagneticButton strength={0.4} radius={120}>
+            <Button
+              size="lg"
+              className="h-16 px-12 text-[11px] font-black uppercase tracking-[0.25em] bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all"
+              asChild
+            >
+              <a href="mailto:info@northbrook.com.gh">Get in Touch →</a>
+            </Button>
+          </MagneticButton>
+        </div>
 
-        gsap.from(".cta-btn-wrap", {
-          scale: 0.8,
-          opacity: 0,
-          duration: 1,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: "top 60%",
-          },
-        });
-      });
-
-      mm.add("(max-width: 767px)", () => {
-        gsap.from(".cta-mobile", {
-          y: 30,
-          opacity: 0,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: headlineRef.current,
-            start: "top 80%",
-          },
-        });
-      });
-
-      return () => mm.revert();
-    }
-  );
-
-  return (
-    <div className="relative z-10 flex flex-col items-center gap-8">
-      <Badge variant="outline" className="cta-mobile border-accent/20 px-4 py-1 text-accent">
-        Start a Project
-      </Badge>
-      
-      <h2
-        ref={headlineRef}
-        className="cta-mobile font-display max-w-4xl text-5xl font-bold tracking-tight text-balance lg:text-8xl"
-      >
-        LET’S MOVE YOUR <br />
-        <span className="text-accent uppercase">Operations</span> FORWARD.
-      </h2>
-
-      <div className="cta-btn-wrap cta-mobile mt-8">
-        <MagneticButton strength={0.5} radius={150}>
-          <Button
-            size="lg"
-            className="cta-button h-20 px-16 text-sm font-bold uppercase tracking-[0.2em]"
-            asChild
-          >
-            <a href="mailto:info@northbrook.com.gh">Get in Touch</a>
-          </Button>
-        </MagneticButton>
+        {/* Contact line */}
+        <p className="cta-contact font-mono text-[10px] uppercase tracking-[0.3em] text-background/40 text-pretty">
+          info@northbrook.com.gh&nbsp;&nbsp;·&nbsp;&nbsp;+233 (0) 244 270 797
+        </p>
       </div>
-
-      <p className="cta-mobile mt-12 font-mono text-xs uppercase tracking-widest text-muted-foreground text-pretty">
-        info@northbrook.com.gh — +233 (0) 244 270 797
-      </p>
-    </div>
-  );
-}
-
-// --- Export ---
-export const CTA = Object.assign(CTARoot, {
-  Content: CTAContent,
-});
-
-export default function CTASection() {
-  return (
-    <CTA>
-      <CTA.Content />
-    </CTA>
+    </section>
   );
 }

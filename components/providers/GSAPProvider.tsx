@@ -1,52 +1,29 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useRef } from "react";
-import { gsap, ScrollTrigger, ScrollSmoother, useGSAP } from "@/lib/gsap";
-
-const GSAPContext = createContext<{ smoother: ScrollSmoother | null }>({
-  smoother: null,
-});
-
-export const useGSAPContext = () => useContext(GSAPContext);
+import { useEffect } from "react";
+import Lenis from "lenis";
+import { gsap, ScrollTrigger } from "@/lib/gsap";
 
 export default function GSAPProvider({ children }: { children: React.ReactNode }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const smoother = useRef<ScrollSmoother | null>(null);
+  useEffect(() => {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
 
-  useGSAP(
-    () => {
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const lenis = new Lenis({ lerp: 0.1 });
 
-      if (!prefersReduced) {
-        smoother.current = ScrollSmoother.create({
-          wrapper: wrapperRef.current,
-          content: contentRef.current,
-          smooth: 1.8,
-          effects: true,
-          normalizeScroll: true,
-        });
+    // Sync Lenis raf with GSAP ticker so ScrollTrigger stays accurate
+    const tick = (time: number) => lenis.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
 
-        // Refresh ScrollTrigger after smoother init
-        document.fonts.ready.then(() => {
-          ScrollTrigger.refresh();
-        });
-      }
+    // Keep ScrollTrigger positions in sync with Lenis scroll
+    lenis.on("scroll", ScrollTrigger.update);
 
-      return () => {
-        smoother.current?.kill();
-      };
-    },
-    { scope: wrapperRef }
-  );
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(tick);
+    };
+  }, []);
 
-  return (
-    <GSAPContext.Provider value={{ smoother: smoother.current }}>
-      <div id="smooth-wrapper" ref={wrapperRef} className="overflow-hidden">
-        <div id="smooth-content" ref={contentRef}>
-          {children}
-        </div>
-      </div>
-    </GSAPContext.Provider>
-  );
+  return <>{children}</>;
 }
