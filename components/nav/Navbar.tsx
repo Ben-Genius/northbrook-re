@@ -3,15 +3,16 @@
 import React, { useRef, useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { buttonVariants } from "../ui/button";
 
 const NAV_LINKS = [
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "QHSE", href: "#qhse" },
-  { name: "Projects", href: "#projects" },
-  { name: "Partners", href: "#partners" },
+  { name: "About", href: "/about" },
+  { name: "Services", href: "/services" },
+  { name: "QHSE", href: "/qhse" },
+  { name: "Projects", href: "/projects" },
+  { name: "Partners", href: "/partners" },
 ];
 
 export default function Navbar() {
@@ -25,25 +26,27 @@ export default function Navbar() {
 
   const [isOpen, setIsOpen] = useState(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
+  const pathname = usePathname();
 
   useGSAP(
     () => {
       const nav = navRef.current;
       if (!nav) return;
 
-      // Fade out with scroll, same rhythm as hero content
-      gsap.to(nav, {
-        opacity: 0,
-        pointerEvents: "none",
-        scrollTrigger: {
-          start: "10% top",
-          end: "30% top",
-          scrub: true,
-        },
-      });
-
+      // Fade out only on the home page hero — inner pages keep the nav visible
+      if (pathname === "/") {
+        gsap.to(nav, {
+          opacity: 0,
+          pointerEvents: "none",
+          scrollTrigger: {
+            start: "10% top",
+            end: "30% top",
+            scrub: true,
+          },
+        });
+      }
     },
-    { scope: navRef }
+    { scope: navRef, dependencies: [pathname] }
   );
 
   const openMenu = useCallback(() => {
@@ -142,12 +145,12 @@ export default function Navbar() {
         {/* Right controls */}
         <div className="relative flex items-center gap-3 sm:gap-4" style={{ zIndex: 201 }}>
           {/* Request Quote pill */}
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             className="nb-quote-btn hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-md border border-white/40 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] transition-colors duration-300 hover:bg-primary hover:border-accent hover:text-white"
           >
             Request Quote
-          </a>
+          </Link>
 
           {/* Hamburger / X */}
           <button
@@ -219,7 +222,7 @@ export default function Navbar() {
           </div>
 
           <Link
-            href="#contact"
+            href="/contact"
             onClick={closeMenu}
             className={`${buttonVariants({ variant: "default", size: "lg" })} group inline-flex items-center gap-3 bg-primary hover:bg-white text-white hover:text-primary px-8 py-4! text-[11px] font-black uppercase tracking-[0.25em] transition-colors duration-300`}
           >

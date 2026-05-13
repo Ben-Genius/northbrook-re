@@ -150,13 +150,9 @@
 "use client"
 
 import { useRef } from "react"
-import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-
-gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 function splitChars(el: HTMLElement) {
   const text = el.textContent || ""
