@@ -85,9 +85,9 @@ export default function Process() {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
-          end: "+=400%",
+          end: "+=120%",
           pin: true,
-          scrub: 1,
+          scrub: 0.4,
           onUpdate: (self) => {
             // Progress bar
             if (progressBarRef.current) {
