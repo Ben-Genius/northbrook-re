@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const PROJECTS = [
   {
@@ -138,9 +139,9 @@ export default function Showcase() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover opacity-70 transition-all duration-700 hover:opacity-90"
+                    className="object-cover opacity-90 transition-all duration-700 hover:opacity-100"
                   />
-                  <div className="absolute inset-0 bg-linear-to-r from-black/80 via-black/40 to-black/20" />
+                  <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/5" />
                 </div>
               </div>
 
@@ -156,10 +157,10 @@ export default function Showcase() {
                     {project.description}
                   </p>
                   <div className="mt-8">
-                    <button className="group flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-accent hover:text-background transition-colors">
+                    <Button variant="ghost" size="sm" className="group gap-4 px-0 font-bold uppercase tracking-widest text-accent hover:bg-transparent hover:text-background">
                       View details
                       <span className="transition-transform group-hover:translate-x-2">→</span>
-                    </button>
+                    </Button>
                   </div>
                 </div>
 

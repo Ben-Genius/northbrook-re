@@ -146,7 +146,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/brand/logo-wordmark.png"
+              src="/images/logo.png"
               alt="North-Brook Limited"
               style={{ height: "40px", width: "auto", opacity: 0.9, marginBottom: "16px" }}
             />
@@ -175,7 +175,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {company.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-sm text-white/60 hover:text-accent transition-colors duration-200">
+                  <Link href={l.href} className="text-sm text-background/60 hover:text-accent transition-colors duration-200">
                     {l.label}
                   </Link>
                 </li>
@@ -186,7 +186,7 @@ export default function Footer() {
           {/* Col 3: Support */}
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-5">Support</p>
-            <div className="space-y-3 text-sm text-white/60">
+            <div className="space-y-3 text-sm text-background/60">
               <p>
                 <Link href="mailto:info@northbrook.com.gh" className="hover:text-accent transition-colors duration-200">
                   info@northbrook.com.gh
@@ -202,7 +202,7 @@ export default function Footer() {
                   WhatsApp the ops desk
                 </Link>
               </p>
-              <p className="text-white/35 text-xs mt-4 pt-4 border-t border-white/8">
+              <p className="text-background/40 text-xs mt-4 pt-4 border-t border-background/8">
                 Ops desk available 24 / 7 · Response in &lt; 2 hours
               </p>
             </div>
@@ -216,7 +216,7 @@ export default function Footer() {
                 <Link
                   key={label} href={href} aria-label={label}
                   target="_blank" rel="noopener noreferrer"
-                  className="w-9 h-9 border border-white/15 flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-200"
+                  className="w-9 h-9 border border-background/15 flex items-center justify-center hover:border-accent hover:text-accent transition-all duration-200"
                   style={{ borderRadius: "6px" }}
                 >
                   <Icon size={15} />
@@ -229,11 +229,11 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/35">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">
           <p>North-Brook Limited © 2026. All Rights Reserved.</p>
           <div className="flex gap-5">
             {legal.map((l) => (
-              <Link key={l.href} href={l.href} className="hover:text-white/60 transition-colors">
+              <Link key={l.href} href={l.href} className="hover:text-background/60 transition-colors">
                 {l.label}
               </Link>
             ))}

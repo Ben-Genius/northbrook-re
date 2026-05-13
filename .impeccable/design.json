@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-13T00:00:00Z",
+  "title": "Design System: North-Brook Limited",
+  "extensions": {
+    "colorMeta": {
+      "north-brook-red": {
+        "role": "primary",
+        "displayName": "North-Brook Red",
+        "canonical": "hsl(339 100% 29%)",
+        "tonalRamp": ["#3B0015", "#620022", "#7D002B", "#940034", "#C4004A", "#E8507E", "#F5A0BE", "#FBE0EA"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1A1615",
+        "tonalRamp": ["#0D0B0B", "#1A1615", "#2E2929", "#3F3A3A", "#575252", "#757070", "#A09A9A", "#D4D0D0"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#FDFCFB",
+        "tonalRamp": ["#1A1615", "#2E2929", "#757070", "#A09A9A", "#D4D0D0", "#E8E3E3", "#F2EDEC", "#FDFCFB"]
+      },
+      "smoke": {
+        "role": "neutral",
+        "displayName": "Smoke",
+        "canonical": "#F2EDEC",
+        "tonalRamp": ["#1A1615", "#3F3A3A", "#757070", "#A09A9A", "#D4D0D0", "#E8E3E3", "#F2EDEC", "#FDFCFB"]
+      },
+      "steel": {
+        "role": "neutral",
+        "displayName": "Steel",
+        "canonical": "#757070",
+        "tonalRamp": ["#0D0B0B", "#1A1615", "#2E2929", "#3F3A3A", "#575252", "#757070", "#A09A9A", "#D4D0D0"]
+      },
+      "wire": {
+        "role": "neutral",
+        "displayName": "Wire",
+        "canonical": "#E8E3E3",
+        "tonalRamp": ["#2E2929", "#3F3A3A", "#575252", "#757070", "#A09A9A", "#D4D0D0", "#E8E3E3", "#FDFCFB"]
+      },
+      "warm-cream": {
+        "role": "neutral",
+        "displayName": "Warm Cream",
+        "canonical": "#F4EFE6",
+        "tonalRamp": ["#3B2A1E", "#5C4232", "#8C6B52", "#B59278", "#D4B99A", "#E8D5BE", "#F4EFE6", "#FDFCFB"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline, major section headlines. Uppercase. One italic accent word per headline." },
+      "headline": { "displayName": "Headline", "purpose": "Section subheadings, CTA heading. Still compressed, never more than 5-6 words per line." },
+      "title": { "displayName": "Title", "purpose": "Process step titles, feature names. The working headline level." },
+      "body": { "displayName": "Body", "purpose": "All paragraph text. Max 65ch line length. Leading generous (1.625) by design." },
+      "label": { "displayName": "Label", "purpose": "Eyebrows, category labels, telemetry overlays, phase identifiers. Classification only, never content." }
+    },
+    "shadows": [
+      {
+        "name": "text-hero",
+        "value": "drop-shadow(0 2px 20px rgba(0,0,0,0.5))",
+        "purpose": "Hero headline legibility over imagery. Readability tool, not elevation. Used only on text overlaid on full-bleed photography."
+      },
+      {
+        "name": "button-primary-ink",
+        "value": "0 25px 50px -12px rgba(0,0,0,0.25)",
+        "purpose": "Primary CTA button on Ink surfaces only. Minimal separation from background. Only shadow in the system."
+      }
+    ],
+    "motion": [
+      {
+        "name": "section-reveal",
+        "value": "clipPath: inset(0 0 100% 0) → inset(0 0 0% 0), 1.5s power4.inOut, scrubbed to scroll",
+        "purpose": "Every page section entrance. The system's signature reveal."
+      },
+      {
+        "name": "char-cascade",
+        "value": "y: 80 → 0, opacity: 0 → 1, rotateX: -90 → 0, stagger: 0.018, 1s power4.out",
+        "purpose": "Hero headline entrance. After preloader complete event."
+      },
+      {
+        "name": "line-stagger",
+        "value": "y: 60-70 → 0, opacity: 0 → 1, stagger: 0.12, 1s power4.out, scrollTrigger start: top 85%",
+        "purpose": "Section headline entrances. Applied to SplitText lines."
+      },
+      {
+        "name": "magnetic-pull",
+        "value": "x/y: 0 → offset*strength, 0.4s power3.out; release: elastic.out(1, 0.4) 0.8s",
+        "purpose": "MagneticButton wrapper on standalone CTAs. The system's only interactive delight."
+      },
+      {
+        "name": "state-transition",
+        "value": "150ms linear",
+        "purpose": "Button hover state transitions. Color swap only."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Light Surface)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main CTA on Paper backgrounds. Red fill inverts to white on hover.",
+      "html": "<button class=\"ds-btn-primary\">REQUEST A QUOTE <svg width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 14L14 2M14 2H5M14 2V11\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 8px; background: #940034; color: #FDFCFB; padding: 24px 32px; border-radius: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.25em; border: none; cursor: pointer; transition: background 150ms linear, color 150ms linear; outline: none; } .ds-btn-primary:hover { background: #FDFCFB; color: #940034; } .ds-btn-primary:focus-visible { outline: 2px solid #940034; outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button (Dark Surface)",
+      "kind": "button",
+      "refersTo": "button-ghost-dark",
+      "description": "Secondary CTA on Ink surfaces. Glass border, inverts to white on hover.",
+      "html": "<button class=\"ds-btn-ghost-dark\">SEE OUR WORK</button>",
+      "css": ".ds-btn-ghost-dark { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); color: #F4EFE6; padding: 24px 32px; border-radius: 8px; font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.25em; border: 1.5px solid rgba(255,255,255,0.25); cursor: pointer; backdrop-filter: blur(8px); transition: background 150ms linear, color 150ms linear; outline: none; } .ds-btn-ghost-dark:hover { background: #FDFCFB; color: #940034; } .ds-btn-ghost-dark:focus-visible { outline: 2px solid #940034; outline-offset: 3px; }"
+    },
+    {
+      "name": "CTA Pill Button",
+      "kind": "button",
+      "refersTo": "button-cta-pill",
+      "description": "Pill-shaped CTA for the final CTA section. Less rigid, same authority.",
+      "html": "<a class=\"ds-btn-cta-pill\" href=\"#\">Request a quote →</a>",
+      "css": ".ds-btn-cta-pill { display: inline-flex; align-items: center; gap: 8px; background: #940034; color: #FDFCFB; padding: 14px 26px; border-radius: 999px; font-size: 14px; font-weight: 600; letter-spacing: 0.03em; text-decoration: none; cursor: pointer; transition: background 150ms linear, transform 150ms; will-change: transform; } .ds-btn-cta-pill:hover { background: #C4004A; } .ds-btn-cta-pill:focus-visible { outline: 2px solid #940034; outline-offset: 3px; }"
+    },
+    {
+      "name": "CTA Outline Pill Button",
+      "kind": "button",
+      "refersTo": "button-cta-outline-pill",
+      "description": "Pill-shaped secondary CTA on Ink surfaces.",
+      "html": "<a class=\"ds-btn-cta-outline-pill\" href=\"#\">WhatsApp the desk</a>",
+      "css": ".ds-btn-cta-outline-pill { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #F4EFE6; padding: 14px 26px; border-radius: 999px; font-size: 14px; font-weight: 600; border: 1.5px solid rgba(255,255,255,0.35); text-decoration: none; cursor: pointer; will-change: transform; transition: background 150ms linear, border-color 150ms; } .ds-btn-cta-outline-pill:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); } .ds-btn-cta-outline-pill:focus-visible { outline: 2px solid #940034; outline-offset: 3px; }"
+    },
+    {
+      "name": "Section Eyebrow Label",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Classification tag above every section heading. Geist Mono, uppercase, accent red. The cargo classification layer.",
+      "html": "<div class=\"ds-eyebrow\"><div class=\"ds-eyebrow-rule\"></div><span>Ship Agency</span><div class=\"ds-eyebrow-rule\"></div></div>",
+      "css": ".ds-eyebrow { display: flex; align-items: center; gap: 12px; font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4em; color: #940034; } .ds-eyebrow-rule { height: 1px; width: 32px; background: #940034; }"
+    },
+    {
+      "name": "Badge / Classification Tag",
+      "kind": "chip",
+      "refersTo": null,
+      "description": "Glass chip for hero classification. Used above the hero headline to label the operational context.",
+      "html": "<span class=\"ds-badge\">Strategic Industrial Logistics</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.25); color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.25); border-radius: 6px; padding: 12px 12px; font-family: 'Geist Mono', monospace; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4em; backdrop-filter: blur(8px); }"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Sticky navbar over the hero. Glassmorphism permitted here as the only functional exception in the system.",
+      "html": "<nav class=\"ds-navbar\"><span class=\"ds-navbar-brand\">NORTH-BROOK</span><div class=\"ds-navbar-links\"><a href=\"#\" class=\"ds-navbar-link\">Services</a><a href=\"#\" class=\"ds-navbar-link\">About</a><a href=\"#\" class=\"ds-navbar-link\">Contact</a></div></nav>",
+      "css": ".ds-navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; background: rgba(253,252,251,0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgba(232,227,227,0.4); z-index: 100; } .ds-navbar-brand { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 900; letter-spacing: 0.15em; color: #1A1615; } .ds-navbar-links { display: flex; gap: 32px; } .ds-navbar-link { font-family: 'Geist Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: #757070; text-decoration: none; transition: color 150ms; } .ds-navbar-link:hover { color: #940034; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Field Office",
+    "overview": "This is the design system of a company that does the actual job. Not a company pitching the job. Every surface is a workspace: purposeful materials, technical data surfaced where it earns attention, nothing placed for decoration.\n\nThe Field Office runs two shifts. In the light sections (Process, Features, Stats), the mood is disciplined — a well-lit workspace with generous breathing room between items, precision typography, and no surface noise. In the dark sections (Hero, CTA, Footer), the mood shifts to the operations floor at dusk: Ink surfaces, warm cream text, a single emergency-red signal light on the primary call-to-action.\n\nA 3.5% noise grain overlay runs across every surface at fixed position — not animated, not decorative. It is a paper texture. It prevents the dark Ink surfaces from reading as 'tech dark mode' and keeps the light Paper surfaces from reading as 'startup white.' Together, they read as industrial document.",
+    "keyCharacteristics": [
+      "Dual-register surfaces: Paper (light) and Ink (dark) alternate across the page",
+      "Acute typographic scale: 7rem display headlines alongside 10px mono labels",
+      "Red as emergency signal: one moment per section, maximum",
+      "Flat elevation: depth through tonal contrast and noise grain, never shadows",
+      "Motion like machinery: clipPath wipes, character cascades, no bounce"
+    ],
+    "rules": [
+      { "name": "The Emergency Signal Rule", "body": "North-Brook Red (#940034) appears on at most one element per visible screen area. If you're using it twice, one instance is wrong.", "section": "colors" },
+      { "name": "The Two-Surface Rule", "body": "Every section is either Paper or Ink. No hybrid backgrounds. The contrast between sections IS the rhythm of the page.", "section": "colors" },
+      { "name": "The Label Layer Rule", "body": "Every major section has exactly one Label above its heading. Geist Mono, 10px, 0.4em tracking, uppercase. It is a cargo classification tag, not a decorative eyebrow.", "section": "typography" },
+      { "name": "The Italic Exception Rule", "body": "One word in each Display or Headline may be italic. This word always carries the emotional payload. Never italicize for decoration — only for the single most loaded word.", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "If you are reaching for box-shadow, stop. The shadow you want is probably a tonal background shift, a Wire border, or a clipPath entrance. Shadows read as 'software UI.' This site is not software UI.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use North-Brook Red on at most one element per visible screen area.",
+      "Do use Geist Mono in uppercase with 0.4em tracking for all classification labels, eyebrows, phase markers, and telemetry.",
+      "Do run the dual-surface alternation (Paper → Ink → Paper) as the structural rhythm of the page.",
+      "Do keep body text at 14px minimum, max-width 65ch, leading 1.625.",
+      "Do apply the SectionReveal clipPath wipe to every new section entrance.",
+      "Do use the noise grain overlay globally and at fixed position. Never remove it from a section.",
+      "Do apply WCAG 2.1 AAA contrast ratios everywhere.",
+      "Do respect prefers-reduced-motion: set all GSAP animations to duration: 0 when the media query matches."
+    ],
+    "donts": [
+      "Don't use generic SaaS blue patterns: Stripe-era rounded cards, feature icon grids, gradient backgrounds.",
+      "Don't use heavy industrial brutalism: all-caps layouts with orange accents, thick structural borders used decoratively.",
+      "Don't use slick agency minimalism: whisper-grey text, 1px photo rules, centered layouts with wide empty margins.",
+      "Don't use government/compliance drab: navy + gold, serif-heavy body text.",
+      "Don't use border-left or border-right greater than 1px as a colored accent stripe.",
+      "Don't use background-clip: text with a gradient.",
+      "Don't use glassmorphism decoratively. Permitted only on the Navbar.",
+      "Don't add box-shadow to surfaces at rest.",
+      "Don't animate layout properties (width, height, padding, margin). GSAP transforms only.",
+      "Don't use identical-size card grids."
+    ]
+  }
+}

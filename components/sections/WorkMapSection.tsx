@@ -4,6 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { gsap, MotionPathPlugin, useGSAP } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 import { Anchor, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const WAYPOINTS = [
   {
@@ -229,7 +230,7 @@ export default function WorkMapSection() {
           {WAYPOINTS.map((point, i) => (
             <div
               key={point.id}
-              className={cn("waypoint-info-" + i, "absolute pointer-events-none z-30 opacity-0", "bg-background/92 backdrop-blur-md border border-foreground/8 p-6 lg:p-8 max-w-[280px]")}
+              className={cn("waypoint-info-" + i, "absolute pointer-events-none z-30 opacity-0 rounded-md", "bg-background/92 backdrop-blur-md border border-foreground/8 p-6 lg:p-8 max-w-[280px]")}
               style={{ left: `calc(50% + ${point.offset.x}px)`, top: `calc(50% + ${point.offset.y}px)` }}
             >
               <div className="flex flex-col gap-3">
@@ -380,12 +381,15 @@ export default function WorkMapSection() {
                     {activeWaypoint.region}
                   </span>
                 </div>
-                <button
+                <Button
+                  variant="ghost"
+                  size="icon"
                   onClick={() => setActivePin(null)}
-                  className="h-8 w-8 flex items-center justify-center border border-foreground/10 text-muted-foreground"
+                  aria-label="Close"
+                  className="border border-foreground/10 text-muted-foreground"
                 >
                   <X size={13} />
-                </button>
+                </Button>
               </div>
 
               {/* Port name */}

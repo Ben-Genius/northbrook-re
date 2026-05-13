@@ -88,7 +88,7 @@ export default function Stats() {
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-1">
           {STATS.map((stat, i) => (
-            <div key={stat.label} className="stat-panel relative group aspect-4/5 overflow-hidden bg-secondary">
+            <div key={stat.label} className="stat-panel relative group aspect-4/5 overflow-hidden bg-card">
               <div className="stat-bg absolute inset-0 z-0 overflow-hidden" style={{ clipPath: "inset(0% 0 0 0)" }}>
                 <Image
                   src={stat.image}
@@ -101,9 +101,6 @@ export default function Stats() {
               </div>
 
               <div className="stat-content relative z-10 flex h-full flex-col justify-end p-8">
-                {/* <div className="font-mono text-xs uppercase tracking-widest text-accent mb-4">
-                  0{i + 1} / Performance
-                </div> */}
                 <AnimatedCounter
                   end={stat.value}
                   suffix={stat.suffix}
@@ -114,8 +111,9 @@ export default function Stats() {
                 </p>
               </div>
 
-              {/* Industrial Border Beats (Exergy3 style) */}
-              <div className="absolute right-0 top-0 h-full w-px bg-foreground/5" />
+              {i < STATS.length - 1 && (
+                <div className="absolute right-0 top-0 h-full w-px bg-foreground/5" />
+              )}
             </div>
           ))}
         </div>

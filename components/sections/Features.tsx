@@ -112,7 +112,7 @@ export default function Features() {
           {FEATURES.map((feature, i) => (
             <div
               key={feature.title}
-              className="feature-card group relative overflow-hidden bg-secondary border border-foreground/5"
+              className="feature-card rounded-md group relative overflow-hidden bg-card border border-border"
               style={{ aspectRatio: "16/10" }}
             >
               <div className="absolute inset-0 z-0 transition-transform duration-700 group-hover:scale-105">
@@ -128,13 +128,13 @@ export default function Features() {
               <div className="relative z-10 flex h-full flex-col justify-end p-5 sm:p-7 lg:p-12 gap-3">
                 {/* Category pill + arrow — same baseline */}
                 <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-2 bg-accent/90 backdrop-blur-sm px-2.5 py-1.5 shrink-0">
+                  <div className="flex items-center gap-2 bg-accent/90 backdrop-blur-sm px-2.5 py-1.5 shrink-0 rounded-md">
                     <div className="h-1 w-1 rounded-full bg-white/80" />
                     <span className="font-mono text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.35em] text-white">
                       {feature.category}
                     </span>
                   </div>
-                  <div className="h-7 w-7 sm:h-8 sm:w-8 flex items-center justify-center border border-white/30 text-white group-hover:bg-accent group-hover:border-accent transition-all shrink-0">
+                  <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-md flex items-center justify-center border border-white/30 text-white group-hover:bg-accent group-hover:border-accent transition-all shrink-0">
                     <ArrowUpRight size={13} />
                   </div>
                 </div>
@@ -144,10 +144,12 @@ export default function Features() {
                   {feature.title}
                 </h3>
 
-                {/* Description — always visible mobile, hover-only desktop */}
-                <p className="text-xs sm:text-sm text-white/75 max-w-sm text-pretty md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] leading-relaxed">
-                  {feature.description}
-                </p>
+                {/* Description — always visible mobile, collapses to zero height on desktop */}
+                <div className="md:grid md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500">
+                  <p className="overflow-hidden text-xs sm:text-sm text-white/75 max-w-sm text-pretty md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
 
                 {/* Stat */}
                 <div className="flex items-center gap-2">

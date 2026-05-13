@@ -154,6 +154,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -268,37 +269,24 @@ export default function CTASection() {
           }}>
             <span className="final-row" style={{ display: "block" }}>Got cargo?</span>
             <span className="final-row" style={{ display: "block" }}>
-              <em style={{ fontFamily: "var(--font-serif)", fontStyle: "italic", color: "var(--color-accent)", fontWeight: 400 }}>Talk to the desk.</em>
+              <em style={{ fontStyle: "italic", color: "var(--color-accent)", fontWeight: 400 }}>Talk to the desk.</em>
             </span>
           </h2>
 
           <div className="final-sub" style={{ marginTop: "clamp(28px,4vh,48px)" }}>
-            <p style={{ fontSize: "14px", color: "#cdc1ad", marginBottom: "24px" }}>
+            <p style={{ fontSize: "14px", color: "var(--color-background)", opacity: 0.5, marginBottom: "24px" }}>
               24/7 ops desk · responses in &lt; 2 hours
             </p>
             <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-              <span className="magnetic-wrap" style={{ display: "inline-block" }}>
-                <Link href="/contact" className="nb-cta-primary" style={{
-                  display: "inline-flex", alignItems: "center", gap: "8px",
-                  padding: "14px 26px", borderRadius: "999px",
-                  background: "var(--color-accent)", color: "#fff",
-                  fontWeight: 600, fontSize: "14px", textDecoration: "none",
-                  willChange: "transform", letterSpacing: "0.03em",
-                }}>
-                  Request a quote →
-                </Link>
+              <span className="magnetic-wrap inline-block">
+                <Button asChild size="lg" className="h-auto px-[26px] py-[14px] text-sm font-semibold tracking-[0.03em] will-change-transform">
+                  <Link href="/contact">Request a quote →</Link>
+                </Button>
               </span>
-              <span className="magnetic-wrap" style={{ display: "inline-block" }}>
-                <Link href="https://wa.me/233244270797" className="nb-cta-outline" style={{
-                  display: "inline-flex", alignItems: "center", gap: "8px",
-                  padding: "14px 26px", borderRadius: "999px",
-                  background: "transparent", color: "#fff",
-                  border: "1.5px solid rgba(255,255,255,.35)",
-                  fontWeight: 600, fontSize: "14px", textDecoration: "none",
-                  willChange: "transform",
-                }}>
-                  WhatsApp the desk
-                </Link>
+              <span className="magnetic-wrap inline-block">
+                <Button asChild variant="outline" size="lg" className="h-auto px-[26px] py-[14px] text-sm font-semibold border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white will-change-transform">
+                  <Link href="https://wa.me/233244270797">WhatsApp the desk</Link>
+                </Button>
               </span>
             </div>
           </div>
