@@ -20,7 +20,7 @@ const STEPS = [
     id: "03",
     title: "Operational Deployment",
     label: "Phase / Execution",
-    description: "Executing total logistics solutions with precision — mobilising assets, coordinating vendors, and delivering where others hesitate.",
+    description: "Executing total logistics solutions with precision: mobilising assets, coordinating vendors, and delivering where others hesitate.",
   },
   {
     id: "04",
@@ -32,7 +32,7 @@ const STEPS = [
     id: "05",
     title: "Compliance & Safety",
     label: "Phase / Standards",
-    description: "Ensuring zero compromise on QHSE timelines and international industry standards — ABS, DNV-GL, Lloyd's Register certified.",
+    description: "Ensuring zero compromise on QHSE timelines and international industry standards: ABS, DNV-GL, Lloyd's Register certified.",
   },
 ];
 
@@ -85,9 +85,9 @@ export default function Process() {
         ScrollTrigger.create({
           trigger: containerRef.current,
           start: "top top",
-          end: "+=400%",
+          end: "+=120%",
           pin: true,
-          scrub: 1,
+          scrub: 0.4,
           onUpdate: (self) => {
             // Progress bar
             if (progressBarRef.current) {
@@ -180,7 +180,7 @@ export default function Process() {
                   className="h-1 rounded-full transition-all duration-500"
                   style={{
                     width: i === activeStep ? "2rem" : "0.5rem",
-                    backgroundColor: i === activeStep ? "#E31E24" : "rgba(255,255,255,0.2)",
+                    backgroundColor: i === activeStep ? "var(--color-accent)" : "rgba(255,255,255,0.2)",
                   }}
                 />
               ))}

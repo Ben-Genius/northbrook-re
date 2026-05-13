@@ -53,10 +53,10 @@ export default function MorphTransition() {
     <section ref={containerRef} className="relative md:h-screen overflow-hidden bg-background">
       <MorphPanelA />
       <MorphPanelB />
-      
+
       {/* Industrial Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.02]" aria-hidden="true">
-        <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:4vw_4vw]" />
+        <div className="h-full w-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-size-[4vw_4vw]" />
       </div>
     </section>
   );
@@ -64,10 +64,10 @@ export default function MorphTransition() {
 
 function MorphPanelA() {
   return (
-    <div className="relative md:absolute md:inset-0 flex items-center justify-center bg-secondary p-12 py-20 lg:p-24">
+    <div className="relative md:absolute md:inset-0 flex items-center justify-center bg-card p-12 py-20 lg:p-24">
       <div className="morph-panel-a-content text-center max-w-5xl space-y-12">
         <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">Established 2011</div>
-        <h2 className="font-display text-4xl font-bold leading-[1] tracking-tighter text-balance lg:text-8xl">
+        <h2 className="font-display text-4xl font-bold leading-none tracking-tighter text-balance lg:text-8xl">
           LOCAL INSIGHT <br />
           WITH <span className="text-accent uppercase">Global Expertise.</span>
         </h2>
@@ -113,12 +113,12 @@ function MorphPanelB() {
 
       <div className="text-center max-w-5xl relative z-10 space-y-12">
         <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">The Northbrook Promise</div>
-        <h2 className="font-display text-4xl font-bold leading-[1] tracking-tighter text-balance lg:text-8xl">
+        <h2 className="font-display text-4xl font-bold leading-none tracking-tighter text-balance lg:text-8xl">
           “WE DON’T JUST <br /> MOVE CARGO, <br />
           <span className="text-accent">WE DELIVER TRUST.</span>”
         </h2>
         <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.4em] text-background/40">
-          — Michael Blay / CEO / North-Brook Ltd
+          Michael Blay / CEO / North-Brook Ltd
         </p>
       </div>
     </div>
