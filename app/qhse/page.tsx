@@ -6,12 +6,13 @@ import { CtaBand } from "@/components/ui/cta-band"
 import { QHSEGrid } from "@/components/qhse-grid"
 import { SmartImage } from "@/components/ui/smart-image"
 import { Reveal } from "@/components/ui/reveal"
-import { FileText, ArrowRight } from "lucide-react"
+import { FileText } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
 import LogoMarquee from "@/components/sections/LogoMarquee"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "QHSE Policy | North-Brook Limited",
@@ -78,7 +79,7 @@ export default function QHSEPage() {
           </div>
           <div className="lg:col-span-6 lg:col-start-7 overflow-visible">
             <Reveal variant="scale" delay={0.2}>
-              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-md border border-wire">
+              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-lg border border-black/[0.08]">
                 <SmartImage
                   src="/images/projects/borr-drilling.jpg"
                   alt="North-Brook safety operations"
@@ -88,7 +89,7 @@ export default function QHSEPage() {
                 />
                 <div className="absolute inset-0 bg-ink/10" />
                 {/* Floating stat card */}
-                <div className="absolute -bottom-6 -right-6 glass-card shadow-sm p-8 z-10 max-w-[240px]">
+                <div className="absolute -bottom-6 -right-6 bg-white border border-black/[0.08] p-8 z-10 max-w-[240px]">
                   <p className="text-accent text-3xl font-display font-bold tracking-tight mb-1">100%</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary">Safety Record</p>
                   <p className="text-caption text-xs mt-3 leading-relaxed">Zero LTIs (Lost Time Injuries) recorded across all offshore campaigns since 2014.</p>
@@ -100,7 +101,7 @@ export default function QHSEPage() {
       </Section>
 
       {/* Safety Metrics Band */}
-      <section className="bg-smoke py-20 px-6 lg:px-12 border-y border-wire">
+      <section className="py-20 px-6 lg:px-12 border-y border-black/[0.08]">
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {[
             { label: "Lost Time Injuries", value: "0" },
@@ -118,7 +119,7 @@ export default function QHSEPage() {
         </div>
       </section>
 
-      <Section gray>
+      <Section>
         <FadeIn>
           <p className="eyebrow mb-6">Our Pillars</p>
           <SplitText
@@ -133,6 +134,43 @@ export default function QHSEPage() {
         <QHSEGrid pillars={pillars} />
       </Section>
 
+      {/* Certification logos */}
+      <Section>
+        <FadeIn>
+          <p className="eyebrow mb-6">Classification Societies</p>
+          <h2 className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight mb-4 leading-tight">
+            Six societies. One standard: the highest.
+          </h2>
+          <p className="text-body text-sm leading-relaxed max-w-lg mb-12">
+            Multi-certified by the world&apos;s leading classification societies, North-Brook meets the compliance requirements of the most demanding global operators.
+          </p>
+        </FadeIn>
+        <div className="grid grid-cols-3 lg:grid-cols-6 border border-black/[0.08] divide-x divide-y divide-black/[0.08] rounded-lg overflow-hidden">
+          {[
+            { file: "abs.png", name: "ABS" },
+            { file: "classnk.png", name: "ClassNK" },
+            { file: "dnv-gl.png", name: "DNV GL" },
+            { file: "korean-register.png", name: "Korean Register" },
+            { file: "lloyds-register.png", name: "Lloyd's Register" },
+            { file: "rina.png", name: "RINA" },
+          ].map((cert, i) => (
+            <FadeIn key={cert.name} delay={i * 0.07}>
+              <div className="group flex flex-col items-center justify-center gap-3 hover:bg-black/[0.02] transition-colors duration-300 py-8 px-4">
+                <div className="relative h-10 w-20 opacity-40 group-hover:opacity-70 transition-opacity duration-300 grayscale group-hover:grayscale-0">
+                  <Image
+                    src={`/images/certs/${cert.file}`}
+                    alt={cert.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-caption font-semibold">{cert.name}</span>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </Section>
+
       <Section>
         <div className="grid lg:grid-cols-2 gap-16 items-end">
           <div>
@@ -143,7 +181,7 @@ export default function QHSEPage() {
             <p className="text-body text-sm leading-relaxed max-w-md mb-8">
               We hold international certifications from the six classification societies that set the global bar for marine safety and quality.
             </p>
-            <Button asChild size="lg" className="rounded-md gap-3 h-auto px-6 py-4 text-xs uppercase tracking-[0.18em] font-semibold">
+            <Button asChild size="lg" className="rounded-lg gap-3 h-auto px-6 py-4 text-xs uppercase tracking-[0.18em] font-semibold">
               <Link href="/docs/north-brook-qhse-policy.pdf" target="_blank" download="North-Brook-QHSE-Policy.pdf">
                 <FileText size={16} />
                 Download Full Policy (PDF)

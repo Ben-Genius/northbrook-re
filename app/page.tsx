@@ -7,14 +7,13 @@ import Features from "@/components/sections/Features";
 import Showcase from "@/components/sections/Showcase";
 import WorkMapSection from "@/components/sections/WorkMapSection";
 import CTA from "@/components/sections/CTA";
-import Footer from "@/components/sections/Footer";
 import SectionReveal from "@/components/ui/SectionReveal";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      
+
       <SectionReveal id="about">
         <LogoMarquee />
         <Stats />
@@ -43,8 +42,6 @@ export default function Home() {
       <SectionReveal id="contact">
         <CTA />
       </SectionReveal>
-
-      <Footer />
     </>
   );
 }

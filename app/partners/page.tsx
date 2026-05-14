@@ -53,7 +53,7 @@ export default function PartnersPage() {
       <VelocityMarquee variant="ports" />
 
       {/* Partner logo wall */}
-      <Section gray>
+      <Section>
         <FadeIn>
           <p className="eyebrow mb-10">Our Partners</p>
         </FadeIn>
@@ -63,26 +63,33 @@ export default function PartnersPage() {
       {/* Why they work with us */}
       <Section>
         <FadeIn>
+          <p className="eyebrow mb-6">Why North-Brook</p>
           <SplitText
             as="h2"
             text="Why global operators choose North-Brook"
             by="word"
             delay={0.1}
             stagger={0.05}
-            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-14 max-w-xl leading-[1.05]"
+            className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-16 max-w-xl leading-[1.05]"
           />
         </FadeIn>
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="divide-y divide-black/[0.08]">
           {values.map((v, i) => (
-            <FadeIn key={v.title} delay={i * 0.12}>
-              <div className="bg-smoke border border-wire rounded-md p-8">
-                <div className="w-8 h-px bg-accent mb-6" />
-                <h3
-                  className="text-xl font-light text-primary mb-3"
-                >
-                  {v.title}
-                </h3>
-                <p className="text-sm text-body leading-relaxed">{v.body}</p>
+            <FadeIn key={v.title} delay={i * 0.1}>
+              <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 py-10 group">
+                <div className="lg:col-span-1 flex items-start">
+                  <span className="font-mono text-[10px] tracking-[0.4em] text-accent mt-1">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <div className="lg:col-span-4">
+                  <h3 className="text-xl font-semibold text-foreground tracking-tight leading-snug group-hover:text-accent transition-colors duration-300">
+                    {v.title}
+                  </h3>
+                </div>
+                <div className="lg:col-span-7">
+                  <p className="text-sm text-body leading-relaxed max-w-[56ch]">{v.body}</p>
+                </div>
               </div>
             </FadeIn>
           ))}

@@ -1,16 +1,18 @@
 "use client"
 
+import Image from "next/image"
 import { useRef } from "react"
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap"
+import { gsap, useGSAP } from "@/lib/gsap"
 
 const partners = [
-  { name: "Saipem",        abbr: "SP" },
-  { name: "Borr Drilling", abbr: "BD" },
-  { name: "Fugro",         abbr: "FG" },
-  { name: "Rina",          abbr: "RN" },
-  { name: "ENI",           abbr: "EN" },
-  { name: "Safeen",        abbr: "SF" },
-  { name: "Bourbon",       abbr: "BB" },
+  { name: "Saipem",        logo: "/images/partners/saipem.png",        abbr: "SP" },
+  { name: "Borr Drilling", logo: "/images/partners/borr-drilling.jpg", abbr: "BD" },
+  { name: "Fugro",         logo: "/images/partners/fugro.jpg",         abbr: "FG" },
+  { name: "Rina",          logo: "/images/partners/rina.jpg",          abbr: "RN" },
+  { name: "ENI",           logo: null,                                  abbr: "EN" },
+  { name: "Safeen",        logo: null,                                  abbr: "SF" },
+  { name: "Bourbon",       logo: null,                                  abbr: "BB" },
+  { name: "OSM Thome",     logo: null,                                  abbr: "OT" },
 ]
 
 interface PartnerLogoWallProps {
@@ -68,21 +70,40 @@ export function PartnerLogoWall({ caption }: PartnerLogoWallProps) {
 
   return (
     <div ref={ref}>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border border-wire divide-x divide-y divide-wire">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border border-black/[0.08] divide-x divide-y divide-black/[0.08]">
         {partners.map((p) => (
           <div
             key={p.name}
-            className="partner-item group bg-background hover:bg-smoke flex flex-col items-center justify-center py-12 px-6 cursor-default select-none transition-colors duration-300"
+            className="partner-item group hover:bg-black/[0.02] flex flex-col items-center justify-center py-12 px-8 cursor-default select-none transition-colors duration-300"
           >
-            <span
-              aria-hidden
-              className="font-display block text-[1.75rem] font-bold text-foreground/10 group-hover:text-accent/25 transition-colors duration-500 mb-3 leading-none tracking-tight"
-            >
-              {p.abbr}
-            </span>
-            <span className="font-display text-base lg:text-lg font-medium tracking-wide text-foreground/40 group-hover:text-foreground transition-colors duration-300">
-              {p.name}
-            </span>
+            {p.logo ? (
+              <>
+                <div className="relative h-10 w-32 grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100">
+                  <Image
+                    src={p.logo}
+                    alt={p.name}
+                    fill
+                    sizes="128px"
+                    className="object-contain"
+                  />
+                </div>
+                <span className="mt-4 text-xs font-medium tracking-wide text-foreground/30 group-hover:text-foreground/60 transition-colors duration-300">
+                  {p.name}
+                </span>
+              </>
+            ) : (
+              <>
+                <span
+                  aria-hidden
+                  className="font-display block text-[1.75rem] font-bold text-foreground/10 group-hover:text-accent/25 transition-colors duration-500 mb-3 leading-none tracking-tight"
+                >
+                  {p.abbr}
+                </span>
+                <span className="font-display text-base lg:text-lg font-medium tracking-wide text-foreground/40 group-hover:text-foreground transition-colors duration-300">
+                  {p.name}
+                </span>
+              </>
+            )}
             <span
               aria-hidden
               className="block mt-4 h-px w-0 group-hover:w-8 bg-accent transition-all duration-500 ease-out"

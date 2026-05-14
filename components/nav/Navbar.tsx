@@ -6,11 +6,12 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 
 const NAV_LINKS = [
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "QHSE", href: "/qhse" },
+  { name: "QHSE Policy", href: "/qhse" },
   { name: "Projects", href: "/projects" },
   { name: "Partners", href: "/partners" },
 ];
@@ -19,9 +20,6 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
-  const line1Ref = useRef<HTMLSpanElement>(null);
-  const line2Ref = useRef<HTMLSpanElement>(null);
-  const line3Ref = useRef<HTMLSpanElement>(null);
   const ctaOverlayRef = useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -71,11 +69,6 @@ export default function Navbar() {
       { clipPath: "inset(0 0 0% 0)", duration: 0.65, ease: "expo.inOut" }
     );
 
-    // Hamburger → X
-    tl.to(line2Ref.current, { scaleX: 0, opacity: 0, duration: 0.2, ease: "power2.in" }, 0.1);
-    tl.to(line1Ref.current, { y: 9, rotation: 45, duration: 0.35, ease: "expo.out" }, 0.25);
-    tl.to(line3Ref.current, { y: -9, rotation: -45, duration: 0.35, ease: "expo.out" }, 0.25);
-
     // Links stagger in
     if (links && links.length) {
       tl.to(
@@ -109,11 +102,6 @@ export default function Navbar() {
       tl.to(links, { clipPath: "inset(0 0 100% 0)", y: -20, duration: 0.3, ease: "expo.in", stagger: 0.04 }, 0);
     }
     tl.to(overlay, { clipPath: "inset(0 0 100% 0)", duration: 0.5, ease: "expo.inOut" }, 0.15);
-
-    // X → hamburger
-    tl.to(line1Ref.current, { y: 0, rotation: 0, duration: 0.3, ease: "expo.out" }, 0);
-    tl.to(line3Ref.current, { y: 0, rotation: 0, duration: 0.3, ease: "expo.out" }, 0);
-    tl.to(line2Ref.current, { scaleX: 1, opacity: 1, duration: 0.25, ease: "power2.out" }, 0.2);
   }, []);
 
   const toggleMenu = useCallback(() => {
@@ -144,35 +132,28 @@ export default function Navbar() {
 
         {/* Right controls */}
         <div className="relative flex items-center gap-3 sm:gap-4" style={{ zIndex: 201 }}>
-          {/* Request Quote pill */}
-          <Link
-            href="/contact"
-            className="nb-quote-btn hidden sm:flex items-center gap-2 px-5 py-2.5 rounded-md border border-white/40 text-white text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] transition-colors duration-300 hover:bg-primary hover:border-accent hover:text-white"
-          >
-            Request Quote
-          </Link>
-
-          {/* Hamburger / X */}
+          {/* Menu toggle */}
           <button
             onClick={toggleMenu}
-            aria-label={isOpen ? "Close menu" : "Open menu"}
+            className="hover:text-primary pointer-events-auto flex items-center gap-3 font-sans text-xl md:text-2xl font-bold tracking-wide transition-colors group text-white"
+            aria-label="Toggle menu"
             aria-expanded={isOpen}
-            className="relative flex h-10 w-10 flex-col items-center justify-center gap-0 focus-visible:outline-none"
           >
-            <span
-              ref={line1Ref}
-              className="nb-burger-line block h-[2px] w-6 origin-center rounded-full bg-white transition-colors duration-300"
-              style={{ marginBottom: "7px" }}
-            />
-            <span
-              ref={line2Ref}
-              className="nb-burger-line block h-[2px] w-6 origin-center rounded-full bg-white transition-colors duration-300"
-            />
-            <span
-              ref={line3Ref}
-              className="nb-burger-line block h-[2px] w-6 origin-center rounded-full bg-white transition-colors duration-300"
-              style={{ marginTop: "7px" }}
-            />
+            <span className="uppercase tracking-wider text-[0.95rem]">{isOpen ? "Close" : "Menu"}</span>
+            <svg
+              viewBox="0 0 12 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className={cn(
+                "h-[1.4rem] w-[1.4rem] transform origin-center transition-transform duration-300 ease-linear text-white",
+                isOpen ? "rotate-45" : "rotate-0"
+              )}
+            >
+              <path d="M12.0005 5.49894V6.99894H8.50047V5.49894H12.0005Z" fill="currentColor" />
+              <path d="M3.5 5.49756V6.99756L0 6.99756L6.55637e-08 5.49756L3.5 5.49756Z" fill="currentColor" />
+              <path d="M6.50106 11.9982H5.00106V8.49824H6.50106V11.9982Z" fill="currentColor" />
+              <path d="M6.49968 3.49777L4.99968 3.49777L4.99968 -0.00222778L6.49968 -0.00222759L6.49968 3.49777Z" fill="currentColor" />
+            </svg>
           </button>
         </div>
       </nav>
@@ -202,7 +183,7 @@ export default function Navbar() {
                 <span className="font-mono text-[10px] text-white/30 tracking-widest tabular-nums">
                   0{i + 1}
                 </span>
-                <span className="text-[clamp(2.5rem,8vw,6rem)] font-black uppercase leading-none tracking-[-0.03em] text-white transition-colors duration-200 group-hover:text-[#E31E24]">
+                <span className="text-[clamp(2.5rem,8vw,6rem)] font-black uppercase leading-none tracking-[-0.03em] text-white transition-colors duration-200 group-hover:text-primary">
                   {link.name}
                 </span>
               </a>

@@ -64,9 +64,7 @@ export default function TeamPage() {
                   />
                 </div>
                 <div className="p-7">
-                  <h3
-                    className="text-xl font-light text-primary mb-1 group-hover:text-accent transition-colors leading-snug"
-                  >
+                  <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-accent transition-colors leading-snug">
                     {m.name}
                   </h3>
                   <p className="text-xs text-caption uppercase tracking-wider mb-4">{m.role}</p>
