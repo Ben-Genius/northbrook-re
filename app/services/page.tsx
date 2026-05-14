@@ -3,9 +3,8 @@ import { Hero } from "@/components/ui/hero"
 import { FadeIn } from "@/components/ui/fade-in"
 import { CtaBand } from "@/components/ui/cta-band"
 import { SmartImage } from "@/components/ui/smart-image"
-import { SectionNav } from "@/components/ui/section-nav"
+// import { SectionNav } from "@/components/ui/section-nav"
 import { SplitText } from "@/components/ui/split-text"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "Logistics Services | Ship Agency, Freight, Bunkering, Warehousing | North-Brook",
@@ -166,7 +165,7 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      <SectionNav items={services.map((s) => ({ id: s.id, label: s.title }))} />
+      {/* <SectionNav items={services.map((s) => ({ id: s.id, label: s.title }))} /> */}
 
       {/* Service sections — full-bleed split layout */}
       {services.map((service, i) => {

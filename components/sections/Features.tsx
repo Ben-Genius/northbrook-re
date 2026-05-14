@@ -25,7 +25,7 @@ const FEATURES = [
     title: "Bunkering & Fuel Logistics",
     description: "Reliable fuel sourcing and delivery with transparent supply chains, ensuring offshore assets keep moving.",
     stat: "Supporting Borr Drilling Operations",
-    image: "/images/project-2.png",
+    image: "/images/projects/borr-drilling-heavy-lift.jpg",
     category: "Energy Support",
   },
   {

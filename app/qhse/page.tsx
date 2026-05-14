@@ -9,10 +9,10 @@ import { Reveal } from "@/components/ui/reveal"
 import { FileText } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
 import LogoMarquee from "@/components/sections/LogoMarquee"
 import Image from "next/image"
+import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "QHSE Policy | North-Brook Limited",
@@ -79,7 +79,7 @@ export default function QHSEPage() {
           </div>
           <div className="lg:col-span-6 lg:col-start-7 overflow-visible">
             <Reveal variant="scale" delay={0.2}>
-              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-lg border border-black/[0.08]">
+              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-lg border border-black/8">
                 <SmartImage
                   src="/images/projects/borr-drilling.jpg"
                   alt="North-Brook safety operations"
@@ -89,7 +89,7 @@ export default function QHSEPage() {
                 />
                 <div className="absolute inset-0 bg-ink/10" />
                 {/* Floating stat card */}
-                <div className="absolute -bottom-6 -right-6 bg-white border border-black/[0.08] p-8 z-10 max-w-[240px]">
+                <div className="absolute -bottom-6 -right-6 bg-white border border-black/8 p-8 z-10 max-w-[240px]">
                   <p className="text-accent text-3xl font-display font-bold tracking-tight mb-1">100%</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary">Safety Record</p>
                   <p className="text-caption text-xs mt-3 leading-relaxed">Zero LTIs (Lost Time Injuries) recorded across all offshore campaigns since 2014.</p>
@@ -101,7 +101,7 @@ export default function QHSEPage() {
       </Section>
 
       {/* Safety Metrics Band */}
-      <section className="py-20 px-6 lg:px-12 border-y border-black/[0.08]">
+      <section className="py-20 px-6 lg:px-12 border-y border-black/8">
         <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
           {[
             { label: "Lost Time Injuries", value: "0" },
@@ -145,7 +145,7 @@ export default function QHSEPage() {
             Multi-certified by the world&apos;s leading classification societies, North-Brook meets the compliance requirements of the most demanding global operators.
           </p>
         </FadeIn>
-        <div className="grid grid-cols-3 lg:grid-cols-6 border border-black/[0.08] divide-x divide-y divide-black/[0.08] rounded-lg overflow-hidden">
+        <div className="grid grid-cols-3 lg:grid-cols-6 border border-black/8 divide-x divide-y divide-black/8 rounded-lg overflow-hidden">
           {[
             { file: "abs.png", name: "ABS" },
             { file: "classnk.png", name: "ClassNK" },
@@ -155,7 +155,7 @@ export default function QHSEPage() {
             { file: "rina.png", name: "RINA" },
           ].map((cert, i) => (
             <FadeIn key={cert.name} delay={i * 0.07}>
-              <div className="group flex flex-col items-center justify-center gap-3 hover:bg-black/[0.02] transition-colors duration-300 py-8 px-4">
+              <div className="group flex flex-col items-center justify-center gap-3 hover:bg-black/2 transition-colors duration-300 py-8 px-4">
                 <div className="relative h-10 w-20 opacity-40 group-hover:opacity-70 transition-opacity duration-300 grayscale group-hover:grayscale-0">
                   <Image
                     src={`/images/certs/${cert.file}`}

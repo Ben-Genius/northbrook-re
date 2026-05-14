@@ -2,33 +2,38 @@
 
 import React, { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const PROJECTS = [
   {
+    slug: "geophysical-fugro-rina",
     title: "Geophysical Campaign",
     subtitle: "Strategic Alliances / Fugro & Rina",
-    image: "/images/project-1.png",
+    image: "/images/projects/geophysical-fugro-rina.jpg",
     description: "Multi-vessel logistical coordination for deep-sea survey operations.",
   },
   {
+    slug: "borr-drilling",
     title: "Borr Drilling Ops",
-    subtitle: "Jack-up Logistics / Offshore",
-    image: "/images/project-2.png",
-    description: "Integrated support for rig positioning and supply chain maintenance.",
+    subtitle: "Heavy-Lift / Offshore Support",
+    image: "/images/projects/borr-drilling-heavy-lift.jpg",
+    description: "Specialized logistical coordination for high-value drilling equipment and offshore assets.",
   },
   {
+    slug: "safeen-argus-2",
     title: "Safeen Argus 2",
     subtitle: "Vessel Husbandry / Agency",
-    image: "/images/project-3.png",
+    image: "/images/projects/safeen-argus.png",
     description: "Complete port agency services for high-capacity bulk carriers.",
   },
   {
+    slug: "saipem-dvd-santorini",
     title: "Saipem Operations",
     subtitle: "Industrial Freight / Crew",
-    image: "/images/project-4.png",
+    image: "/images/showcase/saipem.jpg",
     description: "Complex personnel rotations and heavy-lift freight solutions.",
   },
 ];
@@ -45,7 +50,6 @@ export default function Showcase() {
         const track = trackRef.current;
         if (!track) return;
 
-        // Horizontal scroll with pinning
         gsap.to(track, {
           x: () => -(track.scrollWidth - window.innerWidth),
           ease: "none",
@@ -59,13 +63,13 @@ export default function Showcase() {
           },
         });
 
-        // "Peel" and Parallax transitions
         const panels = gsap.utils.toArray(".project-panel");
-        panels.forEach((panel: any, i: number) => {
+        panels.forEach((panel: any) => {
           const img = panel.querySelector(".project-img");
           const content = panel.querySelector(".project-content");
 
-          gsap.fromTo(img,
+          gsap.fromTo(
+            img,
             { scale: 1.2, x: "-10%" },
             {
               scale: 1,
@@ -73,15 +77,14 @@ export default function Showcase() {
               ease: "none",
               scrollTrigger: {
                 trigger: panel,
-                containerAnimation: gsap.getById("horizontal-scroll") as any, // Not using ID here, but containerAnimation is key
+                containerAnimation: gsap.getById("horizontal-scroll") as any,
                 start: "left right",
                 end: "right left",
                 scrub: true,
-              }
+              },
             }
           );
 
-          // Kinetic text beats
           gsap.from(content, {
             y: 40,
             opacity: 0,
@@ -90,7 +93,7 @@ export default function Showcase() {
               trigger: panel,
               start: "left 60%",
               toggleActions: "play none none reverse",
-            }
+            },
           });
         });
       });
@@ -129,9 +132,10 @@ export default function Showcase() {
           </div>
 
           {PROJECTS.map((project, i) => (
-            <div
-              key={project.title}
-              className="project-panel shrink-0 w-[80vw] h-screen flex items-center relative border-r border-background/10"
+            <Link
+              key={project.slug}
+              href={`/projects/${project.slug}`}
+              className="project-panel group shrink-0 w-[80vw] h-screen flex items-center relative border-r border-background/10"
             >
               <div className="absolute inset-0 z-0 overflow-hidden">
                 <div className="project-img relative h-full w-full">
@@ -139,7 +143,7 @@ export default function Showcase() {
                     src={project.image}
                     alt={project.title}
                     fill
-                    className="object-cover opacity-90 transition-all duration-700 hover:opacity-100"
+                    className="object-cover opacity-90 transition-all duration-700 group-hover:opacity-100 group-hover:scale-[1.02]"
                   />
                   <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/5" />
                 </div>
@@ -157,10 +161,10 @@ export default function Showcase() {
                     {project.description}
                   </p>
                   <div className="mt-8">
-                    <Button variant="ghost" size="sm" className="group gap-4 px-0 font-bold uppercase tracking-widest text-accent hover:bg-transparent hover:text-background">
-                      View details
-                      <span className="transition-transform group-hover:translate-x-2">→</span>
-                    </Button>
+                    <span className="inline-flex items-center gap-3 font-bold uppercase tracking-widest text-sm text-accent transition-all duration-300 group-hover:gap-5">
+                      View case study
+                      <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                    </span>
                   </div>
                 </div>
 
@@ -170,8 +174,28 @@ export default function Showcase() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
+
+          {/* View All Projects End Panel */}
+          <div className="shrink-0 w-[50vw] h-screen flex flex-col items-center justify-center px-24 gap-12">
+            <div className="text-center space-y-6">
+              <div className="section-eyebrow text-accent">Full Portfolio</div>
+              <p className="text-4xl font-display font-bold tracking-tighter leading-tight text-background/80 max-w-xs">
+                More operations on record.
+              </p>
+            </div>
+            <Link href="/projects">
+              <Button
+                variant="outline"
+                size="lg"
+                className="group gap-4 border-background/20 text-background bg-transparent hover:bg-background hover:text-foreground font-bold uppercase tracking-widest px-10 py-6 text-sm transition-all duration-300"
+              >
+                View all projects
+                <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
 
@@ -183,23 +207,44 @@ export default function Showcase() {
         </div>
         <div className="space-y-16">
           {PROJECTS.map((project) => (
-            <div key={project.title} className="project-panel-mobile space-y-4">
+            <Link
+              key={project.slug}
+              href={`/projects/${project.slug}`}
+              className="project-panel-mobile group block space-y-4"
+            >
               <div className="relative aspect-16/10 w-full overflow-hidden">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="space-y-2">
                 <div className="text-xs font-bold uppercase tracking-widest text-accent">{project.subtitle}</div>
-                <h3 className="text-3xl font-bold tracking-tighter text-background">{project.title}</h3>
+                <h3 className="text-3xl font-bold tracking-tighter text-background group-hover:text-accent transition-colors duration-200">{project.title}</h3>
                 <p className="text-background/60 text-sm text-pretty">{project.description}</p>
+                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent pt-1 transition-all duration-200 group-hover:gap-3">
+                  View case study <ArrowRight size={12} />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* Mobile View All CTA */}
+        <div className="pt-8 border-t border-background/10">
+          <Link href="/projects">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full group gap-3 border-background/20 text-background bg-transparent hover:bg-background hover:text-foreground font-bold uppercase tracking-widest transition-all duration-300"
+            >
+              View all projects
+              <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

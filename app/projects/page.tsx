@@ -7,7 +7,6 @@ import { CtaBand } from "@/components/ui/cta-band"
 import { SmartImage } from "@/components/ui/smart-image"
 import { projects } from "@/lib/projects"
 import { ArrowRight } from "lucide-react"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "Projects | North-Brook Limited Logistics Track Record",
@@ -36,8 +35,6 @@ export default function ProjectsPage() {
         image="projects.jpg"
         imageAlt="North-Brook offshore project operations"
       />
-
-      <VelocityMarquee variant="ports" />
 
       <Section>
         {/* Featured first project */}

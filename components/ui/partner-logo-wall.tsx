@@ -5,14 +5,15 @@ import { useRef } from "react"
 import { gsap, useGSAP } from "@/lib/gsap"
 
 const partners = [
-  { name: "Saipem",        logo: "/images/partners/saipem.png",        abbr: "SP" },
+  { name: "Saipem", logo: "/images/partners/saipem.png", abbr: "SP" },
   { name: "Borr Drilling", logo: "/images/partners/borr-drilling.jpg", abbr: "BD" },
-  { name: "Fugro",         logo: "/images/partners/fugro.jpg",         abbr: "FG" },
-  { name: "Rina",          logo: "/images/partners/rina.jpg",          abbr: "RN" },
-  { name: "ENI",           logo: null,                                  abbr: "EN" },
-  { name: "Safeen",        logo: null,                                  abbr: "SF" },
-  { name: "Bourbon",       logo: null,                                  abbr: "BB" },
-  { name: "OSM Thome",     logo: null,                                  abbr: "OT" },
+  { name: "Fugro", logo: "/images/partners/fugro.jpg", abbr: "FG" },
+  { name: "Rina", logo: "/images/partners/rina.jpg", abbr: "RN" },
+  { name: "ENI", logo: "/images/partners/eni.png", abbr: "EN" },
+  { name: "Macwest", logo: "/images/partners/macwest-logo-1.webp", abbr: "MW" },
+  { name: "Cypress", logo: "/images/partners/macwest-logo-2.webp", abbr: "CY" },
+  { name: "OSM Thome", logo: "/images/partners/osm.jpg", abbr: "OT" },
+  { name: "Dolphings", logo: "/images/partners/dolphins.png", abbr: "DP" },
 ]
 
 interface PartnerLogoWallProps {
@@ -70,20 +71,20 @@ export function PartnerLogoWall({ caption }: PartnerLogoWallProps) {
 
   return (
     <div ref={ref}>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border border-black/[0.08] divide-x divide-y divide-black/[0.08]">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 border border-black/8 divide-x divide-y divide-black/8">
         {partners.map((p) => (
           <div
             key={p.name}
-            className="partner-item group hover:bg-black/[0.02] flex flex-col items-center justify-center py-12 px-8 cursor-default select-none transition-colors duration-300"
+            className="partner-item group hover:bg-black/2 flex flex-col items-center justify-center py-12 px-8 cursor-default select-none transition-colors duration-300"
           >
             {p.logo ? (
               <>
-                <div className="relative h-10 w-32 grayscale group-hover:grayscale-0 transition-all duration-500 opacity-50 group-hover:opacity-100">
+                <div className="relative h-20 w-42">
                   <Image
                     src={p.logo}
                     alt={p.name}
                     fill
-                    sizes="128px"
+                    sizes="256px"
                     className="object-contain"
                   />
                 </div>
