@@ -3,15 +3,15 @@
 import Image from "next/image";
 
 const PARTNERS = [
-  { src: "/images/partners/IMG_3727.png", alt: "Partner" },
-  { src: "/images/partners/IMG_3728.png", alt: "Partner" },
-  { src: "/images/partners/IMG_3730.jpg", alt: "Partner" },
-  { src: "/images/partners/IMG_3732.png", alt: "Partner" },
-  { src: "/images/partners/IMG_3731.jpg", alt: "Partner" },
-  { src: "/images/partners/IMG_3726.jpg", alt: "Partner" },
-  { src: "/images/partners/IMG_3733.png", alt: "Partner" },
-  { src: "/images/partners/macwest-logo-2.webp", alt: "Macwest" },
-  { src: "/images/partners/macwest-logo-1.webp", alt: "Macwest" },
+  { alt: "Saipem", src: "/images/partners/saipem.png" },
+  { alt: "Borr Drilling", src: "/images/partners/borr-drilling.jpg" },
+  { alt: "Fugro", src: "/images/partners/fugro.jpg" },
+  { alt: "Rina", src: "/images/partners/rina.jpg" },
+  { alt: "ENI", src: "/images/partners/eni.png" },
+  { alt: "Macwest", src: "/images/partners/macwest-logo-1.webp" },
+  { alt: "Cypress", src: "/images/partners/macwest-logo-2.webp" },
+  { alt: "OSM Thome", src: "/images/partners/osm.jpg" },
+  { alt: "Dolphings", src: "/images/partners/dolphins.png" },
 ];
 
 export default function LogoMarquee() {

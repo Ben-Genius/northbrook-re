@@ -11,7 +11,7 @@ import { PillarGrid } from "@/components/pillar-grid"
 import { CommunityImpact } from "@/components/community-impact"
 import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
-import { Reveal } from "@/components/ui/reveal"
+import { team } from "@/lib/team"
 
 export const metadata: Metadata = {
   title: "About North-Brook Limited | West Africa Logistics Since 2014",
@@ -19,12 +19,6 @@ export const metadata: Metadata = {
     "Founded November 2014 in Accra, North-Brook Limited delivers total onshore and offshore logistics across Ghana and West Africa. Meet our board, leadership, and CSR commitments.",
 }
 
-const boardMembers = [
-  { name: "Frank Adu Jnr", role: "Board Chairman", slug: "frank-adu-jnr" },
-  { name: "Kwabena Amponsah Osei-Bonsu", role: "Non-Executive Director", slug: "kwabena-osei-bonsu" },
-  { name: "Percival O. Ampomah", role: "Non-Executive Director", slug: "percival-ampomah" },
-  { name: "Cheryl Otoo", role: "Non-Executive Director", slug: "cheryl-otoo" },
-]
 
 const pillars = [
   {
@@ -93,9 +87,9 @@ export default function AboutPage() {
       <VelocityMarquee variant="stats" />
 
       {/* Stat band */}
-      <section className="py-16 px-6 lg:px-12 border-y border-black/[0.08]">
+      <section className="py-16 px-6 lg:px-12 border-y border-black/8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-black/[0.08]">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-black/8">
             {[
               { label: "Years Operating", value: "10+", note: "Est. November 2014" },
               { label: "Port Calls", value: "347", note: "Vessels handled" },
@@ -140,39 +134,39 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      {/* Board */}
-      <Section>
+      {/* Leadership */}
+      <Section id="board">
         <FadeIn>
-          <p className="eyebrow mb-4">Our Board</p>
+          <p className="eyebrow mb-4">Our People</p>
           <SplitText
             as="h2"
-            text="The board behind the operation."
+            text="The leadership behind the operation."
             by="word"
             delay={0.1}
             stagger={0.05}
             className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-4 leading-[1.05]"
           />
           <p className="text-caption max-w-xl mb-14">
-            The board shaping strategy for West Africa&apos;s most trusted offshore logistics operator.
+            The board and executive team shaping strategy for West Africa&apos;s most trusted offshore logistics operator.
           </p>
         </FadeIn>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          {boardMembers.map((m, i) => (
-            <FadeIn key={m.slug} delay={i * 0.1}>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {team.map((m, i) => (
+            <FadeIn key={m.slug} delay={(i % 3) * 0.1}>
               <Link
                 href={`/team/${m.slug}`}
-                className="group block border border-black/[0.08] hover:border-accent/30 transition-all duration-500 lift-card overflow-hidden rounded-lg"
+                className="group block border border-black/8 hover:border-accent/30 transition-all duration-500 lift-card overflow-hidden rounded-lg"
               >
                 <div className="relative aspect-4/5 zoom-frame">
                   <SmartImage
                     src={`/images/team/${m.slug}.webp`}
                     alt={`Portrait of ${m.name}`}
                     fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
                     placeholderTone="primary"
-                    placeholderLabel={m.name.charAt(0)}
+                    placeholderLabel={m.name.charAt(m.name.startsWith("Mr.") ? 4 : 0)}
                     placeholderHint={m.role}
                   />
                 </div>
@@ -180,21 +174,16 @@ export default function AboutPage() {
                   <h3 className="text-base font-medium text-primary mb-1 group-hover:text-accent transition-colors leading-snug">
                     {m.name}
                   </h3>
-                  <p className="text-xs text-caption uppercase tracking-wider">{m.role}</p>
+                  <p className="text-xs text-caption uppercase tracking-wider mb-3">{m.role}</p>
+                  <p className="text-sm text-body leading-relaxed line-clamp-2 mb-3">{m.bio[0]}</p>
+                  <span className="inline-flex items-center gap-1 text-xs text-accent uppercase tracking-[0.14em] group-hover:gap-2 transition-all">
+                    Read bio <ArrowRight size={11} />
+                  </span>
                 </div>
               </Link>
             </FadeIn>
           ))}
         </div>
-
-        <FadeIn delay={0.4}>
-          <Link
-            href="/team"
-            className="inline-flex items-center gap-2 text-accent text-sm uppercase tracking-[0.14em] hover:gap-4 transition-all"
-          >
-            Meet our full team <ArrowRight size={14} />
-          </Link>
-        </FadeIn>
       </Section>
 
       {/* CEO Quote */}

@@ -49,7 +49,7 @@ export default async function TeamMemberPage({ params }: Props) {
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Home", item: "https://northbrook.com.gh" },
-      { "@type": "ListItem", position: 2, name: "Team", item: "https://northbrook.com.gh/team" },
+      { "@type": "ListItem", position: 2, name: "About", item: "https://northbrook.com.gh/about" },
       { "@type": "ListItem", position: 3, name: member.name, item: `https://northbrook.com.gh/team/${slug}` },
     ],
   }
@@ -60,42 +60,36 @@ export default async function TeamMemberPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
       {/* Hero */}
-      <section className="bg-ink relative min-h-[72vh] flex items-end overflow-hidden">
-        {/* Full-bleed photo — right half, desktop */}
-        <div className="absolute inset-0 lg:left-[45%]">
+      <section className="bg-ink min-h-[72vh] flex items-end overflow-hidden">
+        {/* Mobile full-bleed background image */}
+        <div className="lg:hidden absolute inset-0">
           <SmartImage
             src={`/images/team/${member.slug}.webp`}
-            alt={`Portrait of ${member.name}`}
+            alt=""
             fill
-            sizes="(min-width: 1024px) 55vw, 100vw"
+            sizes="100vw"
             className="object-cover object-top"
             priority
             placeholderTone="primary"
             placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
             placeholderHint={member.role}
           />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-linear-to-r from-ink/95 via-ink/70 to-ink/10"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-64 bg-linear-to-t from-ink to-transparent"
-          />
+          <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/60 to-transparent" />
+          <div aria-hidden className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/40 to-transparent" />
         </div>
 
-        {/* Content */}
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 pt-40 pb-16 w-full">
-          <FadeIn>
-            <Link
-              href="/team"
-              className="inline-flex items-center gap-2 text-accent text-xs uppercase tracking-widest mb-10 hover:gap-3 transition-all"
-            >
-              <ArrowLeft size={12} /> Our People
-            </Link>
-          </FadeIn>
+        <div className="w-full flex items-end">
+          {/* Content — 4/5 */}
+          <div className="relative flex-3 flex flex-col justify-end px-6 lg:px-12 pt-40 pb-16">
+            <FadeIn>
+              <Link
+                href="/about#board"
+                className="inline-flex items-center gap-2 text-accent text-xs uppercase tracking-widest mb-10 hover:gap-3 transition-all"
+              >
+                <ArrowLeft size={12} /> Our People
+              </Link>
+            </FadeIn>
 
-          <div className="max-w-xl">
             <FadeIn delay={0.06}>
               <p className="eyebrow mb-4">{member.role}</p>
             </FadeIn>
@@ -110,15 +104,31 @@ export default async function TeamMemberPage({ params }: Props) {
                 <span className="text-white/40 text-xs uppercase tracking-[0.16em]">North-Brook Limited</span>
               </div>
             </FadeIn>
+
+            {/* Ambient crimson glow */}
+            <div
+              aria-hidden
+              className="absolute bottom-0 left-0 w-[40vw] h-[30vw] pointer-events-none"
+              style={{ background: "radial-gradient(ellipse, rgba(140,0,48,0.12) 0%, transparent 70%)" }}
+            />
+          </div>
+
+          {/* Portrait — 1/5 */}
+          <div className="hidden lg:block flex-2 self-stretch relative min-h-[72vh]">
+            <SmartImage
+              src={`/images/team/${member.slug}.webp`}
+              alt={`Portrait of ${member.name}`}
+              fill
+              sizes="20vw"
+              className="object-cover object-top"
+              priority
+              placeholderTone="primary"
+              placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
+              placeholderHint={member.role}
+            />
+            <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/50 to-transparent" />
           </div>
         </div>
-
-        {/* Ambient crimson glow — bottom left */}
-        <div
-          aria-hidden
-          className="absolute bottom-0 left-0 w-[40vw] h-[30vw] pointer-events-none"
-          style={{ background: "radial-gradient(ellipse, rgba(140,0,48,0.12) 0%, transparent 70%)" }}
-        />
       </section>
 
       {/* Bio */}
@@ -177,7 +187,7 @@ export default async function TeamMemberPage({ params }: Props) {
         </div>
         <FadeIn>
           <Link
-            href="/team"
+            href="/about#board"
             className="inline-flex items-center gap-2 text-accent text-sm uppercase tracking-[0.14em] hover:gap-4 transition-all"
           >
             <ArrowLeft size={14} /> Back to Leadership

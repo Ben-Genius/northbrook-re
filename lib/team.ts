@@ -7,6 +7,15 @@ export interface TeamMember {
 
 export const team: TeamMember[] = [
   {
+    slug: "michael-blay",
+    name: "Mr. Michael Blay",
+    role: "Chief Executive Officer",
+    bio: [
+      "A visionary and results-driven executive with a proven track record of leading high-growth organisations, Michael Blay is a strategic powerhouse with over a decade of experience in business leadership, investment strategy, and corporate governance.",
+      "As Chief Executive Officer of North-Brook Limited, Mr. Blay has been instrumental in building the company into one of West Africa's most trusted onshore and offshore logistics operators since its founding in November 2014. His leadership philosophy centres on responsiveness, operational precision, and the belief that every client engagement is an exercise in delivering trust. Under his direction, North-Brook has grown its service portfolio, deepened relationships with global energy operators, and maintained an unblemished compliance record across all operations. [Further biographical detail to be provided by the client.]",
+    ],
+  },
+  {
     slug: "frank-adu-jnr",
     name: "Mr. Frank Adu Jnr.",
     role: "Board Chairman",
@@ -40,15 +49,6 @@ export const team: TeamMember[] = [
     bio: [
       "Cheryl is a senior manager at Deloitte Ghana with over 15 years' experience providing consulting and advisory services for the firm's African and global public and private sector clients. She leads public financial management, donor fund management, MSME development, and compliance projects for organisations including the World Bank Group, EU, the African Development Bank (AfDB), UNDP, and the Governments of Ghana, Nigeria, the UK, the Netherlands, and Denmark. Her areas of expertise include financial management, business process improvement, internal and external audits, and risk-based auditing.",
       "At Deloitte Ghana, Cheryl leads the Economic Advisory team. She also serves as the Foreign Commonwealth and Development Office (FCDO) Africa client account manager, working with teams across Africa to build and enhance this platinum account pipeline.",
-    ],
-  },
-  {
-    slug: "michael-blay",
-    name: "Mr. Michael Blay",
-    role: "Chief Executive Officer",
-    bio: [
-      "A visionary and results-driven executive with a proven track record of leading high-growth organisations, Michael Blay is a strategic powerhouse with over a decade of experience in business leadership, investment strategy, and corporate governance.",
-      "As Chief Executive Officer of North-Brook Limited, Mr. Blay has been instrumental in building the company into one of West Africa's most trusted onshore and offshore logistics operators since its founding in November 2014. His leadership philosophy centres on responsiveness, operational precision, and the belief that every client engagement is an exercise in delivering trust. Under his direction, North-Brook has grown its service portfolio, deepened relationships with global energy operators, and maintained an unblemished compliance record across all operations. [Further biographical detail to be provided by the client.]",
     ],
   },
 ]

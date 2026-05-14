@@ -119,7 +119,7 @@ import { FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa"
 const company = [
   { label: "About Us", href: "/about" },
   { label: "Our Services", href: "/services" },
-  { label: "Our People", href: "/team" },
+  { label: "Our People", href: "/about#board" },
   { label: "Our Projects", href: "/projects" },
   { label: "Partners & Clients", href: "/partners" },
   { label: "QHSE Policy", href: "/qhse" },

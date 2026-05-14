@@ -4,7 +4,6 @@ import { Section } from "@/components/ui/section"
 import { FadeIn } from "@/components/ui/fade-in"
 import { CtaBand } from "@/components/ui/cta-band"
 import { PartnerLogoWall } from "@/components/ui/partner-logo-wall"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
 
 export const metadata: Metadata = {
@@ -50,8 +49,6 @@ export default function PartnersPage() {
         imageAlt="North-Brook partners and operations"
       />
 
-      <VelocityMarquee variant="ports" />
-
       {/* Partner logo wall */}
       <Section>
         <FadeIn>
@@ -73,7 +70,7 @@ export default function PartnersPage() {
             className="text-4xl lg:text-6xl font-display font-bold text-foreground tracking-tight mb-16 max-w-xl leading-[1.05]"
           />
         </FadeIn>
-        <div className="divide-y divide-black/[0.08]">
+        <div className="divide-y divide-black/8">
           {values.map((v, i) => (
             <FadeIn key={v.title} delay={i * 0.1}>
               <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 py-10 group">
