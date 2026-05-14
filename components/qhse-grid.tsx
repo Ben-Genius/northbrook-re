@@ -40,7 +40,7 @@ export function QHSEGrid({ pillars }: QHSEGridProps) {
   )
 
   return (
-    <div ref={containerRef} className="grid md:grid-cols-2 border border-wire divide-x divide-y divide-wire rounded-md overflow-hidden">
+    <div ref={containerRef} className="grid md:grid-cols-2 border border-black/[0.08] divide-x divide-y divide-black/[0.08] rounded-lg overflow-hidden">
       {pillars.map((p, i) => {
         const Icon = icons[i % icons.length]
         return (
@@ -52,7 +52,7 @@ export function QHSEGrid({ pillars }: QHSEGridProps) {
 
             <div className="relative z-10">
               <div className="flex items-center gap-4 mb-8">
-                <div className="w-12 h-12 rounded-sm bg-accent/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                <div className="w-12 h-12 rounded-lg bg-accent/5 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
                   <Icon size={24} />
                 </div>
                 <div className="h-px flex-1 bg-accent/10 group-hover:bg-accent/30 transition-colors duration-500" />

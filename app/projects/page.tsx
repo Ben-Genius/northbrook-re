@@ -39,16 +39,16 @@ export default function ProjectsPage() {
 
       <VelocityMarquee variant="ports" />
 
-      <Section gray>
+      <Section>
         {/* Featured first project */}
         {projects[0] && (
           <FadeIn className="mb-6">
             <Link
               href={`/projects/${projects[0].slug}`}
-              className="group block bg-white border border-wire hover:border-accent/40 transition-all duration-500 overflow-hidden rounded-md"
+              className="group block border border-black/8 hover:border-accent/30 transition-all duration-500 overflow-hidden rounded-lg"
             >
               <div className="grid lg:grid-cols-2">
-                <div className="relative aspect-16/9 lg:aspect-auto lg:min-h-[380px] zoom-frame tile-vignette">
+                <div className="relative aspect-video lg:aspect-auto lg:min-h-[380px] zoom-frame tile-vignette">
                   <SmartImage
                     src={`/images/projects/${projects[0].slug}.jpg`}
                     alt={projects[0].title}
@@ -88,7 +88,7 @@ export default function ProjectsPage() {
             <FadeIn key={p.slug} delay={(i % 3) * 0.1}>
               <Link
                 href={`/projects/${p.slug}`}
-                className="group block bg-white border border-wire hover:border-accent/40 transition-all duration-500 overflow-hidden lift-card rounded-md"
+                className="group block border border-black/8 hover:border-accent/30 transition-all duration-500 overflow-hidden lift-card rounded-lg"
               >
                 <div className="relative aspect-16/10 zoom-frame tile-vignette">
                   <SmartImage

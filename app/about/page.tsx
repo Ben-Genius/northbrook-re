@@ -93,9 +93,9 @@ export default function AboutPage() {
       <VelocityMarquee variant="stats" />
 
       {/* Stat band */}
-      <section className="bg-smoke py-16 px-6 lg:px-12 border-y border-wire">
+      <section className="py-16 px-6 lg:px-12 border-y border-black/[0.08]">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-wire">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-black/[0.08]">
             {[
               { label: "Years Operating", value: "10+", note: "Est. November 2014" },
               { label: "Port Calls", value: "347", note: "Vessels handled" },
@@ -141,7 +141,7 @@ export default function AboutPage() {
       </Section>
 
       {/* Board */}
-      <Section gray>
+      <Section>
         <FadeIn>
           <p className="eyebrow mb-4">Our Board</p>
           <SplitText
@@ -162,7 +162,7 @@ export default function AboutPage() {
             <FadeIn key={m.slug} delay={i * 0.1}>
               <Link
                 href={`/team/${m.slug}`}
-                className="group block bg-white border border-wire hover:border-accent/40 transition-all duration-500 lift-card overflow-hidden rounded-md"
+                className="group block border border-black/[0.08] hover:border-accent/30 transition-all duration-500 lift-card overflow-hidden rounded-lg"
               >
                 <div className="relative aspect-4/5 zoom-frame">
                   <SmartImage
@@ -215,7 +215,7 @@ export default function AboutPage() {
       </Section>
 
       {/* CSR */}
-      <Section gray>
+      <Section>
         <FadeIn>
           <p className="eyebrow mb-4">CSR</p>
           <SplitText

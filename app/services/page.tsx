@@ -4,9 +4,8 @@ import { FadeIn } from "@/components/ui/fade-in"
 import { CtaBand } from "@/components/ui/cta-band"
 import { SmartImage } from "@/components/ui/smart-image"
 import { SectionNav } from "@/components/ui/section-nav"
-import { CheckCircle2, Tag } from "lucide-react"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
+import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "Logistics Services | Ship Agency, Freight, Bunkering, Warehousing | North-Brook",
@@ -30,7 +29,7 @@ const services = [
   {
     id: "freight",
     title: "Sea Freight Forwarding",
-    body: "We coordinate the end-to-end movement of sea freight — consolidating cargo, managing documentation, and working with our global network to deliver on time and within budget regardless of the complexity. We have handled freight for Dolphin Geo Subsea’s subsea campaigns, Cypress Energy’s supply chain, and mining equipment consignments requiring specialist handling.",
+    body: "We coordinate the end-to-end movement of sea freight — consolidating cargo, managing documentation, and working with our global network to deliver on time and within budget regardless of the complexity. We have handled freight for Dolphin Geo Subsea's subsea campaigns, Cypress Energy's supply chain, and mining equipment consignments requiring specialist handling.",
     tags: ["Oil & Gas", "Mining", "Chemicals", "Manufacturing"],
     includes: [
       "FCL & LCL cargo movement",
@@ -42,7 +41,7 @@ const services = [
   {
     id: "bunkering",
     title: "Bunkering",
-    body: "We source and deliver fuel to vessels and offshore assets with transparent supply chains, a firm focus on quality control, and the local network to minimise turnaround time. Our bunkering support has kept vessels on schedule across Borr Drilling’s campaigns and multiple survey operations in Ghanaian waters.",
+    body: "We source and deliver fuel to vessels and offshore assets with transparent supply chains, a firm focus on quality control, and the local network to minimise turnaround time. Our bunkering support has kept vessels on schedule across Borr Drilling's campaigns and multiple survey operations in Ghanaian waters.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Marine fuel sourcing",
@@ -54,19 +53,19 @@ const services = [
   {
     id: "warehousing",
     title: "Warehousing & Cargo Consolidation",
-    body: "Our warehousing facilities provide secure storage, inventory management, and cargo consolidation services. With optimized supply chain planning, we help reduce costs, improve efficiency, and keep your goods ready for distribution when and where you need them.",
+    body: "Our warehousing facilities provide secure storage, inventory management, and cargo consolidation services. With optimised supply chain planning, we help reduce costs, improve efficiency, and keep your goods ready for distribution when and where you need them.",
     tags: ["Oil & Gas", "Mining", "Manufacturing"],
     includes: [
       "Bonded & non-bonded storage",
       "Inventory management",
       "Cargo consolidation & deconsolidation",
-      "Supply chain optimization",
+      "Supply chain optimisation",
     ],
   },
   {
     id: "documentation",
     title: "Import & Export Documentation",
-    body: "We manage the full scope of import and export paperwork — from permits and certificates of origin to dangerous goods declarations — ensuring every shipment is accurately documented and compliant with local and international regulations. This has included documentation for Fugro’s offshore geophysical surveys and Saipem’s multi-phase drilling campaigns operating in Ghanaian waters.",
+    body: "We manage the full scope of import and export paperwork — from permits and certificates of origin to dangerous goods declarations — ensuring every shipment is accurately documented and compliant with local and international regulations. This has included documentation for Fugro's offshore geophysical surveys and Saipem's multi-phase drilling campaigns.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Permits & certificates of origin",
@@ -78,7 +77,7 @@ const services = [
   {
     id: "crew-management",
     title: "Crew Management",
-    body: "We handle the full cycle of crew logistics — travel, accommodation, visa processing, and port formalities — so that every rotation is seamless and every regulation met. We have delivered crew management support for OSM Thome and across Saipem’s extended drilling operations in the region.",
+    body: "We handle the full cycle of crew logistics — travel, accommodation, visa processing, and port formalities — so that every rotation is seamless and every regulation met. We have delivered crew management support for OSM Thome and across Saipem's extended drilling operations in the region.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Visa & travel processing",
@@ -90,7 +89,7 @@ const services = [
   {
     id: "customs",
     title: "Customs Clearance",
-    body: "We navigate the full customs process on behalf of our clients — managing documentation, duties, inspections, and regulatory requirements to move cargo through borders quickly and compliantly. This has covered everything from drilling equipment for Eni and Borr Drilling, to chemical consignments and manufactured components requiring specialist classification.",
+    body: "We navigate the full customs process on behalf of our clients — managing documentation, duties, inspections, and regulatory requirements to move cargo through borders quickly and compliantly. This has covered drilling equipment for Eni and Borr Drilling, chemical consignments, and manufactured components requiring specialist classification.",
     tags: ["Oil & Gas", "Chemicals", "Manufacturing"],
     includes: [
       "Customs documentation & duties",
@@ -102,7 +101,7 @@ const services = [
   {
     id: "haulage",
     title: "Haulage Services",
-    body: "We move cargo from port to destination — whether heavy drilling equipment, bulk materials, automotive parts, or sensitive chemical consignments — with routes and handling tailored to the nature of each load. We have provided haulage across Saipem’s operational sites and for Fugro’s survey equipment throughout Ghana.",
+    body: "We move cargo from port to destination — whether heavy drilling equipment, bulk materials, automotive parts, or sensitive chemical consignments — with routes and handling tailored to the nature of each load. We have provided haulage across Saipem's operational sites and for Fugro's survey equipment throughout Ghana.",
     tags: ["Oil & Gas", "Automotive", "Manufacturing", "Chemicals"],
     includes: [
       "Heavy equipment transport",
@@ -144,88 +143,107 @@ export default function ServicesPage() {
       <Hero
         eyebrow="Our Services"
         heading="Total logistics. Onshore and offshore."
-        subheading="Eight core service lines, designed for the operations that can't afford a missed deadline."
         image="services.jpg"
-        imageAlt="North-Brook logistics services"
+        subheading="Eight core service lines, designed for the operations that can't afford a missed deadline."
+        imageAlt="North-Brook logistics services — vessel operations in Ghanaian waters"
       />
+      {/* Operational proof strip */}
+      <div className="bg-ink border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <dl className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+            {[
+              { value: "2011", label: "Established" },
+              { value: "6", label: "Classification Societies" },
+              { value: "24 / 7", label: "Operations Desk" },
+              { value: "Tema, Ghana", label: "Headquarters" },
+            ].map(({ value, label }) => (
+              <div key={label} className="flex flex-col gap-1.5 px-6 py-8 first:pl-0 last:pr-0">
+                <dt className="font-mono text-[9px] uppercase tracking-[0.35em] text-steel">{label}</dt>
+                <dd className="text-xl font-display font-bold text-warm-cream tracking-tight">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
 
-      <VelocityMarquee variant="ports" />
+      <SectionNav items={services.map((s) => ({ id: s.id, label: s.title }))} />
 
-      <SectionNav
-        items={services.map((s) => ({ id: s.id, label: s.title }))}
-      />
-
+      {/* Service sections — full-bleed split layout */}
       {services.map((service, i) => {
-        const isEven = i % 2 === 0
+        const imageRight = i % 2 === 0
+
         return (
           <section
             key={service.id}
             id={service.id}
-            className={`py-24 lg:py-32 px-6 lg:px-12 ${isEven ? "bg-background" : "bg-smoke"}`}
+            className="bg-paper border-b border-black/8 overflow-hidden"
           >
-            <div className="max-w-7xl mx-auto">
-              <div className="grid lg:grid-cols-2 gap-16 items-center">
-                <FadeIn direction="left" className={!isEven ? "lg:order-2" : ""}>
-                  <div className="flex items-start gap-5 mb-8">
-                    <span className="text-accent font-display font-bold text-[5rem] lg:text-[6.5rem] leading-none opacity-[0.08] select-none -mt-2">
+            <div className={`flex flex-col ${imageRight ? "lg:flex-row" : "lg:flex-row-reverse"}`}>
+
+              {/* Text panel */}
+              <div className="flex-1 min-w-0 px-6 lg:px-14 xl:px-20 py-20 lg:py-28 flex flex-col justify-center">
+                <FadeIn>
+                  <div className="flex items-center gap-4 mb-8">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    {service.tags && (
-                      <div className="flex flex-wrap gap-2 pt-3">
-                        {service.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-wire text-[10px] uppercase tracking-wider text-caption font-semibold rounded-full"
-                          >
-                            <Tag size={10} className="text-accent" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    )}
+                    <span aria-hidden className="h-px w-10 bg-wire shrink-0" />
+                    <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-steel">
+                      {service.tags.join("  ·  ")}
+                    </span>
                   </div>
+
                   <SplitText
                     as="h2"
                     text={service.title}
                     by="word"
-                    delay={0.1}
-                    stagger={0.05}
-                    className="text-4xl lg:text-5xl font-display font-bold text-foreground tracking-tight mb-6 leading-[1.05]"
+                    delay={0.05}
+                    stagger={0.04}
+                    className="text-[clamp(1.75rem,3vw,2.75rem)] font-display font-bold text-foreground tracking-tight leading-[1.05] mb-5 max-w-[20ch]"
                   />
-                  <p className="text-body leading-relaxed mb-8">{service.body}</p>
 
-                  <div className="border-t border-wire pt-6">
-                    <p className="eyebrow mb-4">What&apos;s included</p>
-                    <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-                      {service.includes.map((item) => (
-                        <li key={item} className="flex items-start gap-3 text-sm text-caption">
-                          <CheckCircle2 size={15} className="text-accent mt-0.5 shrink-0" />
-                          {item}
+                  <p className="text-sm text-steel leading-relaxed mb-10 max-w-[52ch]">
+                    {service.body}
+                  </p>
+
+                  <div className="border-t border-black/8 pt-6">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-steel mb-4">
+                      Scope of Work
+                    </p>
+                    <ul className="grid sm:grid-cols-2 gap-x-8">
+                      {service.includes.map((item, idx) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-4 py-3 border-b border-black/[0.08]/60 last:border-0 sm:nth-last-2:border-0"
+                        >
+                          <span className="font-mono text-[9px] tracking-[0.3em] text-accent/40 shrink-0 mt-0.5">
+                            {String(idx + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-sm font-medium text-foreground/90 leading-snug">{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                 </FadeIn>
+              </div>
 
-                <FadeIn delay={0.2} className={!isEven ? "lg:order-1" : ""}>
-                  <div className="relative aspect-square overflow-hidden zoom-frame rounded-md">
-                    <SmartImage
-                      src={`/images/services/${service.id}.jpg`}
-                      alt={service.title}
-                      fill
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                      className="object-cover"
-                      placeholderTone="primary"
-                      placeholderLabel={String(i + 1).padStart(2, "0")}
-                      placeholderHint={service.title}
-                    />
-                    <div
-                      aria-hidden
-                      className="absolute inset-0 bg-linear-to-tr from-ink/20 via-transparent to-transparent pointer-events-none"
-                    />
-                  </div>
+              {/* Image panel — fills its half to the viewport edge */}
+              <div className="relative w-full lg:w-[46%] shrink-0 aspect-4/3 lg:aspect-auto lg:min-h-[600px]">
+                <FadeIn delay={0.1} className="absolute inset-0">
+                  <SmartImage
+                    src={`/images/services/${service.id}.jpg`}
+                    alt={service.title}
+                    fill
+                    sizes="(min-width: 1024px) 46vw, 100vw"
+                    className="object-cover"
+                    placeholderTone="primary"
+                    placeholderLabel={String(i + 1).padStart(2, "0")}
+                    placeholderHint={service.title}
+                  />
+                  <div aria-hidden className="absolute inset-0 bg-linear-to-t from-ink/20 via-transparent to-transparent pointer-events-none" />
                 </FadeIn>
               </div>
+
             </div>
           </section>
         )

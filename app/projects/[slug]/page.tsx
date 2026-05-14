@@ -96,7 +96,7 @@ export default async function ProjectPage({ params }: Props) {
             </FadeIn>
           </div>
           <FadeIn delay={0.15}>
-            <div className="bg-smoke border border-wire rounded-md p-8">
+            <div className="border border-black/[0.08] rounded-lg p-8">
               <p className="eyebrow mb-5">Services Provided</p>
               <ul className="space-y-3">
                 {project.services.map((s) => (
@@ -107,7 +107,7 @@ export default async function ProjectPage({ params }: Props) {
                 ))}
               </ul>
               {project.partner && (
-                <div className="mt-6 pt-6 border-t border-wire">
+                <div className="mt-6 pt-6 border-t border-black/[0.08]">
                   <p className="eyebrow mb-2">Partner</p>
                   <p className="text-sm font-medium text-foreground">{project.partner}</p>
                 </div>
@@ -117,13 +117,44 @@ export default async function ProjectPage({ params }: Props) {
         </div>
       </Section>
 
+      {/* Photo gallery */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="py-16 px-6 lg:px-12 border-t border-black/[0.08]">
+          <div className="max-w-7xl mx-auto">
+            <FadeIn>
+              <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-8">
+                Project Photos
+              </p>
+            </FadeIn>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+              {project.gallery.map((src, i) => (
+                <FadeIn key={src} delay={i * 0.07}>
+                  <div className="relative aspect-square overflow-hidden">
+                    <SmartImage
+                      src={src}
+                      alt={`${project.title} — photo ${i + 1}`}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, 50vw"
+                      className="object-cover"
+                      placeholderTone="primary"
+                      placeholderLabel={String(i + 1).padStart(2, "0")}
+                      placeholderHint={project.title}
+                    />
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Prev / Next with thumbnails */}
-      <section className="bg-smoke py-12 px-6 lg:px-12">
+      <section className="py-12 px-6 lg:px-12 border-t border-black/[0.08]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
           {prev ? (
             <Link
               href={`/projects/${prev.slug}`}
-              className="group flex items-center gap-5 bg-white border border-wire hover:border-accent/40 rounded-md p-5 lift-card"
+              className="group flex items-center gap-5 border border-black/[0.08] hover:border-accent/30 rounded-lg p-5 lift-card"
             >
               <div className="relative w-24 h-24 shrink-0 overflow-hidden zoom-frame">
                 <SmartImage
@@ -153,7 +184,7 @@ export default async function ProjectPage({ params }: Props) {
           {next && (
             <Link
               href={`/projects/${next.slug}`}
-              className="group flex items-center gap-5 bg-white border border-wire hover:border-accent/40 rounded-md p-5 lift-card md:flex-row-reverse md:text-right"
+              className="group flex items-center gap-5 border border-black/[0.08] hover:border-accent/30 rounded-lg p-5 lift-card md:flex-row-reverse md:text-right"
             >
               <div className="relative w-24 h-24 shrink-0 overflow-hidden zoom-frame">
                 <SmartImage

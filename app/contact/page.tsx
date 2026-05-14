@@ -49,14 +49,14 @@ export default function ContactPage() {
             </p>
 
             {/* Response promise */}
-            <div className="flex items-center gap-4 bg-smoke border border-wire rounded-md px-5 py-4 mb-8">
+            <div className="flex items-center gap-4 border border-black/[0.08] rounded-lg px-5 py-4 mb-8">
               <div className="w-2 h-2 rounded-full bg-accent shrink-0" />
               <p className="text-sm text-foreground font-medium">We respond within <span className="text-accent">1 business day</span> to all enquiries.</p>
             </div>
 
             <div className="space-y-5 mb-10">
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg border border-black/[0.08] flex items-center justify-center shrink-0">
                   <MapPin size={15} className="text-accent" />
                 </div>
                 <div>
@@ -67,7 +67,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg border border-black/[0.08] flex items-center justify-center shrink-0">
                   <Mail size={15} className="text-accent" />
                 </div>
                 <div>
@@ -81,7 +81,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg border border-black/[0.08] flex items-center justify-center shrink-0">
                   <Phone size={15} className="text-accent" />
                 </div>
                 <div>
@@ -95,7 +95,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="w-8 h-8 rounded-md border border-wire bg-white flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg border border-black/[0.08] flex items-center justify-center shrink-0">
                   <Clock size={15} className="text-accent" />
                 </div>
                 <div>
@@ -106,7 +106,7 @@ export default function ContactPage() {
             </div>
 
             {/* Map embed */}
-            <div className="aspect-4/3 bg-smoke border border-wire rounded-md relative overflow-hidden">
+            <div className="aspect-4/3 border border-black/[0.08] rounded-lg relative overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8763!2d-0.187!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAccra%2C+Ghana!5e0!3m2!1sen!2sgh!4v1"
                 width="100%"

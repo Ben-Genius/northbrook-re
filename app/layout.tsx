@@ -6,6 +6,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/nav/Navbar";
 import Preloader from "@/components/ui/Preloader";
+import Footer from "@/components/sections/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default function RootLayout({
           <ScrollProgress />
           <CustomCursor />
           <main>{children}</main>
+          <Footer />
         </GSAPProvider>
       </body>
     </html>
