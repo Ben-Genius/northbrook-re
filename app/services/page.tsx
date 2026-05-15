@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: "Logistics Services | Ship Agency, Freight, Bunkering, Warehousing | North-Brook",
   description:
     "Total onshore and offshore logistics: ship agency & husbandry, air & sea freight, bunkering & fuel logistics, warehousing & cargo consolidation. Serving Ghana and West Africa.",
+  openGraph: {
+    title: "Logistics Services | North-Brook Limited",
+    description: "Eight service lines — ship agency, freight, bunkering, warehousing, customs clearance, crew management, documentation, and haulage.",
+    url: "https://northbrook.com.gh/services",
+    images: [{ url: "https://northbrook.com.gh/images/hero/services.jpg", width: 1200, height: 630, alt: "North-Brook Limited — Logistics Services" }],
+  },
 }
 
 const services = [
@@ -115,6 +121,8 @@ const serviceSchemas = services.map((s) => ({
   "@context": "https://schema.org",
   "@type": "Service",
   name: s.title,
+  serviceType: s.title,
+  url: `https://northbrook.com.gh/services#${s.id}`,
   provider: {
     "@type": "Organization",
     name: "North-Brook Limited",
@@ -122,6 +130,7 @@ const serviceSchemas = services.map((s) => ({
   },
   description: s.body,
   areaServed: { "@type": "Place", name: "West Africa" },
+  audience: { "@type": "Audience", audienceType: s.tags.join(", ") },
 }))
 
 const breadcrumb = {

@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: "Projects | North-Brook Limited Logistics Track Record",
   description:
     "Selected case studies: vessel agency, drilling campaigns, geophysical and geotechnical surveys for Saipem, Borr Drilling, Fugro, ENI, Rina and more.",
+  openGraph: {
+    title: "Projects | North-Brook Limited",
+    description: "Case studies across drilling, geophysical survey, vessel agency, and offshore supply — Saipem, Borr Drilling, Fugro, ENI and more.",
+    url: "https://northbrook.com.gh/projects",
+    images: [{ url: "https://northbrook.com.gh/images/hero/projects.jpg", width: 1200, height: 630, alt: "North-Brook Limited — Projects" }],
+  },
 }
 
 const breadcrumb = {
@@ -23,10 +29,25 @@ const breadcrumb = {
   ],
 }
 
+const itemList = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "North-Brook Limited — Selected Projects",
+  url: "https://northbrook.com.gh/projects",
+  itemListElement: projects.map((p, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: p.title,
+    url: `https://northbrook.com.gh/projects/${p.slug}`,
+    description: p.description,
+  })),
+}
+
 export default function ProjectsPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
 
       <Hero
         eyebrow="Our Work"

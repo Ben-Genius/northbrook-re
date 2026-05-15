@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   title: "QHSE Policy | North-Brook Limited",
   description:
     "Our commitment to Quality, Health, Safety, and Environment standards across all onshore and offshore operations.",
+  openGraph: {
+    title: "QHSE Policy | North-Brook Limited",
+    description: "Zero LTIs since 2014. Certified by 6 international classification societies. Our QHSE commitment across every operation.",
+    url: "https://northbrook.com.gh/qhse",
+    images: [{ url: "https://northbrook.com.gh/images/hero/qhse.jpg", width: 1200, height: 630, alt: "North-Brook Limited — QHSE Policy" }],
+  },
 }
 
 const pillars = [
@@ -39,9 +45,19 @@ const pillars = [
   },
 ]
 
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://northbrook.com.gh" },
+    { "@type": "ListItem", position: 2, name: "QHSE", item: "https://northbrook.com.gh/qhse" },
+  ],
+}
+
 export default function QHSEPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Hero
         eyebrow="Standards We Care About"
         heading="Quality. Health. Safety. Environment."

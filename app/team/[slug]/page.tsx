@@ -39,6 +39,8 @@ export default async function TeamMemberPage({ params }: Props) {
     "@type": "Person",
     name: member.name,
     jobTitle: member.role,
+    url: `https://northbrook.com.gh/team/${slug}`,
+    image: `https://northbrook.com.gh/images/team/${member.slug}.webp`,
     worksFor: {
       "@type": "Organization",
       name: "North-Brook Limited",
