@@ -13,7 +13,7 @@ export const projects: Project[] = [
     title: "Geophysical Campaign with Fugro & Rina",
     partner: "Fugro · Rina",
     description:
-      "Partnering with Fugro and Rina, North-Brook facilitated a large-scale geophysical campaign using the vessel JP 88 Stork. We delivered comprehensive vessel and logistics support — managing clearances, crew rotations, offshore supply delivery, and port coordination for the full duration of the survey. Mobilised on schedule, zero operational downtime.",
+      "Partnering with Fugro and Rina, North-Brook facilitated a large-scale geophysical campaign using the vessel JP 88 Stork. We delivered comprehensive vessel and logistics support, managing clearances, crew rotations, offshore supply delivery, and port coordination for the full duration of the survey. Mobilised on schedule, zero operational downtime.",
     services: ["Vessel provision", "Logistics support services"],
     gallery: [
       "/images/projects/geophysical-fugro-rina/1.jpg",
@@ -27,7 +27,7 @@ export const projects: Project[] = [
     title: "Borr Drilling Campaign",
     partner: "Borr Drilling",
     description:
-      "North-Brook served as Borr Drilling's sole Ghanaian logistics partner for the duration of the offshore drilling campaign — managing supply vessel clearances, onshore warehousing, crew coordination, and regulatory compliance. Full onshore-offshore integration, zero delays.",
+      "North-Brook served as Borr Drilling's sole Ghanaian logistics partner for the duration of the offshore drilling campaign, managing supply vessel clearances, onshore warehousing, crew coordination, and regulatory compliance. Full onshore-offshore integration, zero delays.",
     services: ["Local partner support", "Complete logistics services"],
     gallery: [
       "/images/projects/borr-drilling/1.jpg",
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     title: "Riser Operations: SAIPEM",
     partner: "Saipem",
     description:
-      "North-Brook was entrusted by Saipem to offload risers from vessel and manage their storage at the port. This project showcased our ability to handle specialised offshore equipment with precision — coordinating with port authorities and ensuring every unit was accounted for and securely stowed.",
+      "North-Brook was entrusted by Saipem to offload risers from vessel and manage their storage at the port. This project showcased our ability to handle specialised offshore equipment with precision coordinating with port authorities and ensuring every unit was accounted for and securely stowed.",
     services: [
       "Offloading risers from vessel",
       "Storage management at port",
@@ -136,7 +136,7 @@ export const projects: Project[] = [
     slug: "jp88-stork-manpower",
     title: "Manpower Solutions: JP 88 Stork",
     description:
-      "For the JP 88 Stork, North-Brook delivered end-to-end manpower solutions — recruiting qualified professionals, managing deployment logistics, and ensuring all onboard safety standards were maintained. Our tailored approach reduced downtime and maximised operational efficiency.",
+      "For the JP 88 Stork, North-Brook delivered end-to-end manpower solutions, recruiting qualified professionals, managing deployment logistics, and ensuring all onboard safety standards were maintained. Our tailored approach reduced downtime and maximised operational efficiency.",
     services: [
       "Recruitment of qualified professionals",
       "Rigorous training & certification",
@@ -155,7 +155,7 @@ export const projects: Project[] = [
     title: "ENI / Borr Drilling Campaign",
     partner: "ENI · Borr Drilling",
     description:
-      "North-Brook coordinated a complex multi-operator logistics programme supporting the joint ENI and Borr Drilling offshore drilling campaign in Ghanaian waters. Managing supply vessel clearances, rig provisioning, and integrated onshore-offshore supply chain operations across two simultaneous operator schedules required precision coordination and deep local authority relationships — both of which North-Brook delivered without incident.",
+      "North-Brook coordinated a complex multi-operator logistics programme supporting the joint ENI and Borr Drilling offshore drilling campaign in Ghanaian waters. Managing supply vessel clearances, rig provisioning, and integrated onshore-offshore supply chain operations across two simultaneous operator schedules required precision coordination and deep local authority relationships, both of which North-Brook delivered without incident.",
     services: [
       "Rig & supply vessel clearance",
       "Offshore supply vessel provision",

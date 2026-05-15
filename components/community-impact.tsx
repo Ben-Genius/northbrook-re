@@ -51,9 +51,9 @@ export function CommunityImpact({ items }: CommunityImpactProps) {
 
   return (
     <div ref={sectionRef} className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-      {/* Visual side - Overlapping image and texture */}
+      {/* Visual side */}
       <div className="lg:col-span-5 relative order-2 lg:order-1">
-        <div ref={imageRef} className="relative aspect-3/4 overflow-hidden zoom-frame rounded-lg border border-black/[0.08]">
+        <div ref={imageRef} className="relative aspect-3/4 overflow-hidden zoom-frame rounded-lg border border-black/8">
           <SmartImage
             src="/images/csr-impact.jpg"
             alt="North-Brook community impact in coastal Ghana"
@@ -64,8 +64,8 @@ export function CommunityImpact({ items }: CommunityImpactProps) {
           <div className="absolute inset-0 bg-ink/10 pointer-events-none" />
         </div>
 
-        {/* Floating stat or label */}
-        <div className="absolute -bottom-8 -right-8 bg-white border border-black/[0.08] p-8 hidden lg:block z-20 max-w-[240px] rounded-lg">
+        {/* Floating stat */}
+        <div className="absolute -bottom-8 -right-8 bg-white border border-black/8 p-8 hidden lg:block z-20 max-w-[240px] rounded-lg">
           <p className="text-accent text-xs uppercase tracking-[0.2em] font-semibold mb-2">Our Promise</p>
           <p className="text-primary text-sm font-light italic leading-relaxed">
             "Commercial success is only sustainable when shared with the communities that host us."
@@ -94,8 +94,8 @@ export function CommunityImpact({ items }: CommunityImpactProps) {
           ))}
         </div>
 
-        {/* Call to action or secondary note */}
-        <div className="pt-8 border-t border-black/[0.08]">
+        {/* Call to action */}
+        <div className="pt-8 border-t border-black/8">
           <p className="text-caption text-xs uppercase tracking-widest leading-relaxed">
             Partnering with local institutions to build a <span className="text-primary font-medium">lasting legacy</span> in West Africa.
           </p>

@@ -4,8 +4,10 @@ import { useRef, useState, useEffect } from "react";
 import { gsap, useGSAP, SplitText, ScrollTrigger } from "@/lib/gsap";
 import { Badge } from "../ui/badge";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import ImageSequencePlayer from "@/components/ui/ImageSequencePlayer";
+import Link from "next/link";
+import RequestQuoteLink from "../request-quote-link";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -52,37 +54,37 @@ export default function Hero() {
   useGSAP(() => {
     const mm = gsap.matchMedia();
 
-      // Desktop: pinned scroll sequence
-      mm.add("(min-width: 768px)", () => {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=300%",
-            pin: true,
-            scrub: 1,
-            onUpdate: (self) => setScrollProgress(self.progress),
-          },
-        }).to(contentRef.current, {
-          opacity: 0, y: -100, scale: 0.9, filter: "blur(20px)", duration: 1,
-        });
+    // Desktop: pinned scroll sequence
+    mm.add("(min-width: 768px)", () => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          scrub: 1,
+          onUpdate: (self) => setScrollProgress(self.progress),
+        },
+      }).to(contentRef.current, {
+        opacity: 0, y: -100, scale: 0.9, filter: "blur(20px)", duration: 1,
       });
+    });
 
-      // Mobile: no pin, lighter fade
-      mm.add("(max-width: 767px)", () => {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top",
-            end: "+=80%",
-            scrub: 1,
-            onUpdate: (self) => setScrollProgress(self.progress),
-          },
-        }).to(contentRef.current, {
-          opacity: 0, y: -60, scale: 0.95, filter: "blur(10px)", duration: 1,
-        });
+    // Mobile: no pin, lighter fade
+    mm.add("(max-width: 767px)", () => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=80%",
+          scrub: 1,
+          onUpdate: (self) => setScrollProgress(self.progress),
+        },
+      }).to(contentRef.current, {
+        opacity: 0, y: -60, scale: 0.95, filter: "blur(10px)", duration: 1,
       });
-    },
+    });
+  },
     { scope: containerRef }
   );
 
@@ -101,31 +103,30 @@ export default function Hero() {
         progress={scrollProgress}
       />
 
-      {/* Cinematic Overlays — left-weighted, image-first */}
+      {/* Cinematic Overlays */}
       <div className="absolute inset-0 z-20 pointer-events-none">
-        {/* Top fade — navbar legibility */}
+        {/* Top fade */}
         <div className="absolute top-0 left-0 w-full h-[22vh] bg-linear-to-b from-black/50 to-transparent" />
 
-        {/* Left column scrim — full width on mobile, half on desktop */}
+        {/* Left column scrim */}
         <div className="absolute inset-y-0 left-0 w-full sm:w-[65%] bg-linear-to-r from-black/70 via-black/40 sm:via-black/25 to-transparent" />
 
         {/* Bottom-left anchor fade */}
         <div className="absolute bottom-0 left-0 w-full h-[30vh] bg-linear-to-t from-black/50 via-black/15 to-transparent" />
       </div>
 
-      {/* Editorial Content — pinned bottom-left, ship stays clear */}
+      {/* Editorial Content */}
       <div
         ref={contentRef}
         className="relative z-30 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-16 py-28 sm:py-32"
       >
-        {/* Badge — top-left */}
         <div ref={badgeRef} className="self-start">
           <Badge className="gap-2 border-white/25 bg-black/25 backdrop-blur-sm text-white/90 p-3 rounded-md font-mono text-[9px] uppercase tracking-[0.4em] font-bold">
             Strategic Industrial Logistics
           </Badge>
         </div>
 
-        {/* Headline + body — bottom-left */}
+        {/* Headline + body */}
         <div className="w-full max-w-[90vw] sm:max-w-[60vw] lg:max-w-[520px] flex flex-col gap-4 sm:gap-6">
           <h1 ref={titleRef} className="font-display text-[clamp(3.5rem,8vw,7rem)] font-black tracking-tighter leading-[0.82] uppercase text-white drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
             Precision
@@ -139,39 +140,17 @@ export default function Hero() {
 
           <div ref={btnsRef} className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-2">
             <MagneticButton strength={0.2} radius={50}>
-              <Button size="lg" className="px-8 py-6 text-[11px] font-black uppercase tracking-widest bg-accent hover:bg-white hover:text-accent shadow-2xl transition-all">
-                Request a Quote
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-                  <path d="M2 14L14 2M14 2H5M14 2V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Button>
+              <RequestQuoteLink />
             </MagneticButton>
             <MagneticButton strength={0.1} radius={40}>
-              <Button variant="outline" size="lg" className="px-8 py-6 text-[11px] font-black uppercase tracking-widest border-white/25 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-accent shadow-xl transition-all">
+              <Link href="/projects" className={`${buttonVariants({ variant: "outline", size: "lg" })} px-8 py-6 text-[11px] font-black uppercase tracking-widest border-white/25 bg-white/5 backdrop-blur-sm text-white hover:bg-white hover:text-accent shadow-xl transition-all`}>
                 See Our Work
-              </Button>
+              </Link>
             </MagneticButton>
           </div>
         </div>
       </div>
 
-      {/* Telemetry Overlays */}
-      {/* <div className="absolute bottom-12 left-12 z-40 hidden md:flex flex-col gap-2">
-        <div className="flex items-center gap-4">
-          <div className="font-mono text-[9px] uppercase tracking-widest text-white/70 font-bold drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-            Telemetry: GH-FR-{String(currentFrame).padStart(3, "0")}
-          </div>
-          <div className="h-[2px] w-32 bg-white/15 relative overflow-hidden">
-            <div
-              className="absolute top-0 left-0 h-full bg-accent transition-all duration-100"
-              style={{ width: `${scrollProgress * 100}%` }}
-            />
-          </div>
-        </div>
-        <div className="font-mono text-[9px] text-white/50 uppercase tracking-[0.2em] font-medium drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
-          Coordinates: 5.5500° N, 0.2000° E
-        </div>
-      </div> */}
 
       {/* Bottom-right corner triangle badge */}
       <div className="absolute bottom-0 right-0 z-40 w-32 h-32 sm:w-40 sm:h-40 pointer-events-none">
@@ -188,7 +167,7 @@ export default function Hero() {
             Port of Tema
           </span>
           <span className="font-mono text-[7px] text-white/70 uppercase tracking-[0.2em] text-right">
-            Ghana · Est. 2011
+            Ghana · Est. 2014
           </span>
         </div>
       </div>

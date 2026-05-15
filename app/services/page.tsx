@@ -16,7 +16,7 @@ const services = [
   {
     id: "ship-agency",
     title: "Ship Agency & Husbandry",
-    body: "We act as the single point of contact for every vessel call — coordinating port clearance, documentation, crew logistics, and onboard provisioning to ensure efficient turnarounds and uninterrupted operations. Past vessel calls we have managed include the Safeen Argus 2, Luna Nelle, and the Ametrin Valor.",
+    body: "We act as the single point of contact for every vessel call, coordinating port clearance, documentation, crew logistics, and onboard provisioning to ensure efficient turnarounds and uninterrupted operations. Past vessel calls we have managed include the Safeen Argus 2, Luna Nelle, and the Ametrin Valor.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Vessel inward/outward clearance",
@@ -28,7 +28,7 @@ const services = [
   {
     id: "freight",
     title: "Sea Freight Forwarding",
-    body: "We coordinate the end-to-end movement of sea freight — consolidating cargo, managing documentation, and working with our global network to deliver on time and within budget regardless of the complexity. We have handled freight for Dolphin Geo Subsea's subsea campaigns, Cypress Energy's supply chain, and mining equipment consignments requiring specialist handling.",
+    body: "We coordinate the end-to-end movement of sea freight, consolidating cargo, managing documentation, and working with our global network to deliver on time and within budget regardless of the complexity. We have handled freight for Dolphin Geo Subsea's subsea campaigns, Cypress Energy's supply chain, and mining equipment consignments requiring specialist handling.",
     tags: ["Oil & Gas", "Mining", "Chemicals", "Manufacturing"],
     includes: [
       "FCL & LCL cargo movement",
@@ -64,7 +64,7 @@ const services = [
   {
     id: "documentation",
     title: "Import & Export Documentation",
-    body: "We manage the full scope of import and export paperwork — from permits and certificates of origin to dangerous goods declarations — ensuring every shipment is accurately documented and compliant with local and international regulations. This has included documentation for Fugro's offshore geophysical surveys and Saipem's multi-phase drilling campaigns.",
+    body: "We manage the full scope of import and export paperwork from permits and certificates of origin to dangerous goods declarations ensuring every shipment is accurately documented and compliant with local and international regulations. This has included documentation for Fugro's offshore geophysical surveys and Saipem's multi-phase drilling campaigns.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Permits & certificates of origin",
@@ -76,7 +76,7 @@ const services = [
   {
     id: "crew-management",
     title: "Crew Management",
-    body: "We handle the full cycle of crew logistics — travel, accommodation, visa processing, and port formalities — so that every rotation is seamless and every regulation met. We have delivered crew management support for OSM Thome and across Saipem's extended drilling operations in the region.",
+    body: "We handle the full cycle of crew logistics, travel, accommodation, visa processing, and port formalities so that every rotation is seamless and every regulation met. We have delivered crew management support for OSM Thome and across Saipem's extended drilling operations in the region.",
     tags: ["Oil & Gas", "Mining"],
     includes: [
       "Visa & travel processing",
@@ -88,7 +88,7 @@ const services = [
   {
     id: "customs",
     title: "Customs Clearance",
-    body: "We navigate the full customs process on behalf of our clients — managing documentation, duties, inspections, and regulatory requirements to move cargo through borders quickly and compliantly. This has covered drilling equipment for Eni and Borr Drilling, chemical consignments, and manufactured components requiring specialist classification.",
+    body: "We navigate the full customs process on behalf of our clients, managing documentation, duties, inspections, and regulatory requirements to move cargo through borders quickly and compliantly. This has covered drilling equipment for Eni and Borr Drilling, chemical consignments, and manufactured components requiring specialist classification.",
     tags: ["Oil & Gas", "Chemicals", "Manufacturing"],
     includes: [
       "Customs documentation & duties",
@@ -100,7 +100,7 @@ const services = [
   {
     id: "haulage",
     title: "Haulage Services",
-    body: "We move cargo from port to destination — whether heavy drilling equipment, bulk materials, automotive parts, or sensitive chemical consignments — with routes and handling tailored to the nature of each load. We have provided haulage across Saipem's operational sites and for Fugro's survey equipment throughout Ghana.",
+    body: "We move cargo from port to destination, whether heavy drilling equipment, bulk materials, automotive parts, or sensitive chemical consignments with routes and handling tailored to the nature of each load. We have provided haulage across Saipem's operational sites and for Fugro's survey equipment throughout Ghana.",
     tags: ["Oil & Gas", "Automotive", "Manufacturing", "Chemicals"],
     includes: [
       "Heavy equipment transport",
@@ -144,19 +144,19 @@ export default function ServicesPage() {
         heading="Total logistics. Onshore and offshore."
         image="services.jpg"
         subheading="Eight core service lines, designed for the operations that can't afford a missed deadline."
-        imageAlt="North-Brook logistics services — vessel operations in Ghanaian waters"
+        imageAlt="North-Brook logistics services, vessel operations in Ghanaian waters"
       />
       {/* Operational proof strip */}
       <div className="bg-ink border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <dl className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
+          <dl className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-y lg:divide-y-0 divide-white/10">
             {[
-              { value: "2011", label: "Established" },
+              { value: "2014", label: "Established" },
               { value: "6", label: "Classification Societies" },
               { value: "24 / 7", label: "Operations Desk" },
               { value: "Tema, Ghana", label: "Headquarters" },
             ].map(({ value, label }) => (
-              <div key={label} className="flex flex-col gap-1.5 px-6 py-8 first:pl-0 last:pr-0">
+              <div key={label} className="flex flex-col gap-1.5 px-4 lg:px-6 py-8 first:pl-0 last:pr-0">
                 <dt className="font-mono text-[9px] uppercase tracking-[0.35em] text-steel">{label}</dt>
                 <dd className="text-xl font-display font-bold text-warm-cream tracking-tight">{value}</dd>
               </div>
@@ -165,9 +165,7 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* <SectionNav items={services.map((s) => ({ id: s.id, label: s.title }))} /> */}
-
-      {/* Service sections — full-bleed split layout */}
+      {/* Service sections */}
       {services.map((service, i) => {
         const imageRight = i % 2 === 0
 
@@ -226,7 +224,7 @@ export default function ServicesPage() {
                 </FadeIn>
               </div>
 
-              {/* Image panel — fills its half to the viewport edge */}
+              {/* Image panel */}
               <div className="relative w-full lg:w-[46%] shrink-0 aspect-4/3 lg:aspect-auto lg:min-h-[600px]">
                 <FadeIn delay={0.1} className="absolute inset-0">
                   <SmartImage

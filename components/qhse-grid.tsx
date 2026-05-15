@@ -22,7 +22,7 @@ export function QHSEGrid({ pillars }: QHSEGridProps) {
   useGSAP(
     () => {
       const items = gsap.utils.toArray(".qhse-item")
-      
+
       gsap.from(items, {
         opacity: 0,
         y: 40,
@@ -40,7 +40,7 @@ export function QHSEGrid({ pillars }: QHSEGridProps) {
   )
 
   return (
-    <div ref={containerRef} className="grid md:grid-cols-2 border border-black/[0.08] divide-x divide-y divide-black/[0.08] rounded-lg overflow-hidden">
+    <div ref={containerRef} className="grid md:grid-cols-2 border border-black/8 divide-x divide-y divide-black/8 rounded-lg overflow-hidden">
       {pillars.map((p, i) => {
         const Icon = icons[i % icons.length]
         return (

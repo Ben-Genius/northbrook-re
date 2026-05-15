@@ -23,7 +23,7 @@ export function CtaBand({
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[40vw] pointer-events-none"
         style={{ background: "radial-gradient(ellipse, rgba(148,0,52,0.18) 0%, transparent 65%)" }}
       />
-      {/* Diagonal accent block — right edge */}
+      {/* Diagonal accent block */}
       <div
         aria-hidden
         className="absolute -right-24 top-0 bottom-0 w-80 bg-accent/8"
@@ -34,7 +34,7 @@ export function CtaBand({
         <FadeIn>
           <p className="eyebrow justify-center mb-6">Start Your Project</p>
           <h2
-            className="font-display text-4xl lg:text-[clamp(2.8rem,5vw,5.5rem)] text-white font-bold tracking-tight leading-[1.0] mb-6"
+            className="font-display text-4xl lg:text-[clamp(2.8rem,5vw,5.5rem)] text-white font-bold tracking-tight leading-none mb-6"
           >
             {heading}
           </h2>
@@ -49,7 +49,12 @@ export function CtaBand({
             size="lg"
             className="btn-shimmer rounded-md px-10 py-4 h-auto text-sm font-semibold uppercase tracking-[0.12em]"
           >
-            <Link href={ctaHref}>{ctaLabel} &rarr;</Link>
+            <Link href={ctaHref}>
+              {ctaLabel}
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
+                <path d="M2 14L14 2M14 2H5M14 2V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </Button>
         </FadeIn>
       </div>

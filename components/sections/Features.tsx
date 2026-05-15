@@ -126,7 +126,7 @@ export default function Features() {
               </div>
 
               <div className="relative z-10 flex h-full flex-col justify-end p-5 sm:p-7 lg:p-12 gap-3">
-                {/* Category pill + arrow — same baseline */}
+                {/* Category pill + arrow */}
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2 bg-accent/90 backdrop-blur-sm px-2.5 py-1.5 shrink-0 rounded-md">
                     <div className="h-1 w-1 rounded-full bg-white/80" />
@@ -144,7 +144,7 @@ export default function Features() {
                   {feature.title}
                 </h3>
 
-                {/* Description — always visible mobile, collapses to zero height on desktop */}
+                {/* Description */}
                 <div className="md:grid md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500">
                   <p className="overflow-hidden text-xs sm:text-sm text-white/75 max-w-sm text-pretty md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)] leading-relaxed">
                     {feature.description}

@@ -25,7 +25,7 @@ const fontMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "North-Brook Ltd | Precision in Oil & Gas Operations",
-  description: "Established in 2011, North-Brook Limited is a leading Ghanaian company specializing in total onshore and offshore logistics solutions including Air/Sea Freight, Bunkering, and Ship Agency.",
+  description: "Established in 2014, North-Brook Limited is a leading Ghanaian company specializing in total onshore and offshore logistics solutions including Air/Sea Freight, Bunkering, and Ship Agency.",
   keywords: ["Logistics", "Ghana", "Oil and Gas", "Freight Forwarding", "Ship Agency", "West Africa"],
 };
 

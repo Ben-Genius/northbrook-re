@@ -70,10 +70,12 @@ export default function Process() {
 
     // Step counter crossfade
     if (stepCountRef.current) {
-      gsap.to(stepCountRef.current, { opacity: 0, duration: 0.15, onComplete: () => {
-        if (stepCountRef.current) stepCountRef.current.textContent = `Step ${STEPS[next].id} / 0${STEPS.length}`;
-        gsap.to(stepCountRef.current, { opacity: 1, duration: 0.2 });
-      }});
+      gsap.to(stepCountRef.current, {
+        opacity: 0, duration: 0.15, onComplete: () => {
+          if (stepCountRef.current) stepCountRef.current.textContent = `Step ${STEPS[next].id} / 0${STEPS.length}`;
+          gsap.to(stepCountRef.current, { opacity: 1, duration: 0.2 });
+        }
+      });
     }
   }, []);
 
@@ -126,7 +128,7 @@ export default function Process() {
   return (
     <section ref={containerRef} className="relative bg-foreground text-background overflow-hidden">
 
-      {/* ── Desktop ── */}
+      {/* Desktop */}
       <div className="hidden md:flex flex-col h-screen">
 
         {/* Top bar */}
@@ -145,7 +147,7 @@ export default function Process() {
         {/* Main content */}
         <div className="flex flex-1 overflow-hidden">
 
-          {/* Left — giant number */}
+          {/* Left */}
           <div className="w-[280px] shrink-0 flex items-center justify-center border-r border-background/10 relative">
             <div
               ref={numberRef}
@@ -155,7 +157,7 @@ export default function Process() {
             </div>
           </div>
 
-          {/* Right — content */}
+          {/* Right */}
           <div className="flex-1 flex flex-col justify-center px-16 xl:px-24 gap-8 max-w-3xl">
             <div ref={labelRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
               {step.label}
@@ -198,7 +200,7 @@ export default function Process() {
         </div>
       </div>
 
-      {/* ── Mobile ── */}
+      {/* Mobile */}
       <div className="md:hidden px-6 py-20">
         <div className="mb-14 space-y-3">
           <div className="flex items-center gap-3">

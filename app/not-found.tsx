@@ -11,19 +11,19 @@ export default function NotFound() {
   useGSAP(
     () => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
-      
+
       tl.from(".not-found-num", {
         opacity: 0,
         y: 40,
         duration: 1.2,
       })
-      
+
       tl.from(".not-found-content", {
         opacity: 0,
         y: 20,
         duration: 0.8,
       }, "-=0.8")
-      
+
       tl.from(".not-found-link", {
         opacity: 0,
         x: -20,
@@ -35,11 +35,10 @@ export default function NotFound() {
   )
 
   return (
-    <main 
+    <main
       ref={containerRef}
       className="min-h-screen flex items-center justify-center pt-24 pb-12 px-6 lg:px-12 section-ink overflow-hidden"
     >
-      {/* Decorative background anchor */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.03] select-none pointer-events-none">
         <Anchor size={600} strokeWidth={0.5} className="text-white" />
       </div>
@@ -62,15 +61,15 @@ export default function NotFound() {
             <h2 className="text-white text-xs uppercase tracking-[0.25em] font-semibold mb-8 opacity-60">
               Get Back on Track
             </h2>
-            
+
             <div className="grid gap-6">
               {[
                 { label: "Our Services", href: "/services", icon: Ship, desc: "Total onshore and offshore logistics." },
                 { label: "Track Record", href: "/projects", icon: ShieldCheck, desc: "Our 100% safety record in action." },
                 { label: "Logistics Pillars", href: "/about", icon: Box, desc: "Built for operations that can't fail." },
               ].map((link) => (
-                <Link 
-                  key={link.href} 
+                <Link
+                  key={link.href}
                   href={link.href}
                   className="not-found-link group flex items-start gap-4 p-4 -m-4 hover:bg-white/5 transition-colors duration-300"
                 >
@@ -90,7 +89,7 @@ export default function NotFound() {
           </div>
 
           <div className="pt-8 border-t border-white/10">
-            <Link 
+            <Link
               href="/contact"
               className="inline-flex items-center gap-3 text-accent text-sm uppercase tracking-[0.18em] font-semibold hover:gap-5 transition-all"
             >

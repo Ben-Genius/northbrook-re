@@ -198,7 +198,7 @@ export default function WorkMapSection() {
       className="relative bg-background border-t border-foreground/5"
     >
 
-      {/* ── Desktop ── */}
+      {/* Desktop */}
       <div className="hidden md:block h-screen overflow-hidden">
         <div className="absolute top-12 left-12 z-20 flex flex-col gap-2">
           <div className="flex items-center gap-3">
@@ -258,10 +258,10 @@ export default function WorkMapSection() {
         </div>
       </div>
 
-      {/* ── Mobile ── */}
+      {/* Mobile */}
       <div className="md:hidden flex flex-col" style={{ height: "100dvh" }}>
 
-        {/* ① Header strip — fixed height, always visible */}
+        {/* Header strip */}
         <div className="shrink-0 px-5 pt-10 pb-4 border-b border-foreground/6 bg-background">
           <div className="flex items-center gap-2 mb-1">
             <div className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
@@ -280,7 +280,7 @@ export default function WorkMapSection() {
           </div>
         </div>
 
-        {/* ② Map — fills all remaining space */}
+        {/* Map */}
         <div className="flex-1 relative overflow-hidden">
           <svg
             viewBox="90 270 380 250"
@@ -310,7 +310,7 @@ export default function WorkMapSection() {
               strokeDashoffset="800"
               opacity="0.6"
             />
-            {/* Pins + labels — no rotation, natural map orientation */}
+            {/* Pins + labels */}
             {WAYPOINTS.map((point, i) => (
               <g
                 key={point.id}
@@ -362,7 +362,7 @@ export default function WorkMapSection() {
           </svg>
         </div>
 
-        {/* ③ Bottom sheet — slides up over the map, never taller than 50dvh */}
+        {/* Bottom sheet */}
         <div
           ref={sheetRef}
           className="absolute bottom-0 left-0 right-0 z-50 bg-background border-t border-foreground/10 shadow-2xl"
