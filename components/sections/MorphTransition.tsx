@@ -66,7 +66,7 @@ function MorphPanelA() {
   return (
     <div className="relative md:absolute md:inset-0 flex items-center justify-center bg-card p-12 py-20 lg:p-24">
       <div className="morph-panel-a-content text-center max-w-5xl space-y-12">
-        <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">Established 2011</div>
+        <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">Established 2014</div>
         <h2 className="font-display text-4xl font-bold leading-none tracking-tighter text-balance lg:text-8xl">
           LOCAL INSIGHT <br />
           WITH <span className="text-accent uppercase">Global Expertise.</span>

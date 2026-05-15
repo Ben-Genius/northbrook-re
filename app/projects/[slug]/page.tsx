@@ -69,14 +69,20 @@ export default async function ProjectPage({ params }: Props) {
           <FadeIn>
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 text-accent text-xs uppercase tracking-widest mb-8 hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 bg-black/50 backdrop-blur-sm border border-white/15 px-4 py-2 rounded-sm text-accent text-[10px] uppercase tracking-widest hover:bg-black/70 hover:border-accent/40 transition-all duration-200 group cursor-pointer mb-8"
             >
-              <ArrowLeft size={12} /> All Projects
+              <ArrowLeft size={10} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
+              All Projects
             </Link>
           </FadeIn>
           {project.partner && (
             <FadeIn delay={0.05}>
-              <p className="eyebrow mb-4">{project.partner}</p>
+              <div className="inline-flex items-center gap-2 mb-4">
+                <span className="block w-5 h-px bg-[#FF2A30]" aria-hidden />
+                <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#FF2A30] bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-sm">
+                  {project.partner}
+                </span>
+              </div>
             </FadeIn>
           )}
           <FadeIn delay={0.1}>
@@ -132,7 +138,7 @@ export default async function ProjectPage({ params }: Props) {
                   <div className="relative aspect-square overflow-hidden">
                     <SmartImage
                       src={src}
-                      alt={`${project.title} — photo ${i + 1}`}
+                      alt={`${project.title} - photo ${i + 1}`}
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
                       className="object-cover"

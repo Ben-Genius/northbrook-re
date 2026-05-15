@@ -27,7 +27,7 @@ export function Hero({
 }: HeroProps) {
   return (
     <section
-      className={`relative pt-40 pb-28 px-6 lg:px-12 overflow-hidden ${dark ? "section-dark" : ""
+      className={`relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 lg:px-12 overflow-hidden ${dark ? "section-dark" : ""
         }`}
       style={!dark ? { backgroundColor: "var(--nb-gray-bg)" } : undefined}
     >
@@ -60,9 +60,16 @@ export function Hero({
       <div className="max-w-7xl mx-auto relative">
         {eyebrow && (
           <Reveal variant="fade" delay={0}>
-            <p className="eyebrow mb-6">
-              {eyebrow}
-            </p>
+            {dark ? (
+              <div className="inline-flex items-center gap-2 mb-6">
+                <span className="block w-5 h-px bg-[#FF2A30]" aria-hidden />
+                <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-[#FF2A30] bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-sm">
+                  {eyebrow}
+                </span>
+              </div>
+            ) : (
+              <p className="eyebrow mb-6">{eyebrow}</p>
+            )}
           </Reveal>
         )}
         <SplitText

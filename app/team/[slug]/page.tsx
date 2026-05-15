@@ -6,7 +6,7 @@ import { FadeIn } from "@/components/ui/fade-in"
 import { Section } from "@/components/ui/section"
 import { CtaBand } from "@/components/ui/cta-band"
 import { SmartImage } from "@/components/ui/smart-image"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -31,6 +31,9 @@ export default async function TeamMemberPage({ params }: Props) {
   const member = team.find((m) => m.slug === slug)
   if (!member) notFound()
 
+  const memberIndex = team.findIndex((m) => m.slug === slug)
+  const indexLabel = String(memberIndex + 1).padStart(2, "0")
+
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -54,18 +57,21 @@ export default async function TeamMemberPage({ params }: Props) {
     ],
   }
 
+  const bioTeaser = member.bio[0].split(".")[0] + "."
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
 
-      {/* Hero */}
-      <section className="bg-ink min-h-[72vh] flex items-end overflow-hidden">
-        {/* Mobile full-bleed background image */}
-        <div className="lg:hidden absolute inset-0">
+      {/* HERO */}
+      <section className="bg-[#0D0D0D] min-h-[90vh] flex flex-col lg:flex-row overflow-hidden">
+
+        {/* Mobile portrait */}
+        <div className="lg:hidden relative w-full aspect-3/4 shrink-0">
           <SmartImage
             src={`/images/team/${member.slug}.webp`}
-            alt=""
+            alt={`Portrait of ${member.name}`}
             fill
             sizes="100vw"
             className="object-cover object-top"
@@ -74,84 +80,145 @@ export default async function TeamMemberPage({ params }: Props) {
             placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
             placeholderHint={member.role}
           />
-          <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-black/60 to-transparent" />
-          <div aria-hidden className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/40 to-transparent" />
+          <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/60 to-transparent" />
+          <div aria-hidden className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-[#0D0D0D] to-transparent" />
         </div>
 
-        <div className="w-full flex items-end">
-          {/* Content — 4/5 */}
-          <div className="relative flex-3 flex flex-col justify-end px-6 lg:px-12 pt-40 pb-16">
-            <FadeIn>
-              <Link
-                href="/about#board"
-                className="inline-flex items-center gap-2 text-accent text-xs uppercase tracking-widest mb-10 hover:gap-3 transition-all"
-              >
-                <ArrowLeft size={12} /> Our People
-              </Link>
-            </FadeIn>
+        {/* LEFT */}
+        <div className="relative lg:w-[45%] shrink-0 flex flex-col justify-end px-6 lg:px-14 pt-10 lg:pt-40 pb-14 lg:pb-20 overflow-hidden">
 
-            <FadeIn delay={0.06}>
-              <p className="eyebrow mb-4">{member.role}</p>
-            </FadeIn>
-            <FadeIn delay={0.12}>
-              <h1 className="font-display font-bold text-white leading-none tracking-tight text-[clamp(2.6rem,6vw,5.5rem)] mb-6">
-                {member.name}
-              </h1>
-            </FadeIn>
-            <FadeIn delay={0.18}>
-              <div className="flex items-center gap-4">
-                <div className="h-px w-10 bg-accent opacity-70" />
-                <span className="text-white/40 text-xs uppercase tracking-[0.16em]">North-Brook Limited</span>
-              </div>
-            </FadeIn>
+          {/* Ghosted index number */}
+          <span
+            aria-hidden
+            className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 font-black leading-none select-none pointer-events-none text-white/4"
+            style={{ fontSize: "clamp(8rem, 18vw, 20rem)" }}
+          >
+            {indexLabel}
+          </span>
 
-            {/* Ambient crimson glow */}
-            <div
-              aria-hidden
-              className="absolute bottom-0 left-0 w-[40vw] h-[30vw] pointer-events-none"
-              style={{ background: "radial-gradient(ellipse, rgba(140,0,48,0.12) 0%, transparent 70%)" }}
-            />
+          {/* Back pill */}
+          <div className="mb-10">
+            <Link
+              href="/about#board"
+              className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm border border-white/10 px-4 py-2 rounded-sm text-accent text-[10px] uppercase tracking-widest hover:bg-white/10 hover:border-accent/40 transition-all duration-200 group cursor-pointer"
+            >
+              <ArrowLeft size={10} className="transition-transform duration-200 group-hover:-translate-x-0.5" />
+              Our People
+            </Link>
           </div>
 
-          {/* Portrait — 1/5 */}
-          <div className="hidden lg:block flex-2 self-stretch relative min-h-[72vh]">
-            <SmartImage
-              src={`/images/team/${member.slug}.webp`}
-              alt={`Portrait of ${member.name}`}
-              fill
-              sizes="20vw"
-              className="object-cover object-top"
-              priority
-              placeholderTone="primary"
-              placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
-              placeholderHint={member.role}
-            />
-            <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/50 to-transparent" />
+          {/* Role tag */}
+          <div className="inline-flex items-center gap-3 mb-5">
+            <span className="block w-6 h-px bg-accent shrink-0" aria-hidden />
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
+              {member.role}
+            </span>
           </div>
+
+          {/* Name */}
+          <h1 className="font-display font-bold text-white leading-[0.95] tracking-tight mb-7"
+            style={{ fontSize: "clamp(2.4rem, 5vw, 5.2rem)" }}>
+            {member.name}
+          </h1>
+
+          {/* Org line */}
+          <div className="flex items-center gap-3 mb-8">
+            <span className="h-px w-8 bg-white/15 shrink-0" aria-hidden />
+            <span className="text-white/30 text-[10px] uppercase tracking-[0.22em] font-mono">
+              North-Brook Limited · Ghana
+            </span>
+          </div>
+
+          {/* Bio teaser */}
+          <p className="text-white/45 text-sm leading-relaxed max-w-sm line-clamp-3">
+            {bioTeaser}
+          </p>
+
+          {/* Ambient red glow */}
+          <div
+            aria-hidden
+            className="absolute bottom-0 left-0 w-[70%] h-[50%] pointer-events-none"
+            style={{ background: "radial-gradient(ellipse at bottom left, rgba(227,30,36,0.09) 0%, transparent 70%)" }}
+          />
+        </div>
+
+        {/* Vertical accent divider*/}
+        <div aria-hidden className="hidden lg:block w-px bg-white/[0.07] shrink-0 self-stretch" />
+
+        {/* RIGHT */}
+        <div className="hidden lg:block relative flex-1 min-h-full">
+          {/* Bleed gradient left edge into content */}
+          <div aria-hidden className="absolute inset-y-0 left-0 w-20 bg-linear-to-r from-[#0D0D0D] to-transparent z-10 pointer-events-none" />
+          {/* Nav protection */}
+          <div aria-hidden className="absolute inset-x-0 top-0 h-36 bg-linear-to-b from-black/55 to-transparent z-10 pointer-events-none" />
+          <SmartImage
+            src={`/images/team/${member.slug}.webp`}
+            alt={`Portrait of ${member.name}`}
+            fill
+            sizes="55vw"
+            className="object-cover object-top"
+            priority
+            placeholderTone="primary"
+            placeholderLabel={member.name.charAt(member.name.startsWith("Mr.") ? 4 : 0)}
+            placeholderHint={member.role}
+          />
         </div>
       </section>
 
-      {/* Bio */}
+      {/*BIO */}
       <Section>
-        <div className="max-w-3xl">
-          {member.bio.map((para, i) => (
-            <FadeIn key={i} delay={i * 0.1}>
-              <p className="text-body leading-relaxed mb-6 text-base">{para}</p>
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+          <div className="lg:col-span-8">
+            {member.bio.map((para, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <p className="text-body leading-relaxed mb-6 text-base">{para}</p>
+              </FadeIn>
+            ))}
+          </div>
+          <div className="lg:col-span-4">
+            <FadeIn delay={0.15}>
+              <div className="border border-black/8 rounded-lg p-8 sticky top-28">
+                <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-5">Profile</p>
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-[9px] text-caption uppercase tracking-widest mb-1 font-mono">Name</p>
+                    <p className="text-sm font-medium text-foreground">{member.name}</p>
+                  </div>
+                  <div>
+                    <p className="text-[9px] text-caption uppercase tracking-widest mb-1 font-mono">Role</p>
+                    <p className="text-sm font-medium text-foreground">{member.role}</p>
+                  </div>
+                  <div>
+                    <p className="text-[9px] text-caption uppercase tracking-widest mb-1 font-mono">Organisation</p>
+                    <p className="text-sm font-medium text-foreground">North-Brook Limited</p>
+                  </div>
+                </div>
+              </div>
             </FadeIn>
-          ))}
+          </div>
         </div>
       </Section>
 
+      {/* OTHER LEADERS */}
       <Section gray>
         <FadeIn>
-          <p className="eyebrow mb-4">Other Leaders</p>
-          <h2
-            className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight leading-tight mb-12"
-          >
-            Meet the rest of the team
-          </h2>
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="eyebrow mb-3">Other Leaders</p>
+              <h2 className="font-display font-bold text-3xl lg:text-4xl text-foreground tracking-tight leading-tight">
+                Meet the rest of the team
+              </h2>
+            </div>
+            <Link
+              href="/about#board"
+              className="hidden sm:inline-flex items-center gap-2 text-accent text-xs uppercase tracking-[0.14em] hover:gap-3 transition-all"
+            >
+              <ArrowLeft size={12} /> All leaders
+            </Link>
+          </div>
         </FadeIn>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
           {team
             .filter((m) => m.slug !== slug)
             .slice(0, 4)
@@ -159,39 +226,45 @@ export default async function TeamMemberPage({ params }: Props) {
               <FadeIn key={m.slug} delay={i * 0.08}>
                 <Link
                   href={`/team/${m.slug}`}
-                  className="group block bg-white border border-wire hover:border-accent/40 rounded-md overflow-hidden lift-card"
+                  className="group relative block overflow-hidden rounded-lg cursor-pointer"
                 >
-                  <div className="relative aspect-4/5 zoom-frame">
+                  <div className="relative aspect-3/4 overflow-hidden">
                     <SmartImage
                       src={`/images/team/${m.slug}.webp`}
                       alt={`Portrait of ${m.name}`}
                       fill
                       sizes="(min-width: 1024px) 25vw, 50vw"
-                      className="object-cover"
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
                       placeholderTone="primary"
                       placeholderLabel={m.name.charAt(m.name.startsWith("Mr.") ? 4 : 0)}
                       placeholderHint={m.role}
                     />
-                  </div>
-                  <div className="p-5">
-                    <h3
-                      className="text-base font-light text-primary mb-1 group-hover:text-accent transition-colors leading-snug"
-                    >
-                      {m.name}
-                    </h3>
-                    <p className="text-[10px] text-caption uppercase tracking-wider">{m.role}</p>
+                    <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/85 via-black/20 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 lg:p-5">
+                      <h3 className="text-white text-sm font-medium leading-snug mb-1 group-hover:text-accent transition-colors duration-200">
+                        {m.name}
+                      </h3>
+                      <p className="text-white/45 text-[9px] uppercase tracking-wider font-mono">{m.role}</p>
+                    </div>
+                    {/* Arrow reveal on hover */}
+                    <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-accent/0 group-hover:bg-accent flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
+                      <ArrowRight size={12} className="text-white" />
+                    </div>
                   </div>
                 </Link>
               </FadeIn>
             ))}
         </div>
+
         <FadeIn>
-          <Link
-            href="/about#board"
-            className="inline-flex items-center gap-2 text-accent text-sm uppercase tracking-[0.14em] hover:gap-4 transition-all"
-          >
-            <ArrowLeft size={14} /> Back to Leadership
-          </Link>
+          <div className="mt-6 sm:hidden">
+            <Link
+              href="/about#board"
+              className="inline-flex items-center gap-2 text-accent text-xs uppercase tracking-[0.14em] hover:gap-3 transition-all"
+            >
+              <ArrowLeft size={12} /> All leaders
+            </Link>
+          </div>
         </FadeIn>
       </Section>
 

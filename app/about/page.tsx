@@ -12,6 +12,7 @@ import { CommunityImpact } from "@/components/community-impact"
 import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 import { SplitText } from "@/components/ui/split-text"
 import { team } from "@/lib/team"
+import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
   title: "About North-Brook Limited | West Africa Logistics Since 2014",
@@ -79,7 +80,7 @@ export default function AboutPage() {
       <Hero
         eyebrow="About Us"
         heading="Built for the operations that can't fail."
-        subheading="Ten years running the logistics operations that others find too complex, too remote, or too time-critical. Here's who built that record."
+        subheading="Eleven years running the logistics operations that others find too complex, too remote, or too time-critical. Here's who built that record."
         image="about.jpg"
         imageAlt="North-Brook leadership and operations team"
       />
@@ -89,15 +90,25 @@ export default function AboutPage() {
       {/* Stat band */}
       <section className="py-16 px-6 lg:px-12 border-y border-black/8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-black/8">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {[
-              { label: "Years Operating", value: "10+", note: "Est. November 2014" },
+              { label: "Years Operating", value: "11+", note: "Est. November 2014" },
               { label: "Port Calls", value: "347", note: "Vessels handled" },
               { label: "Class Certifications", value: "6", note: "International societies" },
               { label: "Lost Time Injuries", value: "0", note: "Since operations began" },
             ].map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.1}>
-                <div className="flex flex-col py-8 lg:py-4 lg:px-10 first:lg:pl-0 last:lg:pr-0">
+                <div className={cn(
+                  "flex flex-col py-8 lg:py-4 px-4 lg:px-10",
+                  // mobile: right border on col1 (i%2===0), top border on row2 (i>=2)
+                  i % 2 === 0 && "border-r border-black/8",
+                  i >= 2 && "border-t border-black/8",
+                  // desktop: reset mobile borders, use right border on first 3
+                  "lg:border-t-0",
+                  i < 3 ? "lg:border-r lg:border-black/8" : "lg:border-r-0",
+                  i === 0 && "pl-0 lg:pl-0",
+                  i === 3 && "pr-0 lg:pr-0",
+                )}>
                   <span className="text-muted-foreground text-[9px] uppercase tracking-[0.3em] mb-2 font-mono">{stat.label}</span>
                   <span className="text-accent font-display font-bold text-5xl lg:text-6xl tracking-tight leading-none mb-2">{stat.value}</span>
                   <span className="text-caption text-[10px] font-mono">{stat.note}</span>

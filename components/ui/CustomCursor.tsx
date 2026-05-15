@@ -83,15 +83,15 @@ export default function CustomCursor() {
   return createPortal(
     <div
       ref={containerRef}
-      className="pointer-events-none fixed left-0 top-0 z-[999999] opacity-0 will-change-transform"
+      className="pointer-events-none fixed left-0 top-0 z-999999 opacity-0 will-change-transform"
     >
-      {/* Outer ring — centered via negative offset */}
+      {/* Outer ring */}
       <div
         ref={ringRef}
         className="absolute rounded-full border border-accent/50"
         style={{ width: 40, height: 40, top: -20, left: -20 }}
       />
-      {/* Inner dot — centered */}
+      {/* Inner dot */}
       <div
         ref={dotRef}
         className="absolute rounded-full bg-accent"

@@ -153,6 +153,7 @@ import { useRef } from "react"
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import RequestQuoteLink from "../request-quote-link"
 
 function splitChars(el: HTMLElement) {
   const text = el.textContent || ""
@@ -275,9 +276,7 @@ export default function CTASection() {
             </p>
             <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
               <span className="magnetic-wrap inline-block">
-                <Button asChild size="lg" className="h-auto px-[26px] py-[14px] text-sm font-semibold tracking-[0.03em] will-change-transform">
-                  <Link href="/contact">Request a quote →</Link>
-                </Button>
+                <RequestQuoteLink />
               </span>
               <span className="magnetic-wrap inline-block">
                 <Button asChild variant="outline" size="lg" className="h-auto px-[26px] py-[14px] text-sm font-semibold border-white/35 bg-transparent text-white hover:bg-white/10 hover:text-white will-change-transform">

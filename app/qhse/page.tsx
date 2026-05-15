@@ -77,19 +77,21 @@ export default function QHSEPage() {
               </div>
             </FadeIn>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7 overflow-visible">
+          <div className="lg:col-span-6 lg:col-start-7">
             <Reveal variant="scale" delay={0.2}>
-              <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-lg border border-black/8">
-                <SmartImage
-                  src="/images/projects/borr-drilling.jpg"
-                  alt="North-Brook safety operations"
-                  fill
-                  className="object-cover"
-                  placeholderTone="primary"
-                />
-                <div className="absolute inset-0 bg-ink/10" />
+              <div className="relative">
+                <div className="relative aspect-4/3 overflow-hidden zoom-frame rounded-lg border border-black/8">
+                  <SmartImage
+                    src="/images/projects/borr-drilling.jpg"
+                    alt="North-Brook safety operations"
+                    fill
+                    className="object-cover"
+                    placeholderTone="primary"
+                  />
+                  <div className="absolute inset-0 bg-ink/10" />
+                </div>
                 {/* Floating stat card */}
-                <div className="absolute -bottom-6 -right-6 bg-white border border-black/8 p-8 z-10 max-w-[240px]">
+                <div className="absolute -bottom-6 right-0 lg:-right-6 bg-white border border-black/8 p-6 lg:p-8 z-10 max-w-[220px] lg:max-w-[240px] shadow-xl">
                   <p className="text-accent text-3xl font-display font-bold tracking-tight mb-1">100%</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary">Safety Record</p>
                   <p className="text-caption text-xs mt-3 leading-relaxed">Zero LTIs (Lost Time Injuries) recorded across all offshore campaigns since 2014.</p>

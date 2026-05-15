@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { buttonVariants } from "../ui/button";
 import { cn } from "@/lib/utils";
+import RequestQuoteLink from "../request-quote-link";
 
 const NAV_LINKS = [
   { name: "About", href: "/about" },
@@ -23,29 +24,16 @@ export default function Navbar() {
   const ctaOverlayRef = useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const pathname = usePathname();
 
-  useGSAP(
-    () => {
-      const nav = navRef.current;
-      if (!nav) return;
-
-      // Fade out only on the home page hero — inner pages keep the nav visible
-      if (pathname === "/") {
-        gsap.to(nav, {
-          opacity: 0,
-          pointerEvents: "none",
-          scrollTrigger: {
-            start: "10% top",
-            end: "30% top",
-            scrub: true,
-          },
-        });
-      }
-    },
-    { scope: navRef, dependencies: [pathname] }
-  );
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const openMenu = useCallback(() => {
     setIsOpen(true);
@@ -114,12 +102,17 @@ export default function Navbar() {
       <nav
         ref={navRef}
         style={{ zIndex: 200 }}
-        className="fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 lg:px-14 py-5 lg:py-6 transition-[padding] duration-300"
+        className={cn(
+          "fixed top-0 left-0 w-full flex items-center justify-between px-5 sm:px-8 lg:px-14 transition-all duration-500",
+          "py-5 lg:py-6 bg-transparent",
+        )}
         aria-label="Main navigation"
       >
         {/* Logo */}
         <Link href="/" className="relative shrink-0" style={{ zIndex: 201 }}>
-          <div className=" relative h-10 w-[160px] sm:w-[190px] lg:w-[210px] duration-300">
+          <div className="relative h-10 w-[160px] sm:w-[190px] lg:w-[210px] duration-300"
+            style={isScrolled ? { filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.55)) drop-shadow(0 1px 8px rgba(0,0,0,0.35))" } : undefined}
+          >
             <Image
               src="/images/logo.png"
               alt="North-Brook Ltd."
@@ -138,6 +131,7 @@ export default function Navbar() {
             className="hover:text-primary pointer-events-auto flex items-center gap-3 font-sans text-xl md:text-2xl font-bold tracking-wide transition-colors group text-white"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
+            style={isScrolled ? { textShadow: "0 1px 4px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.4)" } : undefined}
           >
             <span className="uppercase tracking-wider text-[0.95rem]">{isOpen ? "Close" : "Menu"}</span>
             <svg
@@ -148,6 +142,7 @@ export default function Navbar() {
                 "h-[1.4rem] w-[1.4rem] transform origin-center transition-transform duration-300 ease-linear text-white",
                 isOpen ? "rotate-45" : "rotate-0"
               )}
+              style={isScrolled ? { filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.6))" } : undefined}
             >
               <path d="M12.0005 5.49894V6.99894H8.50047V5.49894H12.0005Z" fill="currentColor" />
               <path d="M3.5 5.49756V6.99756L0 6.99756L6.55637e-08 5.49756L3.5 5.49756Z" fill="currentColor" />
@@ -202,16 +197,7 @@ export default function Navbar() {
             <span className="text-sm font-bold text-white/70">Tema, Greater Accra, Ghana</span>
           </div>
 
-          <Link
-            href="/contact"
-            onClick={closeMenu}
-            className={`${buttonVariants({ variant: "default", size: "lg" })} group inline-flex items-center gap-3 bg-primary hover:bg-white text-white hover:text-primary px-8 py-4! text-[11px] font-black uppercase tracking-[0.25em] transition-colors duration-300`}
-          >
-            Request a Quote
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">
-              <path d="M2 14L14 2M14 2H5M14 2V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </Link>
+          <RequestQuoteLink />
         </div>
       </div>
     </>
