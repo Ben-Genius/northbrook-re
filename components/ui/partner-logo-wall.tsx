@@ -85,6 +85,7 @@ export function PartnerLogoWall({ caption }: PartnerLogoWallProps) {
                     alt={p.name}
                     fill
                     sizes="256px"
+                    loading="lazy"
                     className="object-contain"
                   />
                 </div>

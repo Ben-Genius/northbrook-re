@@ -112,12 +112,12 @@ function MorphPanelB() {
       </svg>
 
       <div className="text-center max-w-5xl relative z-10 space-y-12">
-        <div className="section-eyebrow text-accent uppercase tracking-[0.4em]">The Northbrook Promise</div>
+        <div className="section-eyebrow text-background/75 uppercase tracking-[0.4em]">The Northbrook Promise</div>
         <h2 className="font-display text-4xl font-bold leading-none tracking-tighter text-balance lg:text-8xl">
-          “WE DON’T JUST <br /> MOVE CARGO, <br />
-          <span className="text-accent">WE DELIVER TRUST.</span>”
+          &ldquo;WE DON&apos;T JUST <br /> MOVE CARGO, <br />
+          <span className="text-background italic">WE DELIVER TRUST.&rdquo;</span>
         </h2>
-        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.4em] text-background/40">
+        <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.4em] text-background/65">
           Michael Blay / CEO / North-Brook Ltd
         </p>
       </div>

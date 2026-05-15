@@ -7,10 +7,15 @@ const inputCls =
   "w-full bg-white border border-wire text-foreground placeholder:text-muted-foreground px-4 py-3 text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent transition-colors"
 
 const services = [
-  { value: "ship-agency", label: "Ship Agency" },
-  { value: "freight", label: "Freight" },
+  { value: "ship-agency", label: "Ship Agency & Husbandry" },
+  { value: "freight", label: "Air & Sea Freight" },
   { value: "bunkering", label: "Bunkering" },
-  { value: "warehousing", label: "Warehousing" },
+  { value: "warehousing", label: "Warehousing & Cargo Consolidation" },
+  { value: "documentation", label: "Import & Export Documentation" },
+  { value: "crew-management", label: "Crew Management" },
+  { value: "customs", label: "Customs Clearance" },
+  { value: "haulage", label: "Haulage Services" },
+  { value: "marine-technical", label: "Marine Technical Services" },
   { value: "general", label: "General Inquiry" },
 ]
 

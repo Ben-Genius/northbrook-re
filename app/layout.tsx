@@ -11,16 +11,22 @@ import Footer from "@/components/sections/Footer";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+  preload: true,
 });
 
 const fontSans = Geist({
   subsets: ["latin"],
   variable: "--font-geist-sans",
+  display: "swap",
+  preload: true,
 });
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-geist-mono",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

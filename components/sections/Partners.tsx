@@ -48,7 +48,8 @@ export function Partners() {
                 alt={p.alt}
                 width={250}
                 height={80}
-                unoptimized
+                sizes="200px"
+                loading="lazy"
                 className="h-16 w-auto max-w-[200px] object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
               />
             </div>

@@ -9,10 +9,10 @@ import { SplitText } from "@/components/ui/split-text"
 export const metadata: Metadata = {
   title: "Logistics Services | Ship Agency, Freight, Bunkering, Warehousing | North-Brook",
   description:
-    "Total onshore and offshore logistics: ship agency & husbandry, air & sea freight, bunkering & fuel logistics, warehousing & cargo consolidation. Serving Ghana and West Africa.",
+    "Total onshore and offshore logistics: ship agency & husbandry, air & sea freight, bunkering & fuel logistics, warehousing & cargo consolidation, and marine technical services. Serving Ghana and West Africa.",
   openGraph: {
     title: "Logistics Services | North-Brook Limited",
-    description: "Eight service lines — ship agency, freight, bunkering, warehousing, customs clearance, crew management, documentation, and haulage.",
+    description: "Nine service lines — ship agency, freight, bunkering, warehousing, customs clearance, crew management, documentation, haulage, and marine technical services.",
     url: "https://northbrook.com.gh/services",
     images: [{ url: "https://northbrook.com.gh/images/hero/services.jpg", width: 1200, height: 630, alt: "North-Brook Limited — Logistics Services" }],
   },
@@ -33,14 +33,14 @@ const services = [
   },
   {
     id: "freight",
-    title: "Sea Freight Forwarding",
-    body: "We coordinate the end-to-end movement of sea freight, consolidating cargo, managing documentation, and working with our global network to deliver on time and within budget regardless of the complexity. We have handled freight for Dolphin Geo Subsea's subsea campaigns, Cypress Energy's supply chain, and mining equipment consignments requiring specialist handling.",
+    title: "Air & Sea Freight",
+    body: "Through our integrated global network and local expertise, we deliver cost-effective air and sea freight solutions. Whether urgent air shipments or bulk sea cargo, we ensure timely, secure, and seamless transport across borders. We have handled freight for Dolphin Geo Subsea's subsea campaigns, Cypress Energy's supply chain, and mining equipment consignments requiring specialist handling.",
     tags: ["Oil & Gas", "Mining", "Chemicals", "Manufacturing"],
     includes: [
-      "FCL & LCL cargo movement",
+      "Air freight — urgent & time-critical cargo",
+      "Sea freight — FCL & LCL cargo movement",
       "Global network coordination",
-      "Subsea campaign logistics",
-      "Specialist equipment handling",
+      "Subsea & specialist equipment handling",
     ],
   },
   {
@@ -115,6 +115,20 @@ const services = [
       "Chemical consignment handling",
     ],
   },
+  {
+    id: "marine-technical",
+    title: "Marine Technical Services",
+    body: "Our certified engineers deliver specialist marine technical services across fire fighting systems, life saving appliances, navigation communications, electrical installations, and calibration. Every scope is carried out to class society standards — tested, certified, and documented.",
+    tags: ["Oil & Gas", "Marine", "Offshore"],
+    includes: [
+      "Fire fighting equipment — servicing, refilling, hydro-testing & certification",
+      "Life saving appliances — lifeboat & life raft annual and 5-yearly servicing",
+      "NAVCOM — installation, commissioning, repair & airtime",
+      "GMDSS — radio surveys, testing, certification & programming",
+      "Calibration — automation, custom engineering solutions & certification",
+      "Electrical — design, motor rewinding, cable routing & switchboard assembly",
+    ],
+  },
 ]
 
 const serviceSchemas = services.map((s) => ({
@@ -152,7 +166,7 @@ export default function ServicesPage() {
         eyebrow="Our Services"
         heading="Total logistics. Onshore and offshore."
         image="services.jpg"
-        subheading="Eight core service lines, designed for the operations that can't afford a missed deadline."
+        subheading="Nine core service lines, designed for the operations that can't afford a missed deadline."
         imageAlt="North-Brook logistics services, vessel operations in Ghanaian waters"
       />
       {/* Operational proof strip */}
@@ -216,19 +230,41 @@ export default function ServicesPage() {
                     <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-steel mb-4">
                       Scope of Work
                     </p>
-                    <ul className="grid sm:grid-cols-2 gap-x-8">
-                      {service.includes.map((item, idx) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-4 py-3 border-b border-black/[0.08]/60 last:border-0 sm:nth-last-2:border-0"
-                        >
-                          <span className="font-mono text-[9px] tracking-[0.3em] text-accent/40 shrink-0 mt-0.5">
-                            {String(idx + 1).padStart(2, "0")}
-                          </span>
-                          <span className="text-sm font-medium text-foreground/90 leading-snug">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {service.id === "marine-technical" ? (
+                      <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-3">
+                        {service.includes.map((item, idx) => {
+                          const [category, ...rest] = item.split(" — ")
+                          return (
+                            <li
+                              key={item}
+                              className="bg-paper border border-black/8 rounded-sm px-4 py-4 flex flex-col gap-2 group hover:border-accent/30 transition-colors duration-200"
+                            >
+                              <span className="font-mono text-[9px] tracking-[0.3em] text-accent/50">
+                                {String(idx + 1).padStart(2, "0")}
+                              </span>
+                              <span className="text-sm font-semibold text-foreground leading-snug">{category}</span>
+                              {rest.length > 0 && (
+                                <span className="text-[11px] text-steel leading-relaxed">{rest.join(" — ")}</span>
+                              )}
+                            </li>
+                          )
+                        })}
+                      </ul>
+                    ) : (
+                      <ul className="grid sm:grid-cols-2 gap-x-8">
+                        {service.includes.map((item, idx) => (
+                          <li
+                            key={item}
+                            className="flex items-start gap-4 py-3 border-b border-black/[0.08]/60 last:border-0 sm:nth-last-2:border-0"
+                          >
+                            <span className="font-mono text-[9px] tracking-[0.3em] text-accent/40 shrink-0 mt-0.5">
+                              {String(idx + 1).padStart(2, "0")}
+                            </span>
+                            <span className="text-sm font-medium text-foreground/90 leading-snug">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </FadeIn>
               </div>

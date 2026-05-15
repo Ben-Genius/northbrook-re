@@ -40,6 +40,7 @@ export function Hero({
               alt={imageAlt ?? ""}
               fill
               sizes="100vw"
+              priority
               className="object-cover"
               placeholderTone="primary"
               placeholderLabel="NB"

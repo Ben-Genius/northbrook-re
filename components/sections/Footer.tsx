@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Col 2: Company */}
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-5">Company</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/75 mb-5">Company</p>
             <ul className="space-y-3">
               {company.map((l) => (
                 <li key={l.href}>
@@ -70,7 +70,7 @@ export default function Footer() {
 
           {/* Col 3: Support */}
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-5">Support</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/75 mb-5">Support</p>
             <div className="space-y-3 text-sm text-background/60">
               <p>
                 <Link href="mailto:info@northbrook.com.gh" className="hover:text-accent transition-colors duration-200">
@@ -87,7 +87,7 @@ export default function Footer() {
                   WhatsApp the ops desk
                 </Link>
               </p>
-              <p className="text-background/40 text-xs mt-4 pt-4 border-t border-background/8">
+              <p className="text-background/65 text-xs mt-4 pt-4 border-t border-background/8">
                 Ops desk available 24 / 7 · Response in &lt; 2 hours
               </p>
             </div>
@@ -95,7 +95,7 @@ export default function Footer() {
 
           {/* Col 4: Follow */}
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent mb-5">Follow</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/75 mb-5">Follow</p>
             <div className="flex gap-3">
               {social.map(({ Icon, label, href }) => (
                 <Link
@@ -114,7 +114,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-background/40">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 py-5 flex flex-col sm:flex-row justify-between items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] text-background/60">
           <p>North-Brook Limited © 2026. All Rights Reserved.</p>
           <div className="flex gap-5">
             {legal.map((l) => (
