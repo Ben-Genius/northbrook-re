@@ -55,7 +55,7 @@ export default function Hero() {
     const mm = gsap.matchMedia();
 
     // Desktop: pinned scroll sequence
-    mm.add("(min-width: 768px)", () => {
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
       gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -66,12 +66,25 @@ export default function Hero() {
           onUpdate: (self) => setScrollProgress(self.progress),
         },
       }).to(contentRef.current, {
-        opacity: 0, y: -100, scale: 0.9, filter: "blur(20px)", duration: 1,
+        opacity: 0, y: -100, scale: 0.9, duration: 1,
       });
     });
 
+    // Desktop reduced-motion: no pin, simple fade
+    mm.add("(min-width: 768px) and (prefers-reduced-motion: reduce)", () => {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=100%",
+          scrub: 1,
+          onUpdate: (self) => setScrollProgress(self.progress),
+        },
+      }).to(contentRef.current, { opacity: 0, duration: 1 });
+    });
+
     // Mobile: no pin, lighter fade
-    mm.add("(max-width: 767px)", () => {
+    mm.add("(max-width: 767px) and (prefers-reduced-motion: no-preference)", () => {
       gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
@@ -81,7 +94,7 @@ export default function Hero() {
           onUpdate: (self) => setScrollProgress(self.progress),
         },
       }).to(contentRef.current, {
-        opacity: 0, y: -60, scale: 0.95, filter: "blur(10px)", duration: 1,
+        opacity: 0, y: -60, scale: 0.95, duration: 1,
       });
     });
   },

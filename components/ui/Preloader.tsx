@@ -8,15 +8,40 @@ export default function Preloader() {
   const counterRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const [percentage, setPercentage] = useState(0);
+  const [skip, setSkip] = useState(false);
+
+  // Skip preloader on return visits — only show once per session
+  useEffect(() => {
+    if (sessionStorage.getItem("nb_preloader_seen")) {
+      setSkip(true);
+      if (containerRef.current) containerRef.current.style.display = "none";
+      (window as any).__preloaderDone = true;
+      window.dispatchEvent(new CustomEvent("preloader:complete"));
+    } else {
+      sessionStorage.setItem("nb_preloader_seen", "1");
+    }
+  }, []);
 
   useGSAP(
     () => {
+      if (skip) return;
+
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // Reduced motion: instant complete
+      if (prefersReduced) {
+        if (containerRef.current) containerRef.current.style.display = "none";
+        (window as any).__preloaderDone = true;
+        window.dispatchEvent(new CustomEvent("preloader:complete"));
+        return;
+      }
+
+      const DURATION = 1.4; // was 2.5s — shaves 1.1s off Speed Index
+
       const tl = gsap.timeline({
         onComplete: () => {
-          // Hide preloader
           gsap.to(containerRef.current, {
             clipPath: "inset(0 0 100% 0)",
-            duration: 1.2,
+            duration: 0.8,
             ease: "power4.inOut",
             onComplete: () => {
               if (containerRef.current) containerRef.current.style.display = "none";
@@ -27,36 +52,32 @@ export default function Preloader() {
         }
       });
 
-      // Counter animation
       const countObj = { value: 0 };
       tl.to(countObj, {
         value: 100,
-        duration: 2.5,
+        duration: DURATION,
         ease: "power2.inOut",
-        onUpdate: () => {
-          setPercentage(Math.floor(countObj.value));
-        }
+        onUpdate: () => setPercentage(Math.floor(countObj.value)),
       });
 
-      // Progress bar
       tl.to(progressRef.current, {
         scaleX: 1,
-        duration: 2.5,
+        duration: DURATION,
         ease: "power2.inOut",
       }, 0);
 
-      // Final reveal staggers
       tl.to(".preloader-text", {
         y: -20,
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
+        stagger: 0.08,
+        duration: 0.35,
         ease: "power2.in"
-      }, "+=0.2");
-
+      }, "+=0.1");
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [skip] }
   );
+
+  if (skip) return null;
 
   return (
     <div
@@ -70,7 +91,7 @@ export default function Preloader() {
             North-Brook Operations
           </div>
         </div>
-        
+
         <div ref={counterRef} className="preloader-text font-display text-8xl font-bold tracking-tighter lg:text-[12vw]">
           {percentage.toString().padStart(3, "0")}
         </div>

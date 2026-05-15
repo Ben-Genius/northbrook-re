@@ -120,7 +120,7 @@ export default function Showcase() {
         <div ref={trackRef} className="flex h-full items-center gap-0">
           {/* Intro Panel */}
           <div className="shrink-0 w-[50vw] flex flex-col justify-center px-24 border-r border-background/10">
-            <div className="section-eyebrow text-accent mb-8">Selected Case Studies</div>
+            <div className="section-eyebrow text-background/75 mb-8">Selected Case Studies</div>
             <h2 className="font-display text-8xl font-bold tracking-tighter leading-[0.9]">
               IMPACTFUL <br />
               PROJECTS.
@@ -143,6 +143,8 @@ export default function Showcase() {
                     src={project.image}
                     alt={project.title}
                     fill
+                    sizes="80vw"
+                    loading="lazy"
                     className="object-cover opacity-90 transition-all duration-700 group-hover:opacity-100 group-hover:scale-[1.02]"
                   />
                   <div className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/5" />
@@ -151,7 +153,7 @@ export default function Showcase() {
 
               <div className="project-content relative z-10 w-full px-24 grid grid-cols-2 gap-24">
                 <div className="flex flex-col justify-center gap-8">
-                  <div className="font-mono text-xs uppercase tracking-[0.4em] text-accent">
+                  <div className="font-mono text-xs uppercase tracking-[0.4em] text-background/75">
                     {project.subtitle}
                   </div>
                   <h3 className="font-display text-7xl font-bold tracking-tighter leading-none text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
@@ -161,7 +163,7 @@ export default function Showcase() {
                     {project.description}
                   </p>
                   <div className="mt-8">
-                    <span className="inline-flex items-center gap-3 font-bold uppercase tracking-widest text-sm text-accent transition-all duration-300 group-hover:gap-5">
+                    <span className="inline-flex items-center gap-3 font-bold uppercase tracking-widest text-sm text-background/80 transition-all duration-300 group-hover:gap-5">
                       View case study
                       <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                     </span>
@@ -180,7 +182,7 @@ export default function Showcase() {
           {/* View All Projects End Panel */}
           <div className="shrink-0 w-[50vw] h-screen flex flex-col items-center justify-center px-24 gap-12">
             <div className="text-center space-y-6">
-              <div className="section-eyebrow text-accent">Full Portfolio</div>
+              <div className="section-eyebrow text-background/75">Full Portfolio</div>
               <p className="text-4xl font-display font-bold tracking-tighter leading-tight text-background/80 max-w-xs">
                 More operations on record.
               </p>
@@ -202,7 +204,7 @@ export default function Showcase() {
       {/* Mobile Vertical View */}
       <div className="md:hidden space-y-12 py-24 px-6">
         <div className="space-y-4">
-          <div className="section-eyebrow text-accent">Notable Projects</div>
+          <div className="section-eyebrow text-background/75">Notable Projects</div>
           <h2 className="text-5xl font-bold tracking-tighter leading-none uppercase">Project Portfolio.</h2>
         </div>
         <div className="space-y-16">
@@ -217,15 +219,17 @@ export default function Showcase() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  loading="lazy"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="space-y-2">
-                <div className="text-xs font-bold uppercase tracking-widest text-accent">{project.subtitle}</div>
+                <div className="text-xs font-bold uppercase tracking-widest text-background/75">{project.subtitle}</div>
                 <h3 className="text-3xl font-bold tracking-tighter text-background group-hover:text-accent transition-colors duration-200">{project.title}</h3>
                 <p className="text-background/60 text-sm text-pretty">{project.description}</p>
-                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent pt-1 transition-all duration-200 group-hover:gap-3">
+                <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-background/75 pt-1 transition-all duration-200 group-hover:gap-3">
                   View case study <ArrowRight size={12} />
                 </span>
               </div>

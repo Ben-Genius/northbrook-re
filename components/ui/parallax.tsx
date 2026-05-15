@@ -27,6 +27,10 @@ export function Parallax({ children, offset = -80, className }: ParallaxProps) {
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+            onEnter: () => { if (innerRef.current) innerRef.current.style.willChange = "transform" },
+            onLeave: () => { if (innerRef.current) innerRef.current.style.willChange = "auto" },
+            onEnterBack: () => { if (innerRef.current) innerRef.current.style.willChange = "transform" },
+            onLeaveBack: () => { if (innerRef.current) innerRef.current.style.willChange = "auto" },
           },
         }
       )
@@ -35,7 +39,7 @@ export function Parallax({ children, offset = -80, className }: ParallaxProps) {
 
   return (
     <div ref={containerRef} className={className} style={{ position: "relative" }}>
-      <div ref={innerRef} style={{ willChange: "transform" }}>
+      <div ref={innerRef}>
         {children}
       </div>
     </div>
@@ -66,6 +70,10 @@ export function ParallaxBackground({
             start: "top bottom",
             end: "bottom top",
             scrub: true,
+            onEnter: () => { if (innerRef.current) innerRef.current.style.willChange = "transform" },
+            onLeave: () => { if (innerRef.current) innerRef.current.style.willChange = "auto" },
+            onEnterBack: () => { if (innerRef.current) innerRef.current.style.willChange = "transform" },
+            onLeaveBack: () => { if (innerRef.current) innerRef.current.style.willChange = "auto" },
           },
         }
       )
@@ -74,7 +82,7 @@ export function ParallaxBackground({
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none" aria-hidden>
-      <div ref={innerRef} className="absolute inset-x-0" style={{ willChange: "transform", top: `-${offset}px`, bottom: `-${offset}px` }}>
+      <div ref={innerRef} className="absolute inset-x-0" style={{ top: `-${offset}px`, bottom: `-${offset}px` }}>
         {children}
       </div>
     </div>

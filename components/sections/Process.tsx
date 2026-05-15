@@ -139,7 +139,7 @@ export default function Process() {
               Our Methodology
             </span>
           </div>
-          <div ref={stepCountRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/40">
+          <div ref={stepCountRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/65">
             Step {step.id} / 0{STEPS.length}
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function Process() {
           <div className="w-[280px] shrink-0 flex items-center justify-center border-r border-background/10 relative">
             <div
               ref={numberRef}
-              className="font-display font-black text-[clamp(8rem,14vw,14rem)] leading-none text-accent select-none"
+              className="font-display font-black text-[clamp(8rem,14vw,14rem)] leading-none text-background/20 select-none"
             >
               {step.id}
             </div>
@@ -159,7 +159,7 @@ export default function Process() {
 
           {/* Right */}
           <div className="flex-1 flex flex-col justify-center px-16 xl:px-24 gap-8 max-w-3xl">
-            <div ref={labelRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-accent">
+            <div ref={labelRef} className="font-mono text-[10px] uppercase tracking-[0.4em] text-background/75">
               {step.label}
             </div>
 
@@ -220,8 +220,8 @@ export default function Process() {
               style={{ clipPath: "inset(0 0 0 0)" }}
             >
               <div className="flex items-start justify-between">
-                <span className="font-display text-6xl font-black text-accent/30 leading-none">{s.id}</span>
-                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-background/40 pt-2">{s.label}</span>
+                <span className="font-display text-6xl font-black text-background/20 leading-none">{s.id}</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-background/65 pt-2">{s.label}</span>
               </div>
               <div className="space-y-3">
                 <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-background leading-tight">
@@ -230,7 +230,7 @@ export default function Process() {
                 <p className="text-sm text-background/60 leading-relaxed">{s.description}</p>
               </div>
               <div className="h-px w-full bg-background/10" />
-              <div className="font-mono text-[9px] text-background/30 uppercase tracking-widest">
+              <div className="font-mono text-[9px] text-background/55 uppercase tracking-widest">
                 {i + 1} of {STEPS.length}
               </div>
             </div>

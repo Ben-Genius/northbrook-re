@@ -45,6 +45,8 @@ export default function LogoMarquee() {
                 alt={p.alt}
                 width={250}
                 height={80}
+                sizes="200px"
+                loading="lazy"
                 className="h-16 w-auto max-w-[200px] object-contain"
               />
             </div>
