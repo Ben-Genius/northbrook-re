@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: "Contact North-Brook Limited | Logistics Ghana",
   description:
     "Get in touch with North-Brook Limited in Accra, Ghana. Email info@northbrook.com.gh or call +233 (0) 244 270 797.",
+  openGraph: {
+    title: "Contact North-Brook Limited",
+    description: "Ops desk available 24/7. Response within 2 hours. info@northbrook.com.gh · +233 (0) 244 270 797.",
+    url: "https://northbrook.com.gh/contact",
+    images: [{ url: "https://northbrook.com.gh/images/hero/contact.jpg", width: 1200, height: 630, alt: "North-Brook Limited — Contact" }],
+  },
 }
 
 const breadcrumb = {
@@ -105,7 +111,7 @@ export default function ContactPage() {
             {/* Map embed */}
             <div className="aspect-4/3 border border-black/8 rounded-lg relative overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8763!2d-0.187!3d5.6037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAccra%2C+Ghana!5e0!3m2!1sen!2sgh!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.8763!2d-0.18685!3d5.60373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b516e7a6c3c5d%3A0xb98d3c1e5c3b2a1f!2sJoseph+Richard+Asiedu+St%2C+Accra%2C+Ghana!5e0!3m2!1sen!2sgh!4v1"
                 width="100%"
                 height="100%"
                 style={{ border: 0, filter: "grayscale(80%) contrast(1.1)" }}

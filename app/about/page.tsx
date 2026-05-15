@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   title: "About North-Brook Limited | West Africa Logistics Since 2014",
   description:
     "Founded November 2014 in Accra, North-Brook Limited delivers total onshore and offshore logistics across Ghana and West Africa. Meet our board, leadership, and CSR commitments.",
+  openGraph: {
+    title: "About North-Brook Limited | West Africa Logistics Since 2014",
+    description: "Founded November 2014. Meet the board, leadership, and the CSR commitments behind West Africa's premier logistics partner.",
+    url: "https://northbrook.com.gh/about",
+    images: [{ url: "https://northbrook.com.gh/images/hero/about.jpg", width: 1200, height: 630, alt: "North-Brook Limited — About Us" }],
+  },
 }
 
 

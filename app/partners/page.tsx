@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: "Partners & Clients | North-Brook Limited",
   description:
     "North-Brook works with global energy operators, drilling contractors, and survey specialists across West Africa. Saipem, Borr Drilling, Fugro, Rina, ENI, and more.",
+  openGraph: {
+    title: "Partners & Clients | North-Brook Limited",
+    description: "Trusted by Saipem, Borr Drilling, Fugro, ENI, OSM Thome, and more. A decade of partnerships with global energy operators in West Africa.",
+    url: "https://northbrook.com.gh/partners",
+    images: [{ url: "https://northbrook.com.gh/images/hero/partners.jpg", width: 1200, height: 630, alt: "North-Brook Limited — Partners & Clients" }],
+  },
 }
 
 const values = [
