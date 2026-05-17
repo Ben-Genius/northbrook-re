@@ -200,7 +200,7 @@ export default function QHSEPage() {
               We hold international certifications from the six classification societies that set the global bar for marine safety and quality.
             </p>
             <Button asChild size="lg" className="rounded-lg gap-3 h-auto px-6 py-4 text-xs uppercase tracking-[0.18em] font-semibold">
-              <Link href="/docs/north-brook-qhse-policy.pdf" target="_blank" download="North-Brook-QHSE-Policy.pdf">
+              <Link href="/docs/qhse-policy-document.pdf" target="_blank" download="North-Brook-QHSE-Policy.pdf">
                 <FileText size={16} />
                 Download Full Policy (PDF)
               </Link>
