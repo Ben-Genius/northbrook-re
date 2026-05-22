@@ -5,7 +5,7 @@ import Process from "@/components/sections/Process";
 import MorphTransition from "@/components/sections/MorphTransition";
 import Features from "@/components/sections/Features";
 import Showcase from "@/components/sections/Showcase";
-import WorkMapSection from "@/components/sections/WorkMapSection";
+// import WorkMapSection from "@/components/sections/WorkMapSection";
 import CTA from "@/components/sections/CTA";
 import SectionReveal from "@/components/ui/SectionReveal";
 
@@ -35,9 +35,9 @@ export default function Home() {
         <Showcase />
       </SectionReveal>
 
-      <SectionReveal>
+      {/* <SectionReveal>
         <WorkMapSection />
-      </SectionReveal>
+      </SectionReveal> */}
 
       <SectionReveal id="contact">
         <CTA />

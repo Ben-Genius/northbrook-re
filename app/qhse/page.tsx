@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { SplitText } from "@/components/ui/split-text"
 import LogoMarquee from "@/components/sections/LogoMarquee"
 import Image from "next/image"
-import { VelocityMarquee } from "@/components/ui/velocity-marquee"
+// import { VelocityMarquee } from "@/components/ui/velocity-marquee"
 
 export const metadata: Metadata = {
   title: "QHSE Policy | North-Brook Limited",
@@ -107,7 +107,7 @@ export default function QHSEPage() {
                   <div className="absolute inset-0 bg-ink/10" />
                 </div>
                 {/* Floating stat card */}
-                <div className="absolute -bottom-6 right-0 lg:-right-6 bg-white border border-black/8 p-6 lg:p-8 z-10 max-w-[220px] lg:max-w-[240px] shadow-xl">
+                <div className="absolute -bottom-6 right-0 lg:-right-6 bg-white border border-black/8 p-6 lg:p-8 z-10 max-w-55 lg:max-w-60 shadow-xl">
                   <p className="text-accent text-3xl font-display font-bold tracking-tight mb-1">100%</p>
                   <p className="text-[10px] uppercase tracking-[0.2em] font-semibold text-primary">Safety Record</p>
                   <p className="text-caption text-xs mt-3 leading-relaxed">Zero LTIs (Lost Time Injuries) recorded across all offshore campaigns since 2014.</p>
