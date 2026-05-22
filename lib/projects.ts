@@ -221,11 +221,11 @@ export const projects: Project[] = [
   },
   {
     slug: "bourbon-liberty-311",
-    title: "Fire-fighting Services: Bourbon Liberty 311",
+    title: "Lifeboat Services: Bourbon Liberty 311",
     description:
-      "Our team of fire-fighting engineers delivered expert services for the firefighting equipment onboard vessel Bourbon Liberty 311, ensuring all systems remained functional, efficient, and compliant. We conducted thorough assessments, provided recommendations, and executed renewal work with precision.",
+      "Our team of lifeboat engineers delivered expert services for the lifeboat equipment onboard vessel Bourbon Liberty 311, ensuring all systems remained functional, efficient, and compliant. We conducted thorough assessments, provided recommendations, and executed renewal work with precision.",
     services: [
-      "Firefighting equipment assessment",
+      "Lifeboat equipment assessment",
       "System testing & certification",
       "Renewal & maintenance",
       "Compliance documentation",

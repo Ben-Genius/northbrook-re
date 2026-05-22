@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    id: "ship-agency",
+    id: "ship-agenc",
     title: "Ship Agency & Husbandry",
     body: "We act as the single point of contact for every vessel call, coordinating port clearance, documentation, crew logistics, and onboard provisioning to ensure efficient turnarounds and uninterrupted operations. Past vessel calls we have managed include the Safeen Argus 2, Luna Nelle, and the Ametrin Valor.",
     tags: ["Oil & Gas", "Mining"],
@@ -273,7 +273,12 @@ export default function ServicesPage() {
               <div className="relative w-full lg:w-[46%] shrink-0 aspect-4/3 lg:aspect-auto lg:min-h-[600px]">
                 <FadeIn delay={0.1} className="absolute inset-0">
                   <SmartImage
-                    src={`/images/services/${service.id}.jpg`}
+                    src={[
+                      `/images/services/${service.id}.png`,
+                      `/images/services/${service.id}.jpg`,
+                      `/images/services/${service.id}.jpeg`,
+
+                    ]}
                     alt={service.title}
                     fill
                     sizes="(min-width: 1024px) 46vw, 100vw"

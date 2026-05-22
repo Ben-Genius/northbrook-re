@@ -3,7 +3,8 @@
 import Image, { type ImageProps } from "next/image"
 import { useState } from "react"
 
-interface SmartImageProps extends Omit<ImageProps, "onError" | "alt"> {
+interface SmartImageProps extends Omit<ImageProps, "onError" | "alt" | "src"> {
+  src: string | string[]
   alt: string
   /** Two-letter or short label baked into the placeholder when image is missing. */
   placeholderLabel?: string
@@ -21,6 +22,7 @@ const tones: Record<NonNullable<SmartImageProps["placeholderTone"]>, { bg: strin
 }
 
 export function SmartImage({
+  src,
   alt,
   placeholderLabel = "NB",
   placeholderTone = "primary",
@@ -32,9 +34,22 @@ export function SmartImage({
   ...rest
 }: SmartImageProps) {
   const [failed, setFailed] = useState(false)
+  const [srcIndex, setSrcIndex] = useState(0)
+  
+  const sources = Array.isArray(src) ? src : [src]
+  const currentSrc = sources[srcIndex]
+
   const tone = tones[placeholderTone]
 
-  if (failed) {
+  const handleError = () => {
+    if (srcIndex < sources.length - 1) {
+      setSrcIndex(srcIndex + 1)
+    } else {
+      setFailed(true)
+    }
+  }
+
+  if (failed || !currentSrc) {
     return (
       <div
         role="img"
@@ -78,12 +93,13 @@ export function SmartImage({
 
   return (
     <Image
+      src={currentSrc}
       alt={alt}
       className={className}
       fill={fill}
       width={width}
       height={height}
-      onError={() => setFailed(true)}
+      onError={handleError}
       {...rest}
     />
   )
