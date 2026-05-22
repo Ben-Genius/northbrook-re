@@ -35,9 +35,9 @@ export default function Home() {
         <Showcase />
       </SectionReveal>
 
-      {/* <SectionReveal>
+      <SectionReveal>
         <WorkMapSection />
-      </SectionReveal> */}
+      </SectionReveal>
 
       <SectionReveal id="contact">
         <CTA />
