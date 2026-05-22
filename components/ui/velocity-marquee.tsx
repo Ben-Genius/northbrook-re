@@ -37,7 +37,7 @@ export function VelocityMarquee({ variant = "stats", dark = false }: VelocityMar
         const v = Math.min(Math.abs(self.getVelocity() / 1400), 1.8) + 1
         gsap.to(tw, { timeScale: v * (self.direction === -1 ? -1 : 1), duration: 1.2, overwrite: true })
       },
-      onLeave:     () => gsap.to(tw, { timeScale: 1, duration: 1.5 }),
+      onLeave: () => gsap.to(tw, { timeScale: 1, duration: 1.5 }),
       onLeaveBack: () => gsap.to(tw, { timeScale: 1, duration: 1.5 }),
     })
   }, { scope: rowRef })
@@ -68,9 +68,9 @@ export function VelocityMarquee({ variant = "stats", dark = false }: VelocityMar
           display: "flex", gap: "60px", padding: "24px 0",
           whiteSpace: "nowrap",
           fontFamily: "var(--font-cormorant), Georgia, serif",
-          fontWeight: 700, fontSize: "clamp(22px,2.5vw,32px)",
+          fontWeight: 500, fontSize: "clamp(22px,2.5vw,32px)",
           letterSpacing: "-0.02em",
-          fontStyle: isStats ? "italic" : "normal",
+          fontStyle: isStats ? "normal" : "normal",
           color: dark ? "rgba(255,255,255,0.72)" : "var(--nb-ink)",
           willChange: "transform",
         }}
