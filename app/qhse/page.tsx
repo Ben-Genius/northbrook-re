@@ -62,11 +62,11 @@ export default function QHSEPage() {
         eyebrow="Standards We Care About"
         heading="Quality. Health. Safety. Environment."
         subheading="Our commitment to QHSE is not a compliance exercise; it is the foundation on which every North-Brook operation is built."
-        image="qhse.jpg"
+        image="qhse.png"
         imageAlt="North-Brook safety operations"
       />
 
-      <VelocityMarquee variant="stats" />
+      {/* <VelocityMarquee variant="stats" /> */}
 
       <Section>
         <div className="grid lg:grid-cols-12 gap-16 items-center">
