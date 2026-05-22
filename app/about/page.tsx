@@ -91,7 +91,7 @@ export default function AboutPage() {
         imageAlt="North-Brook leadership and operations team"
       />
 
-      <VelocityMarquee variant="stats" />
+      {/* <VelocityMarquee variant="stats" /> */}
 
       {/* Stat band */}
       <section className="py-16 px-6 lg:px-12 border-y border-black/8">
