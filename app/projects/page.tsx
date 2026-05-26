@@ -53,7 +53,7 @@ export default function ProjectsPage() {
         eyebrow="Our Work"
         heading="Operations delivered without incident."
         subheading="Named partners. Specific operations. A selection of campaigns we've run in Ghanaian waters and across West Africa."
-        image="projects.jpg"
+        image="project.png"
         imageAlt="North-Brook offshore project operations"
       />
 

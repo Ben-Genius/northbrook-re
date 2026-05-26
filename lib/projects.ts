@@ -235,4 +235,42 @@ export const projects: Project[] = [
       "/images/projects/bourbon-liberty-311/2.jpg",
     ],
   },
+  {
+    slug: "bgp-prospector",
+    title: "Fire Fighting & Lifeboat Services: BGP Prospector",
+    partner: "BGP",
+    description:
+      "North-Brook delivered specialised fire fighting and lifeboat services aboard the BGP Prospector, ensuring all safety-critical systems were inspected, serviced, and certified to international standards. Our engineers carried out functional testing, renewal works, and compliance documentation to keep the vessel mission-ready without operational interruption.",
+    services: [
+      "Fire fighting equipment servicing",
+      "Lifeboat inspection & certification",
+      "System testing & renewal",
+      "Compliance documentation",
+    ],
+  },
+  {
+    slug: "eastern-tulip",
+    title: "Vessel Agency: Eastern Tulip",
+    description:
+      "North-Brook acted as vessel agent for the Eastern Tulip during its call in Ghanaian waters, handling all inward and outward clearances, port documentation, supplies, and crew coordination. Our local authority relationships and seamless port handling ensured a fast turnaround with zero compliance issues.",
+    services: [
+      "Vessel agency services",
+      "Inward/outward clearance",
+      "Port documentation & formalities",
+      "Material supply & provisioning",
+    ],
+  },
+  {
+    slug: "bourbon-evolution-802",
+    title: "Lifting Equipment Inspection: Bourbon Evolution 802",
+    partner: "Bourbon",
+    description:
+      "North-Brook delivered comprehensive lifting equipment inspection services aboard the Bourbon Evolution 802, certifying cranes, slings, shackles, and load-bearing assemblies against offshore standards. Our certified inspectors carried out load testing, NDT verification, and full compliance documentation to keep the vessel safely operational.",
+    services: [
+      "Lifting gear inspection & certification",
+      "Load testing & NDT verification",
+      "Crane & rigging assessment",
+      "Compliance documentation",
+    ],
+  },
 ]

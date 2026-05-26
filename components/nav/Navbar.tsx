@@ -194,7 +194,7 @@ export default function Navbar() {
         >
           <div className="flex flex-col gap-1">
             <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-mono">Headquarters</span>
-            <span className="text-sm font-bold text-white/70">Tema, Greater Accra, Ghana</span>
+            <span className="text-sm font-bold text-white/70">No 12 Joseph Richard Asiedu St, Accra, Ghana</span>
           </div>
 
           <RequestQuoteLink />

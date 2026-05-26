@@ -177,7 +177,7 @@ export default function ServicesPage() {
               { value: "2014", label: "Established" },
               { value: "6", label: "Classification Societies" },
               { value: "24 / 7", label: "Operations Desk" },
-              { value: "Tema, Ghana", label: "Headquarters" },
+              { value: "Accra, Ghana", label: "Headquarters" },
             ].map(({ value, label }) => (
               <div key={label} className="flex flex-col gap-1.5 px-4 lg:px-6 py-8 first:pl-0 last:pr-0">
                 <dt className="font-mono text-[9px] uppercase tracking-[0.35em] text-steel">{label}</dt>
