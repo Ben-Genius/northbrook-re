@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "@/lib/heroFrameCache";
 import GSAPProvider from "@/components/providers/GSAPProvider";
 import CustomCursor from "@/components/ui/CustomCursor";
 import ScrollProgress from "@/components/ui/ScrollProgress";
@@ -79,6 +80,10 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
     >
+      <head>
+        {/* Prioritize first hero frame so it's available before JS runs */}
+        <link rel="preload" as="image" href="/hero/frame_001.webp" />
+      </head>
       <body className="bg-background text-foreground selection:bg-accent selection:text-white">
         <script
           type="application/ld+json"

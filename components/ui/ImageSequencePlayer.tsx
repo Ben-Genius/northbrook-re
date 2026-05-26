@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { frameCache, getFrameLoadProgress, FRAME_COUNT as CACHE_FRAME_COUNT } from "@/lib/heroFrameCache";
 
 interface ImageSequencePlayerProps {
   frameCount: number;
@@ -23,34 +24,50 @@ export default function ImageSequencePlayer({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const [imagesLoaded, setImagesLoaded] = useState(0);
 
-  // Preload images
+  // Use cache progress if this is the hero sequence, otherwise count from scratch
+  const useCache = frameCount === CACHE_FRAME_COUNT;
+  const initialLoaded = useCache ? Math.round(getFrameLoadProgress() * frameCount) : 0;
+  const [imagesLoaded, setImagesLoaded] = useState(initialLoaded);
+
   useEffect(() => {
+    if (useCache) {
+      // Pull already-started images from the module-level cache
+      const cached: HTMLImageElement[] = [];
+      let resolved = 0;
+
+      for (let i = 1; i <= frameCount; i++) {
+        const img = frameCache.get(i)!;
+        cached.push(img);
+        if (img.complete) {
+          resolved++;
+        } else {
+          const done = () => setImagesLoaded((n) => n + 1);
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+        }
+      }
+
+      imagesRef.current = cached;
+      setImagesLoaded(resolved);
+      return;
+    }
+
+    // Fallback: original fresh-load path for non-hero sequences
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
     for (let i = 1; i <= frameCount; i++) {
       const img = new Image();
-      const index = String(i).padStart(3, "0");
-      img.src = `${baseUrl}${index}${extension}`;
-
-      const handleLoad = () => {
+      img.src = `${baseUrl}${String(i).padStart(3, "0")}${extension}`;
+      img.onload = img.onerror = () => {
         loadedCount++;
         setImagesLoaded(loadedCount);
       };
-
-      const handleError = () => {
-        loadedCount++;
-        setImagesLoaded(loadedCount);
-      };
-
-      img.onload = handleLoad;
-      img.onerror = handleError;
       loadedImages.push(img);
     }
     imagesRef.current = loadedImages;
-  }, [frameCount, baseUrl, extension]);
+  }, [frameCount, baseUrl, extension, useCache]);
 
   // Handle rendering
   const renderFrame = (index: number) => {

@@ -16,7 +16,7 @@ export default function CTASection() {
           Let&apos;s Work Together
         </h2>
         <p className="text-white/50 text-base max-w-md">
-          Tell us about your cargo and we&apos;ll get back to you within 2 hours.
+          Tell us what you need, and we&apos;ll get back to you within 2 hours.
         </p>
         <RequestQuoteLink />
       </div>
